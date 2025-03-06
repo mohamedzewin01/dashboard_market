@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 
+import '../../features/home/presentation/pages/home_view.dart';
+import '../../features/layout/presentation/pages/layout_view.dart';
+
+
 class RoutesManager {
   static const String welcomeScreen = '/welcomeScreen';
   static const String splashScreen = '/';
@@ -17,8 +21,8 @@ class RoutesManager {
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case RoutesManager.splashScreen:
-      //   return MaterialPageRoute(builder: (_) => const S());
+      case RoutesManager.splashScreen:
+        return MaterialPageRoute(builder: (_) =>  Scaffold(appBar: AppBar(title: Text("Splash Screen"))));
 
 
       default:
