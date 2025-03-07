@@ -11,7 +11,7 @@ class HomeUseCase {
 
   HomeUseCase(this.homeRepo);
 
-  Future<Result<HomeEntity?>> getHomeData(int idZone) {
-    return homeRepo.getHomeData(idZone);
+  Future<Result<HomeEntity?>> getHomeData() {
+    return homeRepo.getHomeData();
   }
 }

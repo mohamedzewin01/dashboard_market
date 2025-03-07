@@ -8,6 +8,7 @@ class LayoutCubit extends Cubit<LayoutState> {
 
   static LayoutCubit get(context) => BlocProvider.of(context);
   int index = 0;
+  int number = 0;
 
   void changeIndex(int selectIndex) {
     index = selectIndex;

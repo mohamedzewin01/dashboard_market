@@ -1,11 +1,11 @@
-import '../../data/models/response/HomeModelResponseDto.dart';
+import '../../data/models/response/AllProductsRespose.dart';
 
 class HomeEntity {
   HomeEntity({
     this.status,
-    this.data,
+    this.products,
   });
 
   String? status;
-  Data? data;
+  List<Products>? products;
 }

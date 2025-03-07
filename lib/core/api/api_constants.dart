@@ -1,7 +1,7 @@
 class ApiConstants {
-  static const String baseUrl = "https://artawiya.com/rabbit/api/v1/";
+  static const String baseUrl = "https://artawiya.com/fadaalhalj/api/v1/";
   static const String baseUrlImage =
-      "https://artawiya.com/rabbit/api/v1/upload/";
+      "https://artawiya.com/fadaalhalj/api/v1/upload/";
   static const String home = "home/viewHome";
-  static const String categories = "categories/fetchCategoriesByZone";
+  static const String products = "products/fetchAllProducts.php";
 }

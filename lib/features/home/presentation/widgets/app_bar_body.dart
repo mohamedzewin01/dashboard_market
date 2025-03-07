@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import 'dropDownHomeMenu.dart';
 
@@ -54,12 +53,7 @@ class AppBarBody extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: ColorManager.primaryColor.withAlpha(200),
               ),
-              child: CircleAvatar(
-                child: Image.asset(
-                  Assets.imagesAppIcon,
-                  scale: 4,
-                ),
-              ),
+              child: CircleAvatar(),
             ),
           )
         ]);

@@ -14,10 +14,10 @@ class HomeDataSourceRepoImpl implements HomeDataSourceRepo {
   HomeDataSourceRepoImpl(this.apiService);
 
   @override
-  Future<Result<HomeEntity?>> getHomeData(int idZone) {
+  Future<Result<HomeEntity?>> getHomeData() {
     return executeApi(() async {
-      // var response = await apiService.getHomeData(idZone);
-      // return response.toHomeEntity();
+      var response = await apiService.getHomeData();
+      return response.toHomeEntity();
     });
   }
 }

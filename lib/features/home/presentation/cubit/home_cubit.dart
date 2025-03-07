@@ -18,18 +18,14 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getHomeData() async {
     emit(HomeLoading());
-    log('HomeCubit: getHomeData://///////');
-    final result = await _homeUseCase.getHomeData(10);
-    log('HomeCubit: getHomeData: $result');
+    final result = await _homeUseCase.getHomeData();
     switch (result) {
       case Success<HomeEntity?>():
         {
           if (!isClosed) {
             emit(HomeSuccess(result.data));
           }
-          log('HomeCubit: getHomeData: ${result.data}');
         }
-
       case Fail<HomeEntity>():
         {
           emit(HomeFail(result.exception));

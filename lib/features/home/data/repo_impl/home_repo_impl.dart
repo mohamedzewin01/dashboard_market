@@ -1,5 +1,6 @@
 
 import 'package:injectable/injectable.dart';
+
 import '../../../../core/common/api_result.dart';
 import '../../domain/entities/home_entities.dart';
 import '../../domain/repo/home_repo.dart';
@@ -12,7 +13,7 @@ class HomeRepoImpl implements HomeRepo {
   HomeRepoImpl(this.homeDataSourceRepo);
 
   @override
-  Future<Result<HomeEntity?>> getHomeData(int idZone) {
-    return homeDataSourceRepo.getHomeData(idZone);
+  Future<Result<HomeEntity?>> getHomeData() {
+    return homeDataSourceRepo.getHomeData();
   }
 }
