@@ -9,7 +9,7 @@ class RoutesManager {
   static const String registrationScreen = '/registration';
 
   // static const String dashboardScreen = '/dashboard';
-  static const String homeScreen = '/home';
+  static const String homeScreen = '/products';
   static const String layout = '/layout';
   static const String categories = '/categories';
   static const String cartScreen = '/cart';

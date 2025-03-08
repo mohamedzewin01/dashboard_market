@@ -20,7 +20,7 @@ class _ApiService implements ApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<AllProductsResponse> getHomeData() async {
+  Future<AllProductsResponse?> getProductsData() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -35,10 +35,12 @@ class _ApiService implements ApiService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AllProductsResponse _value;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late AllProductsResponse? _value;
     try {
-      _value = AllProductsResponse.fromJson(_result.data!);
+      _value = _result.data == null
+          ? null
+          : AllProductsResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

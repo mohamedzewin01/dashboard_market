@@ -45,7 +45,7 @@ abstract class DioModule {
           print('Response: ${response.statusCode}');
           return handler.next(response);
         },
-        onError: (DioError error, handler) {
+        onError: (DioException error, handler) {
           print('Error: ${error.response?.statusCode} - ${error.message}');
           return handler.next(error);
         },
