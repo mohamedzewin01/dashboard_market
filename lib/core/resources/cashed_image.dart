@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,7 +32,7 @@ class CustomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // log('${ApiConstants.baseUrlImage}$url');
+    log('${ApiConstants.baseUrlImage}$url');
     return getFileExtensionFromUrl(url) == 'svg'
         ? SvgPicture.network(
             url.isNotEmpty ? '${ApiConstants.baseUrlImage}$url' : '',

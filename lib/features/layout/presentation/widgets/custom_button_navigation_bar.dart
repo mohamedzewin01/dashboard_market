@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 //import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
@@ -25,19 +26,19 @@ class CustomBottomNavigationBar extends StatelessWidget {
       backgroundColor: ColorManager.white,
       items: [
         BottomNavigationBarItem(
-          icon: buildIcon(Assets.imagesHome, 0, currentIndex),
+          icon: buildIcon(Assets.products, 0, currentIndex),
           label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
-          icon: buildIcon(Assets.imagesCategories, 1, currentIndex),
+          icon: buildIcon(Assets.products, 1, currentIndex),
           label: AppLocalizations.of(context)!.categories,
         ),
         BottomNavigationBarItem(
-          icon: buildIcon(Assets.imagesCart, 2, currentIndex),
+          icon: buildIcon(Assets.products, 2, currentIndex),
           label: AppLocalizations.of(context)!.cart,
         ),
         BottomNavigationBarItem(
-          icon: buildIcon(Assets.imagesSetting, 3, currentIndex),
+          icon: buildIcon(Assets.products, 3, currentIndex),
           label: AppLocalizations.of(context)!.profile,
         ),
       ],
