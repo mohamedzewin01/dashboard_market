@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-
-import 'core/resources/myTheme.dart';
-import 'core/resources/routes_manager.dart';
-import 'l10n/app_localizations.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-
 import 'core/di/di.dart';
+import 'core/resources/myTheme.dart';
+import 'core/resources/routes_manager.dart';
 import 'core/utils/cashed_data_shared_preferences.dart';
 import 'core/utils/my_bloc_observer.dart';
+import 'l10n/app_localizations.dart';
 import 'localization/locale_cubit.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,7 +48,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             onGenerateRoute: RouteGenerator.getRoute,
             initialRoute: RoutesManager.splashScreen,
-            // home: SplashScreen(),
+            // products: SplashScreen(),
           );
         },
       ),

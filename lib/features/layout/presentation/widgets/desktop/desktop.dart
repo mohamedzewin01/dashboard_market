@@ -22,7 +22,10 @@ class DesktopLayout extends StatelessWidget {
                 );
               },
             )),
-        Expanded(flex: 3, child: CustomDrawer()),
+        SizedBox(
+          width: 200,
+          child: CustomDrawer(),
+        ),
       ],
     );
   }

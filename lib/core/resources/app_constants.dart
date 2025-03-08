@@ -1,13 +1,13 @@
-import 'package:dashboard_market/features/home/presentation/pages/home_view.dart';
 import 'package:flutter/material.dart';
 
-
+import '../../features/home/presentation/pages/home_view.dart';
+import '../../features/products/presentation/pages/products_view.dart';
 
 class AppConstants {
   static const int listGenerate = 6;
   static const viewOptions = <Widget>[
     HomeView(),
-    Scaffold(body: Text("اضافة منتجات")),
+    ProductsView(),
     Scaffold(body: Text("اضافة صور")),
     Scaffold(body: Text("المنتجات المعروض حاليا")),
     Scaffold(body: Text("الاعدادت")),
