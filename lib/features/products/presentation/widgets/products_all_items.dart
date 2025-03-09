@@ -9,15 +9,17 @@ import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/widgets/custom_riyal_saudi.dart';
 import '../../data/models/response/AllProductsRespose.dart';
+import '../cubit/home_cubit.dart';
 
 class CustomProductsAllItem extends StatelessWidget {
   const CustomProductsAllItem({
     super.key,
     required this.product,
-    this.onTap,
+    this.onTap, required this.viewModel,
   });
 
   final Products product;
+  final HomeCubit viewModel;
   final void Function()? onTap;
 
   @override
@@ -187,7 +189,9 @@ class CustomProductsAllItem extends StatelessWidget {
           Positioned(
             top: 0, // to shift little up
             right: 0,
-            child: SwitchStatusProducts(product: product),
+            child: SwitchStatusProducts(
+                viewModel: viewModel,
+                product: product),
           )
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../core/common/api_result.dart';
+import '../../data/models/request/edit_product_request.dart';
 import '../../domain/entities/products_entities.dart';
 import '../../domain/use_cases/products_use_case.dart';
 
@@ -32,5 +33,11 @@ class HomeCubit extends Cubit<HomeState> {
           log('HomeCubit: getHomeData: ${result.exception}');
         }
     }
+  }
+
+  Future<void> editProduct(EditProductRequest editProductRequest) async {
+
+    await _homeUseCase.editProductsData(editProductRequest);
+    log('Success');
   }
 }

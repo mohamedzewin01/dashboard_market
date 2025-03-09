@@ -4,4 +4,5 @@ class ApiConstants {
       "https://artawiya.com/fadaalhalj/api/v1/upload/";
   static const String home = "products/viewHome";
   static const String products = "products/fetchAllProducts.php";
+  static const String editProducts = "products/editProduct.php";
 }

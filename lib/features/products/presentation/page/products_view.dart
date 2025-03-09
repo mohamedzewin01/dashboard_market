@@ -4,10 +4,12 @@ import 'package:dashboard_market/features/products/presentation/widgets/products
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/di/di.dart';
-import '../../../core/resources/color_manager.dart';
-import '../data/models/response/AllProductsRespose.dart';
-import 'cubit/home_cubit.dart';
+import '../../../../core/di/di.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../data/models/response/AllProductsRespose.dart';
+import '../cubit/home_cubit.dart';
+
+
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -67,6 +69,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                 ),
                                 delegate: SliverChildBuilderDelegate(
                                   (context, index) => CustomProductsAllItem(
+                                    viewModel: viewModel,
                                     product: products[index],
                                   ),
                                   childCount: products.length,
