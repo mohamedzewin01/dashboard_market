@@ -1,6 +1,6 @@
 class EditProductRequest {
   EditProductRequest({
-    required this.idProduct,  // جعل idProduct required
+    required this.idProduct, // جعل idProduct required
     this.status,
     this.productName,
     this.description,
@@ -27,7 +27,6 @@ class EditProductRequest {
     dateDescount = json['date_descount'];
     category = json['category'];
 
-
     if (idProduct == null) {
       throw ArgumentError('idProduct is required');
     }
@@ -53,7 +52,9 @@ class EditProductRequest {
     if (productName != null) map['product_name'] = productName;
     if (description != null) map['description'] = description;
     if (imageCover != null) map['image_cover'] = imageCover;
-    if (productPriceAfterDiscount != null) map['product_price_after_discount'] = productPriceAfterDiscount;
+    if (productPriceAfterDiscount != null) {
+      map['product_price_after_discount'] = productPriceAfterDiscount;
+    }
     if (descount != null) map['descount'] = descount;
     if (dateDescount != null) map['date_descount'] = dateDescount;
     if (category != null) map['category'] = category;

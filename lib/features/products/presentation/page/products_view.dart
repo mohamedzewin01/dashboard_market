@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dashboard_market/features/products/presentation/widgets/edit_product.dart';
 import 'package:dashboard_market/features/products/presentation/widgets/products_all_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +9,6 @@ import '../../../../core/di/di.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../data/models/response/AllProductsRespose.dart';
 import '../cubit/home_cubit.dart';
-
-
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -70,6 +69,17 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                 delegate: SliverChildBuilderDelegate(
                                   (context, index) => CustomProductsAllItem(
                                     viewModel: viewModel,
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+
+                                        builder: (context) => EditProduct(
+                                          viewModel: viewModel,
+                                          product: products[index],
+                                        ),
+                                      );
+                                    },
                                     product: products[index],
                                   ),
                                   childCount: products.length,
@@ -81,7 +91,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       ),
                     ),
                   );
-                  ;
+
                 }
                 return SizedBox();
               },
