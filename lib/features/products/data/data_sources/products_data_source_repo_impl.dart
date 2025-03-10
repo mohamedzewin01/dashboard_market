@@ -15,7 +15,7 @@ class ProductsDataSourceRepoImpl implements ProductsDataSourceRepo {
   ProductsDataSourceRepoImpl(this.apiService);
 
   @override
-  Future<Result<ProductsEntity?>> getHomeData() {
+  Future<Result<ProductsEntity?>> getProductsData() {
     return executeApi(() async {
       var response = await apiService.getProductsData();
       return response?.toHomeEntity();

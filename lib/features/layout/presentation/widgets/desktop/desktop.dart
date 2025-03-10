@@ -13,15 +13,24 @@ class DesktopLayout extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-            flex: 9,
-            child: BlocBuilder<LayoutCubit, LayoutState>(
-              builder: (context, state) {
-                return Scaffold(
-                  body:
-                      AppConstants.viewOptions[LayoutCubit.get(context).index],
-                );
-              },
-            )),
+          flex: 9,
+          child: BlocBuilder<LayoutCubit, LayoutState>(
+            builder: (context, state) {
+              return Scaffold(
+                body: Navigator(
+                    key: GlobalKey<NavigatorState>(),
+                    onGenerateRoute: (settings) {
+                      return MaterialPageRoute(
+                        builder: (context) => IndexedStack(
+                          index: LayoutCubit.get(context).index,
+                          children: AppConstants.viewOptions,
+                        ),
+                      );
+                    }),
+              );
+            },
+          ),
+        ),
         SizedBox(
           width: 200,
           child: CustomDrawer(),

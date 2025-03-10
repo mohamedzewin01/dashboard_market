@@ -6,6 +6,7 @@ import '../../features/products/presentation/page/products_view.dart';
 
 class AppConstants {
   static const int listGenerate = 6;
+
   static const viewOptions = <Widget>[
     HomeView(),
     ProductsScreen(),
@@ -14,3 +15,4 @@ class AppConstants {
     Scaffold(body: Text("الاعدادت")),
   ];
 }
+final GlobalKey<ScaffoldState>  listGenerate = GlobalKey<ScaffoldState>() ;

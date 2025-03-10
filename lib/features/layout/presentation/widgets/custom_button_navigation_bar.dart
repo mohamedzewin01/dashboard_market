@@ -26,25 +26,25 @@ class CustomBottomNavigationBar extends StatelessWidget {
       backgroundColor: ColorManager.white,
       items: [
         BottomNavigationBarItem(
-          icon: buildIcon(Assets.products, 0, currentIndex),
+          icon: buildIcon(Icons.home, 0, currentIndex),
           label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
-          icon: buildIcon(Assets.products, 1, currentIndex),
+          icon: buildIcon(Icons.category_sharp, 1, currentIndex),
           label: AppLocalizations.of(context)!.categories,
         ),
         BottomNavigationBarItem(
-          icon: buildIcon(Assets.products, 2, currentIndex),
+          icon: buildIcon(Icons.image, 2, currentIndex),
           label: AppLocalizations.of(context)!.cart,
         ),
         BottomNavigationBarItem(
-          icon: buildIcon(Assets.products, 3, currentIndex),
+          icon: buildIcon(Icons.settings, 3, currentIndex),
           label: AppLocalizations.of(context)!.profile,
         ),
       ],
       selectedFontSize: AppSize.s12,
-      selectedLabelStyle: getLightStyle(color: ColorManager.lightGrey2),
-      unselectedLabelStyle: getMediumStyle(color: ColorManager.lightGrey2),
+      selectedLabelStyle: getLightStyle(color: ColorManager.orange),
+      unselectedLabelStyle: getMediumStyle(color: ColorManager.orange),
       currentIndex: currentIndex,
       onTap: onItemTapped,
       type: BottomNavigationBarType.fixed,

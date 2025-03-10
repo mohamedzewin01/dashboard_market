@@ -14,7 +14,7 @@ class LayoutScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => LayoutCubit(),
       child: AdaptiveLayout(
-        mobileLayout: (context) => const LayoutMobileView(),
+        mobileLayout: (context) => const MobileLayout(),
         tabletLayout: (context) => const DesktopLayout(),
         desktopLayout: (context) => const Center(child: DesktopLayout()),
       ),

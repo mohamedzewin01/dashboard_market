@@ -1,216 +1,198 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dashboard_market/core/widgets/custom_elevated_button.dart';
-import 'package:dashboard_market/features/products/data/models/request/edit_product_request.dart';
-import 'package:dashboard_market/features/products/presentation/widgets/switch_status_products.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dashboard_market/core/resources/style_manager.dart';
+import 'package:dashboard_market/core/widgets/custom_elevated_button.dart';
+import 'package:dashboard_market/core/widgets/custom_text_form_field.dart';
+import 'package:dashboard_market/features/products/data/models/request/edit_product_request.dart';
+import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../../../core/widgets/custom_riyal_saudi.dart';
+
 import '../../data/models/response/AllProductsRespose.dart';
 import '../cubit/home_cubit.dart';
 
-class EditProduct extends StatelessWidget {
+class EditProduct extends StatefulWidget {
   const EditProduct(
       {super.key, required this.viewModel, required this.product});
 
-  final HomeCubit viewModel;
+  final ProductsCubit viewModel;
   final Products product;
 
   @override
+  State<EditProduct> createState() => _EditProductState();
+}
+
+class _EditProductState extends State<EditProduct> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController newPriceController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        'تعديل بيانات المنتج',
-        textAlign: TextAlign.center,
-        textDirection: TextDirection.rtl,
-        style: GoogleFonts.roboto(color: ColorManager.black),
+    nameController.text = widget.product.productName ?? '';
+    priceController.text = widget.product.productPrice.toString();
+    newPriceController.text =
+        widget.product.productPriceAfterDiscount.toString();
+    descriptionController.text = widget.product.description ?? '';
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.product.productName ?? ''),
       ),
-      content: Stack(
-        alignment: Alignment.center,
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            // to make the row take minimum
-            children: [
-              Container(
-                clipBehavior: Clip.antiAlias,
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12),
-                  ),
-                ),
-                child: Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.fill,
-                    child: CachedNetworkImage(
-                      height: 200,
-                      width: 200,
-                      imageUrl:
-                          '${ApiConstants.baseUrlImage}${product.imageCover}',
-                      fit: BoxFit.cover,
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) => Skeletonizer(
-                              child: Image.asset(
-                        Assets.assetsImagesImageDefault,
-                      )),
-                      errorWidget: (context, url, error) => Image.asset(
-                        Assets.assetsImagesImageDefault,
-                        fit: BoxFit.fill,
-                      ),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              child: FittedBox(
+                fit: BoxFit.fill,
+                child: CachedNetworkImage(
+                  height: 200,
+                  width: 200,
+                  imageUrl:
+                      '${ApiConstants.baseUrlImage}${widget.product.imageCover}',
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Skeletonizer(
+                    child: Image.asset(
+                      Assets.assetsImagesImageDefault,
                     ),
                   ),
+                  errorWidget: (context, url, error) => Image.asset(
+                    Assets.assetsImagesImageDefault,
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    product.productName ?? '',
-                    overflow: TextOverflow.ellipsis,
-                    textDirection: TextDirection.rtl,
-                    style: GoogleFonts.roboto(
-                        color: ColorManager.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
-                    maxLines: 1,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Column(
+              spacing: 16,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: CustomTextFormField(
+                        // keyboardType: TextInputType.multiline,
+                        maxLines: 2,
+                        minLines: 1,
+                        controller: nameController,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'اسم الصنف',
+                        style: getSemiBoldStyle(
+                            color: ColorManager.black, fontSize: 16),
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: CustomTextFormField(
+                          controller: descriptionController),
+                    ),
+                    Expanded(
+                      child: Text(
+                        'تفاصيل',
+                        style: getSemiBoldStyle(
+                            color: ColorManager.black, fontSize: 16),
+                        textDirection: TextDirection.rtl,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: CustomTextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: priceController),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Expanded(
                         child: Text(
-                          product.description ?? '',
-                          textDirection: TextDirection.rtl,
-                          maxLines: 1,
-                          textAlign: TextAlign.right,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: ColorManager.primary,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      product.productPrice != 0
-                          ? Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const CustomRiyalSaudi(
-                                  color: ColorManager.primary,
-                                  size: 12,
-                                ),
-                                const SizedBox(
-                                  width: 3,
-                                ),
-                                Text(
-                                  product.productPrice.toString(),
-                                  style: const TextStyle(
-                                    color: ColorManager.primary,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12,
-                                    decoration: TextDecoration.lineThrough,
-                                    decorationColor: ColorManager.primary,
-                                    decorationThickness: 2,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : const SizedBox(),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CustomRiyalSaudi(),
-                          const SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            product.productPriceAfterDiscount.toString(),
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 16,
-                                color: ColorManager.error),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              )
-            ],
-          ),
-          product.productPrice == 0
-              ? SizedBox()
-              : Positioned(
-                  top: 0,
-                  left: 0,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color: ColorManager.error,
-                          borderRadius:
-                              BorderRadius.only(topLeft: Radius.circular(8))),
-                      padding: EdgeInsets.all(8),
-                      child: Column(
-                        children: [
-                          Text("${product.descount}%",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorManager.white)),
-                          Text("خصم",
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: ColorManager.white))
-                        ],
-                      )),
+                      'السعر قبل الخصم',
+                      style: getSemiBoldStyle(
+                          color: ColorManager.black, fontSize: 16),
+                      textDirection: TextDirection.rtl,
+                    )),
+                  ],
                 ),
-          Positioned(
-            top: 0, // to shif6t little up
-            right: 0,
-            child: SwitchStatusProducts(viewModel: viewModel, product: product),
-          )
-        ],
-      ),
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CustomElevatedButton(
-                buttonColor: ColorManager.grey,
-                title: 'الغاء',
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-            CustomElevatedButton(
-                buttonColor: ColorManager.orange,
-                title: 'حفظ',
-                onPressed: () {
-                  viewModel.editProduct(EditProductRequest(
-                      idProduct: product.idProduct, status: product.status));
-                  Navigator.pop(context);
-                }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: CustomTextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: newPriceController,
+                      ),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Expanded(
+                        child: Text(
+                      'السعر النهائي',
+                      style: getSemiBoldStyle(
+                          color: ColorManager.black, fontSize: 16),
+                      textDirection: TextDirection.rtl,
+                    )),
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    Spacer(),
+                    Expanded(
+                      flex: 2,
+                      child: CustomElevatedButton(
+                          buttonColor: ColorManager.orange,
+                          title: 'حفظ',
+                          onPressed: () {
+                            print(nameController.text);
+                            widget.viewModel.editProduct(EditProductRequest(
+                              idProduct: widget.product.idProduct,
+                              productName: nameController.text,
+                              description: descriptionController.text,
+                              productPriceAfterDiscount:
+                                  newPriceController.text,
+                            ));
+                          }),
+                    ),
+                    Spacer(),
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }

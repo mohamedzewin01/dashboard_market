@@ -19,7 +19,7 @@ class CustomProductsAllItem extends StatelessWidget {
   });
 
   final Products product;
-  final HomeCubit viewModel;
+  final ProductsCubit viewModel;
   final void Function()? onTap;
 
   @override

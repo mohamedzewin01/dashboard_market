@@ -71,7 +71,7 @@ class Products {
   String? description;
   String? imageCover;
   num? productPriceAfterDiscount;
-  String? category;
+  num? category;
   num? descount;
   num? status;
   String? dateDescount;

@@ -46,7 +46,7 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i249.ProductsRepoImpl(gh<_i1.ProductsDataSourceRepo>()));
     gh.factory<_i258.HomeUseCase>(
         () => _i258.HomeUseCase(gh<_i482.ProductsRepo>()));
-    gh.factory<_i537.HomeCubit>(() => _i537.HomeCubit(gh<_i258.HomeUseCase>()));
+    gh.factory<_i537.ProductsCubit>(() => _i537.ProductsCubit(gh<_i258.HomeUseCase>()));
     return this;
   }
 }

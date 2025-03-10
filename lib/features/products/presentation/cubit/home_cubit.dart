@@ -12,24 +12,24 @@ import '../../domain/use_cases/products_use_case.dart';
 part 'home_state.dart';
 
 @injectable
-class HomeCubit extends Cubit<HomeState> {
+class ProductsCubit extends Cubit<ProductsState> {
   final HomeUseCase _homeUseCase;
 
-  HomeCubit(this._homeUseCase) : super(HomeInitial());
+  ProductsCubit(this._homeUseCase) : super(ProductsInitial());
 
   Future<void> getHomeData() async {
-    emit(HomeLoading());
-    final result = await _homeUseCase.getHomeData();
+    emit(ProductsLoading());
+    final result = await _homeUseCase.getProductsData();
     switch (result) {
       case Success<ProductsEntity?>():
         {
           if (!isClosed) {
-            emit(HomeSuccess(result.data));
+            emit(ProductsSuccess(result.data));
           }
         }
       case Fail<ProductsEntity>():
         {
-          emit(HomeFail(result.exception));
+          emit(ProductsFail(result.exception));
           log('HomeCubit: getHomeData: ${result.exception}');
         }
     }

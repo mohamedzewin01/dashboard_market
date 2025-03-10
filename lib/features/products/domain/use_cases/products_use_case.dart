@@ -13,7 +13,7 @@ class HomeUseCase {
 
   HomeUseCase(this.productsRepo);
 
-  Future<Result<ProductsEntity?>> getHomeData() {
+  Future<Result<ProductsEntity?>> getProductsData() {
     return productsRepo.getProductsData();
   }
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest) {

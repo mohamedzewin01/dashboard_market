@@ -12,7 +12,7 @@ class SwitchStatusProducts extends StatefulWidget {
   });
 
   final Products product;
-  final HomeCubit viewModel;
+  final ProductsCubit viewModel;
 
   @override
   State<SwitchStatusProducts> createState() => _SwitchStatusProductsState();
@@ -27,7 +27,9 @@ class _SwitchStatusProductsState extends State<SwitchStatusProducts> {
         mouseCursor: MouseCursor.defer,
         // hoverColor: ColorManager.orange,
         activeTrackColor: Colors.green,
-        inactiveTrackColor: Colors.grey,
+        activeColor: Colors.white,
+        inactiveThumbColor:Colors.grey,
+        inactiveTrackColor: Colors.white,
         value: widget.product.status == 1,
         onChanged: (value) {
           setState(() {

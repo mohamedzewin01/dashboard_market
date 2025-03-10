@@ -84,7 +84,7 @@ Widget passwordHidden({
   );
 }
 
-Widget buildIcon(String assetPath, int index, int currentIndex) {
+Widget buildIcon(IconData icon,  int index, int currentIndex) {
   bool isSelected = index == currentIndex;
 
   return Container(
@@ -96,15 +96,10 @@ Widget buildIcon(String assetPath, int index, int currentIndex) {
           : Colors.transparent,
       borderRadius: BorderRadius.circular(12),
     ),
-    child: SvgPicture.asset(
-      assetPath,
-      width: 24,
-      height: 24,
-      // colorFilter: ColorFilter.mode(
-      //   isSelected ? ColorManager.orange : ColorManager.placeHolderColor,
-      //   BlendMode.srcIn,
-      // ),
-    ),
+    child:  Icon(icon,color:isSelected ? ColorManager.orange : ColorManager.grey ,),
+
+
+
   );
 }
 

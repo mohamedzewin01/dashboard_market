@@ -6,6 +6,6 @@ import '../../domain/entities/products_entities.dart';
 import '../models/request/edit_product_request.dart';
 
 abstract class ProductsDataSourceRepo {
-  Future<Result<ProductsEntity?>> getHomeData();
+  Future<Result<ProductsEntity?>> getProductsData();
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest);
 }

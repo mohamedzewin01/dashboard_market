@@ -220,7 +220,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.initialValue,
     this.onChanged,
-    this.inputAction,
+    this.inputAction, this.minLines, this.maxLines,
   });
 
   final TextEditingController controller;
@@ -229,6 +229,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? initialValue;
   final bool? obscureText;
   final bool? enabled;
+  final int? minLines;
+  final int? maxLines;
   final String? Function(String?)? validator;
   final Widget? suffix;
   final Widget? prefixIcon;
@@ -239,14 +241,20 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      textDirection: TextDirection.rtl,
+      textAlign: TextAlign.center,
+      textInputAction: inputAction,
       cursorColor: ColorManager.placeHolderColor,
-      style: const TextStyle(color: ColorManager.placeHolderColor),
+      style:getSemiBoldStyle(color: ColorManager.black,fontSize: FontSize.s16),
       initialValue: initialValue,
       readOnly: enabled ?? false,
+      minLines: minLines,
+      maxLines: maxLines,
       controller: controller,
       keyboardType: keyboardType,
       decoration: InputDecoration(
-        errorStyle: TextStyle(fontSize: 14),
+        isDense: true,
+        errorStyle: TextStyle(fontSize: 14,),
         prefixIcon: prefixIcon,
         prefixIconColor: ColorManager.placeHolderColor,
         suffixIcon: suffix != null
@@ -269,7 +277,7 @@ class CustomTextFormField extends StatelessWidget {
           fontSize: FontSize.s14,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: const EdgeInsets.all(AppPadding.p8),
+        contentPadding: const EdgeInsets.all(AppSize.s6),
         enabledBorder: outLintInputBorderMethod(
           const BorderSide(
               color: ColorManager.placeHolderColor, width: AppSize.w1_5),

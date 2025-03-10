@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/di.dart';
+import '../../../../core/resources/app_constants.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../data/models/response/AllProductsRespose.dart';
 import '../cubit/home_cubit.dart';
@@ -18,11 +19,11 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
-  late HomeCubit viewModel;
+  late ProductsCubit viewModel;
 
   @override
   void initState() {
-    viewModel = getIt.get<HomeCubit>();
+    viewModel = getIt.get<ProductsCubit>();
     super.initState();
   }
 
@@ -34,13 +35,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
       },
       child: SafeArea(
         child: Scaffold(
+          key:listGenerate,
           backgroundColor: ColorManager.white,
           body: BlocProvider(
             create: (context) => viewModel..getHomeData(),
-            child: BlocBuilder<HomeCubit, HomeState>(
+            child: BlocBuilder<ProductsCubit, ProductsState>(
               builder: (context, state) {
-                if (state is HomeLoading) {}
-                if (state is HomeSuccess) {
+                if (state is ProductsLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: ColorManager.primaryColor,
+                    ),
+                  );
+                }
+                if (state is ProductsSuccess) {
                   List<Products>? products =
                       state.homeEntity?.products?.reversed.toList() ?? [];
                   return RefreshIndicator(
@@ -70,15 +78,23 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                   (context, index) => CustomProductsAllItem(
                                     viewModel: viewModel,
                                     onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        barrierDismissible: false,
-
-                                        builder: (context) => EditProduct(
-                                          viewModel: viewModel,
-                                          product: products[index],
-                                        ),
-                                      );
+                                      // showDialog(
+                                      //   context: context,
+                                      //   barrierDismissible: false,
+                                      //   builder: (context) =>
+                                      //   EditProduct(
+                                      //     viewModel: viewModel,
+                                      //     product: products[index],
+                                      //   ),
+                                      // );
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => EditProduct(
+                                              viewModel: viewModel,
+                                              product: products[index],
+                                            ),
+                                          ));
                                     },
                                     product: products[index],
                                   ),
@@ -91,7 +107,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       ),
                     ),
                   );
-
                 }
                 return SizedBox();
               },

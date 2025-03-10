@@ -16,7 +16,7 @@ class ProductsRepoImpl implements ProductsRepo {
 
   @override
   Future<Result<ProductsEntity?>> getProductsData() {
-    return productsDataSourceRepo.getHomeData();
+    return productsDataSourceRepo.getProductsData();
   }
 
   @override
