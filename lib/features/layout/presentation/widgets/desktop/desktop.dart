@@ -1,3 +1,4 @@
+import 'package:dashboard_market/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,9 +32,13 @@ class DesktopLayout extends StatelessWidget {
             },
           ),
         ),
-        SizedBox(
-          width: 200,
-          child: CustomDrawer(),
+        Container(
+          color: ColorManager.placeHolderColor,
+          width: 250,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: CustomDrawer(),
+          ),
         ),
       ],
     );

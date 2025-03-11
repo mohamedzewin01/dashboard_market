@@ -26,8 +26,18 @@ class CustomDrawer extends StatelessWidget {
         onTap: () => LayoutCubit.get(context).changeIndex(1),
       ),
       ItemsDrawer(
+        title: 'اضافة منتج',
+        svgPath: Assets.uploadImage,
+        onTap: () => LayoutCubit.get(context).changeIndex(2),
+      ),
+      ItemsDrawer(
         title: 'الصور',
-        svgPath: Assets.products,
+        svgPath: Assets.uploadImage,
+        onTap: () => LayoutCubit.get(context).changeIndex(2),
+      ),
+      ItemsDrawer(
+        title: 'الاقسام',
+        svgPath: Assets.uploadImage,
         onTap: () => LayoutCubit.get(context).changeIndex(2),
       ),
       ItemsDrawer(
@@ -37,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
       ),
     ];
     return Scaffold(
-      backgroundColor: ColorManager.black,
+      backgroundColor: ColorManager.white,
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: CustomScrollView(

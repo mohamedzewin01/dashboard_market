@@ -5,4 +5,5 @@ class ApiConstants {
   static const String home = "products/viewHome";
   static const String products = "products/fetchAllProducts.php";
   static const String editProducts = "products/editProduct.php";
+  static const String fetchImages = "images/fetchImages.php";
 }

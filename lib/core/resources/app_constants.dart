@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../features/add_images/presentation/pages/images_view.dart';
 import '../../features/home/presentation/pages/home_view.dart';
 import '../../features/products/presentation/page/products_view.dart';
 
@@ -10,8 +10,7 @@ class AppConstants {
   static const viewOptions = <Widget>[
     HomeView(),
     ProductsScreen(),
-    Scaffold(body: Text("اضافة صور")),
-    Scaffold(body: Text("المنتجات المعروض حاليا")),
+    ImagesView()   ,
     Scaffold(body: Text("الاعدادت")),
   ];
 }
