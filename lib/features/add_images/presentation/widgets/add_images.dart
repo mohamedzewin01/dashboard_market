@@ -1,50 +1,46 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:dashboard_market/features/add_images/presentation/manager/images_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:image_picker/image_picker.dart'; // للجوال
-import 'package:image_picker_web/image_picker_web.dart'; // للويب
+import 'package:image_picker/image_picker.dart'; // للجوالب
 import 'package:share_plus/share_plus.dart';
-
+import 'package:path_provider/path_provider.dart';
 import '../../../../core/resources/color_manager.dart';
+import 'package:flutter/services.dart';
 
+class UpLoadImage extends StatefulWidget {
+  const UpLoadImage({
+    super.key, required this.viewModel,
 
-class AddPicture extends StatefulWidget {
-  const AddPicture({
-    super.key,
-    required this.urlImage,
   });
 
-  final String urlImage;
+  final ImagesCubit viewModel;
 
   @override
-  State<AddPicture> createState() => _TabBodySellerState();
+  State<UpLoadImage> createState() => _TabBodySellerState();
 }
 
-class _TabBodySellerState extends State<AddPicture> {
-  Uint8List? _imageBytes;
-  File? _imageFile;
+class _TabBodySellerState extends State<UpLoadImage> {
 
-  Future<void> _pickImage() async {
-    if (kIsWeb) {
-      // للويب
-      final image = await ImagePickerWeb.getImageAsBytes();
-      if (image != null) {
-        setState(() {
-          _imageBytes = image;
-        });
-      }
-    } else {
+
+  Future<File?> _pickImage() async {
 
       final XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (xFile != null) {
-        final File imageFile = File(xFile.path);
-        setState(() {
-          _imageFile = imageFile;
-        });
+              setState(() {
+                widget.viewModel.imageFile = File(xFile.path);
+              });
+        return File(xFile.path);
       }
-    }
+
+    return null;
   }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +51,7 @@ class _TabBodySellerState extends State<AddPicture> {
         onTap: _pickImage,
         child: Column(
           children: [
-            if (_imageBytes != null || _imageFile != null)
+            if (widget.viewModel.imageBytes != null || widget.viewModel.imageFile != null)
               Container(
                 decoration: BoxDecoration(
 
@@ -66,18 +62,11 @@ class _TabBodySellerState extends State<AddPicture> {
                   aspectRatio: 16/9,
                   child: Container(
                     clipBehavior: Clip.antiAlias,
-
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: kIsWeb
-                        ? Image.memory(
-                      _imageBytes!,
-                      fit: BoxFit.fill,
-                      width: double.infinity,
-                    )
-                        : Image.file(
-                      _imageFile!,
+                    child: Image.file(
+                      widget.viewModel.imageFile!,
                       fit: BoxFit.fill,
                       width: double.infinity,
                     ),
@@ -100,8 +89,9 @@ class _TabBodySellerState extends State<AddPicture> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: Image.network(
-                      widget.urlImage,
+                    child: Image.asset(
+                      'assets/images/image_default.jpg',
+                      // 'widget.urlImage',
                       fit: BoxFit.fill,
                       width: double.infinity,
                     ),

@@ -13,6 +13,16 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/add_images/data/data_sources/images_datasources.dart'
+    as _i759;
+import '../../features/add_images/data/repositories/images_repo_impl.dart'
+    as _i340;
+import '../../features/add_images/domain/repositories/images_repo.dart'
+    as _i378;
+import '../../features/add_images/domain/use_cases/images_use_case.dart'
+    as _i728;
+import '../../features/add_images/presentation/manager/images_cubit.dart'
+    as _i208;
 import '../../features/products/data/data_sources/products_data_source_repo.dart'
     as _i1;
 import '../../features/products/data/data_sources/products_data_source_repo_impl.dart'
@@ -42,11 +52,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
     gh.factory<_i1.ProductsDataSourceRepo>(
         () => _i647.ProductsDataSourceRepoImpl(gh<_i680.ApiService>()));
+    gh.factory<_i759.ImagesDataSources>(
+        () => _i759.ImagesDataSources(apiService: gh<_i680.ApiService>()));
     gh.factory<_i482.ProductsRepo>(
         () => _i249.ProductsRepoImpl(gh<_i1.ProductsDataSourceRepo>()));
+    gh.factory<_i208.ImagesCubit>(
+        () => _i208.ImagesCubit(gh<_i759.ImagesDataSources>()));
+    gh.factory<_i378.ImagesRepo>(
+        () => _i340.ImagesRepoImpl(gh<_i759.ImagesDataSources>()));
+    gh.factory<_i728.ImagesUseCase>(
+        () => _i728.ImagesUseCase(gh<_i378.ImagesRepo>()));
     gh.factory<_i258.HomeUseCase>(
         () => _i258.HomeUseCase(gh<_i482.ProductsRepo>()));
-    gh.factory<_i537.ProductsCubit>(() => _i537.ProductsCubit(gh<_i258.HomeUseCase>()));
+    gh.factory<_i537.ProductsCubit>(
+        () => _i537.ProductsCubit(gh<_i258.HomeUseCase>()));
     return this;
   }
 }

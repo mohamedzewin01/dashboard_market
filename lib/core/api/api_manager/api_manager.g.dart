@@ -81,6 +81,90 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<ImagesModel?> getImagesData() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ImagesModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'images/fetchImages.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late ImagesModel? _value;
+    try {
+      _value =
+          _result.data == null ? null : ImagesModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<UpLoadImageModel?> uploadImage(
+    File? imageFile,
+    String? imageName,
+    String? imageCategory,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (imageFile != null) {
+      _data.files.add(
+        MapEntry(
+          'image',
+          MultipartFile.fromFileSync(
+            imageFile.path,
+            filename: imageFile.path.split(Platform.pathSeparator).last,
+          ),
+        ),
+      );
+    }
+    if (imageName != null) {
+      _data.fields.add(MapEntry('ImageName', imageName));
+    }
+    if (imageCategory != null) {
+      _data.fields.add(MapEntry('ImageCategory', imageCategory));
+    }
+    final _options = _setStreamType<UpLoadImageModel>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'multipart/form-data',
+      )
+          .compose(
+            _dio.options,
+            'images/uploadImage.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late UpLoadImageModel? _value;
+    try {
+      _value = _result.data == null
+          ? null
+          : UpLoadImageModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||
