@@ -33,17 +33,17 @@ class CustomDrawer extends StatelessWidget {
       ItemsDrawer(
         title: 'الصور',
         svgPath: Assets.uploadImage,
-        onTap: () => LayoutCubit.get(context).changeIndex(2),
+        onTap: () => LayoutCubit.get(context).changeIndex(3),
       ),
       ItemsDrawer(
         title: 'الاقسام',
         svgPath: Assets.uploadImage,
-        onTap: () => LayoutCubit.get(context).changeIndex(2),
+        onTap: () => LayoutCubit.get(context).changeIndex(4),
       ),
       ItemsDrawer(
         title: 'الاعدادات',
         svgPath: Assets.setting,
-        onTap: () => LayoutCubit.get(context).changeIndex(3),
+        onTap: () => LayoutCubit.get(context).changeIndex(5),
       ),
     ];
     return Scaffold(

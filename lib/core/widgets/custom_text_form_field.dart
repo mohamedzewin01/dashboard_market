@@ -281,27 +281,27 @@ class CustomTextFormField extends StatelessWidget {
         enabledBorder: outLintInputBorderMethod(
           const BorderSide(
               color: ColorManager.placeHolderColor, width: AppSize.w1_5),
-          const BorderRadius.all(Radius.circular(AppSize.s40)),
+          const BorderRadius.all(Radius.circular(AppSize.s12)),
         ),
         focusedBorder: outLintInputBorderMethod(
           const BorderSide(
               color: ColorManager.primaryColor, width: AppSize.w1_5),
-          const BorderRadius.all(Radius.circular(AppSize.s40)),
+          const BorderRadius.all(Radius.circular(AppSize.s12)),
         ),
         errorBorder: outLintInputBorderMethod(
           const BorderSide(
               color: ColorManager.primaryColor, width: AppSize.w1_5),
-          const BorderRadius.all(Radius.circular(AppSize.s40)),
+          const BorderRadius.all(Radius.circular(AppSize.s12)),
         ),
         focusedErrorBorder: outLintInputBorderMethod(
           const BorderSide(
               color: ColorManager.primaryColor, width: AppSize.w1_5),
-          const BorderRadius.all(Radius.circular(AppSize.s40)),
+          const BorderRadius.all(Radius.circular(AppSize.s12)),
         ),
         disabledBorder: outLintInputBorderMethod(
             const BorderSide(
                 color: ColorManager.placeHolderColor, width: AppSize.w1_5),
-            const BorderRadius.all(Radius.circular(AppSize.s40))),
+            const BorderRadius.all(Radius.circular(AppSize.s12))),
       ),
       obscureText: obscureText ?? false,
       validator: validator,

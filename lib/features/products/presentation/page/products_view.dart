@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dashboard_market/features/products/presentation/widgets/edit_product.dart';
 import 'package:dashboard_market/features/products/presentation/widgets/products_all_items.dart';
+import 'package:dashboard_market/features/products/presentation/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -64,41 +65,52 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                   ? 3
                                   : 2;
                           log(constraints.maxWidth.toString());
-                          return CustomScrollView(
-                            slivers: [
-                              SliverGrid(
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: crossAxisCount,
-                                  crossAxisSpacing: 16.0,
-                                  mainAxisSpacing: 16.0,
-                                  childAspectRatio: 1.0,
-                                ),
-                                delegate: SliverChildBuilderDelegate(
-                                  (context, index) => CustomProductsAllItem(
-                                    viewModel: viewModel,
-                                    onTap: () {
-                                      // showDialog(
-                                      //   context: context,
-                                      //   barrierDismissible: false,
-                                      //   builder: (context) =>
-                                      //   EditProduct(
-                                      //     viewModel: viewModel,
-                                      //     product: products[index],
-                                      //   ),
-                                      // );
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => EditProduct(
-                                              viewModel: viewModel,
-                                              product: products[index],
-                                            ),
-                                          ));
-                                    },
-                                    product: products[index],
-                                  ),
-                                  childCount: products.length,
+                          return Column(
+                            children: [
+                              CustomSearchBar(viewModel: viewModel),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Expanded(
+                                child: CustomScrollView(
+                                  slivers: [
+
+                                    SliverGrid(
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: crossAxisCount,
+                                        crossAxisSpacing: 16.0,
+                                        mainAxisSpacing: 16.0,
+                                        childAspectRatio: 1.0,
+                                      ),
+                                      delegate: SliverChildBuilderDelegate(
+                                        (context, index) => CustomProductsAllItem(
+                                          viewModel: viewModel,
+                                          onTap: () {
+                                            // showDialog(
+                                            //   context: context,
+                                            //   barrierDismissible: false,
+                                            //   builder: (context) =>
+                                            //   EditProduct(
+                                            //     viewModel: viewModel,
+                                            //     product: products[index],
+                                            //   ),
+                                            // );
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) => EditProduct(
+                                                    viewModel: viewModel,
+                                                    product: products[index],
+                                                  ),
+                                                ));
+                                          },
+                                          product: products[index],
+                                        ),
+                                        childCount: products.length,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -117,3 +129,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 }
+
+
+
+

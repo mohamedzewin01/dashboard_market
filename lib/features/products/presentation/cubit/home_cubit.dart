@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
@@ -34,6 +35,8 @@ class ProductsCubit extends Cubit<ProductsState> {
         }
     }
   }
+TextEditingController searchController = TextEditingController();
+  String searchQuery = "";
 
   Future<void> editProduct(EditProductRequest editProductRequest) async {
 

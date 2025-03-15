@@ -24,19 +24,19 @@ ThemeData getApplicationTheme() {
       errorStyle: getRegularStyle(color: ColorManager.error),
       enabledBorder: outLintInputBorderMethod(
         const BorderSide(color: ColorManager.black, width: AppSize.w1_5),
-        const BorderRadius.all(Radius.circular(AppSize.s40)),
+        const BorderRadius.all(Radius.circular(AppSize.s12)),
       ),
       focusedBorder: outLintInputBorderMethod(
         const BorderSide(color: ColorManager.grey, width: AppSize.w1_5),
-        const BorderRadius.all(Radius.circular(AppSize.s40)),
+        const BorderRadius.all(Radius.circular(AppSize.s12)),
       ),
       errorBorder: outLintInputBorderMethod(
         const BorderSide(color: ColorManager.error, width: AppSize.w1_5),
-        const BorderRadius.all(Radius.circular(AppSize.s40)),
+        const BorderRadius.all(Radius.circular(AppSize.s12)),
       ),
       focusedErrorBorder: outLintInputBorderMethod(
         const BorderSide(color: ColorManager.black, width: AppSize.w1_5),
-        const BorderRadius.all(Radius.circular(AppSize.s40)),
+        const BorderRadius.all(Radius.circular(AppSize.s12)),
       ),
     ),
   );
@@ -46,6 +46,6 @@ OutlineInputBorder outLintInputBorderMethod(
     BorderSide borderSide, BorderRadius borderRadius) {
   return OutlineInputBorder(
     borderSide: borderSide,
-    borderRadius: const BorderRadius.all(Radius.circular(AppSize.s20)),
+    borderRadius: const BorderRadius.all(Radius.circular(AppSize.s12)),
   );
 }
