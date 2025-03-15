@@ -44,10 +44,14 @@ class ImagesCubit extends Cubit<ImagesState> {
   Uint8List? imageBytes;
    File? imageFile;
   TextEditingController nameController = TextEditingController();
-
+final formKey = GlobalKey<FormState>();
   Future<void> upLoadImages() async {
-    // emit(LoadingImages());
-    print('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
     await _imagesDataSources.upLoadImage(imageFile!, nameController.text, '1');
+  }
+
+  Future<void> deleteImages(String imageId, String imageName) async {
+
+    await _imagesDataSources.deleteImage(imageId, imageName);
+    fetchImages();
   }
 }

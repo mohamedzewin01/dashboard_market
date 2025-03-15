@@ -24,7 +24,6 @@ class UpLoadImage extends StatefulWidget {
 
 class _TabBodySellerState extends State<UpLoadImage> {
 
-
   Future<File?> _pickImage() async {
 
       final XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -38,10 +37,6 @@ class _TabBodySellerState extends State<UpLoadImage> {
     return null;
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,7 +49,6 @@ class _TabBodySellerState extends State<UpLoadImage> {
             if (widget.viewModel.imageBytes != null || widget.viewModel.imageFile != null)
               Container(
                 decoration: BoxDecoration(
-
                   border: Border.all(color: ColorManager.primaryColor, width: 3),
                   borderRadius: BorderRadius.circular(12),
                 ),

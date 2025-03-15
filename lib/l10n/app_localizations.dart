@@ -23,7 +23,7 @@ import 'app_localizations_en.dart';
 /// return MaterialApp(
 ///   localizationsDelegates: AppLocalizations.localizationsDelegates,
 ///   supportedLocales: AppLocalizations.supportedLocales,
-///   products: MyApplicationHome(),
+///   home: MyApplicationHome(),
 /// );
 /// ```
 ///
@@ -431,7 +431,7 @@ abstract class AppLocalizations {
   /// **'Password must not be empty and must contain at least 6 characters, an uppercase letter, and one number'**
   String get resetPasswordMessage;
 
-  /// No description provided for @products.
+  /// No description provided for @home.
   ///
   /// In en, this message translates to:
   /// **'Home'**

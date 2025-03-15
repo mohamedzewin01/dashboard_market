@@ -165,6 +165,46 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<DeleteImage?> deleteImage(String? imageId, String? imageName) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (imageId != null) {
+      _data.fields.add(MapEntry('imageId', imageId));
+    }
+    if (imageName != null) {
+      _data.fields.add(MapEntry('image', imageName));
+    }
+    final _options = _setStreamType<DeleteImage>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'multipart/form-data',
+      )
+          .compose(
+            _dio.options,
+            'images/deleteImage.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late DeleteImage? _value;
+    try {
+      _value =
+          _result.data == null ? null : DeleteImage.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

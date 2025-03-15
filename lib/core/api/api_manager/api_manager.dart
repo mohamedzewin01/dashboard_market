@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
-
+import '../../../features/add_images/data/models/delete_image.dart';
 import '../../../features/add_images/data/models/upload_image_model.dart';
 import '../../../features/products/data/models/request/edit_product_request.dart';
 import '../../../features/products/data/models/response/AllProductsRespose.dart';
@@ -36,8 +36,13 @@ abstract class ApiService {
   Future<UpLoadImageModel?> uploadImage(
       @Part(name:'image') File? imageFile,
       @Part(name:'ImageName') String? imageName,
-      @Part(name:'ImageCategory') String? imageCategory
-      );
+      @Part(name:'ImageCategory') String? imageCategory);
+
+  @POST(ApiConstants.deleteImage)
+  @MultiPart()
+  Future<DeleteImage?> deleteImage(
+      @Part(name:'imageId') String? imageId,
+      @Part(name:'image') String? imageName);
 
 }
 

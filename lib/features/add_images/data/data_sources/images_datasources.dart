@@ -6,6 +6,7 @@ import 'package:dashboard_market/core/common/api_result.dart';
 import 'package:dashboard_market/features/add_images/domain/entities/images_entity.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../domain/entities/delete_image_entity.dart';
 import '../../domain/entities/image_upload_entity.dart';
 
 @injectable
@@ -29,6 +30,16 @@ class ImagesDataSources {
       () async {
         var response = await apiService.uploadImage(file, name, imageCategory);
         return response?.toUpLoadImageEntity();
+      },
+    );
+  }
+
+  Future<Result<DeleteImageEntity?>> deleteImage(
+   String imageId,   String imageName) async {
+    return executeApi(
+          () async {
+        var response = await apiService.deleteImage(imageId, imageName);
+        return response?.toDeleteImageEntity();
       },
     );
   }

@@ -7,4 +7,5 @@ class ApiConstants {
   static const String editProducts = "products/editProduct.php";
   static const String fetchImages = "images/fetchImages.php";
   static const String uploadImage = "images/uploadImage.php";
+  static const String deleteImage = "images/deleteImage.php";
 }
