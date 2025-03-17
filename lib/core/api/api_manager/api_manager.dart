@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dashboard_market/features/add_images/data/models/images_model.dart';
 import 'package:dashboard_market/features/add_product/data/models/add_product_responces.dart';
+import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
@@ -56,6 +57,14 @@ abstract class ApiService {
       @Part(name:'stauts') int? status,
       @Part(name:'imagePath') String? imagePath,
       @Part(name:'category') int? category,);
+
+
+
+  @POST(ApiConstants.fetchCategories)
+  Future<FetchCategoriesResponse?> getCategories();
+
+
+
 
 }
 

@@ -5,22 +5,16 @@ import 'package:dashboard_market/features/add_images/domain/entities/delete_imag
 import 'package:dashboard_market/features/add_images/domain/entities/image_upload_entity.dart';
 import 'package:dashboard_market/features/add_images/domain/entities/images_entity.dart';
 import 'package:dashboard_market/features/add_images/domain/repositories/images_repo.dart';
+import 'package:dashboard_market/features/categories/domain/entities/fetch_categories.dart';
+import 'package:dashboard_market/features/categories/domain/repositories/categories_repo.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class ImagesUseCase {
-  ImagesRepo imagesRepo;
+class CategoriesUseCase {
+  CategoriesRepo categoriesRepo;
 
-  ImagesUseCase(this.imagesRepo);
+  CategoriesUseCase(this.categoriesRepo);
 
-  Future<Result<ImagesEntity?>> getImagesData() => imagesRepo.fetchImagesData();
-
-  Future<Result<UpLoadImageEntity?>> uploadImage(
-          File file, String name, String imageCategory) =>
-      imagesRepo.upLoadImage(file, name, imageCategory);
-
-
-  Future<Result<DeleteImageEntity?>> deleteImage(
-      String imageId, String name) =>
-      imagesRepo.deleteImage(imageId, name);
+  Future<Result<FetchCategoriesEntity?>> getCategoriesData() =>
+      categoriesRepo.fetchCategoriesData();
 }

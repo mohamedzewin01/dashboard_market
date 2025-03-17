@@ -30,7 +30,7 @@ class ProductsCubit extends Cubit<ProductsState> {
         }
       case Fail<ProductsEntity>():
         {
-          emit(ProductsFail(result.exception));
+          if (!isClosed) emit(ProductsFail(result.exception));
           log('HomeCubit: getHomeData: ${result.exception}');
         }
     }

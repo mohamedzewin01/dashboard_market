@@ -36,7 +36,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       },
       child: SafeArea(
         child: Scaffold(
-          key:listGenerate,
+          key: listGenerate,
           backgroundColor: ColorManager.white,
           body: BlocProvider(
             create: (context) => viewModel..getHomeData(),
@@ -74,7 +74,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
                               Expanded(
                                 child: CustomScrollView(
                                   slivers: [
-
                                     SliverGrid(
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
@@ -84,26 +83,20 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                         childAspectRatio: 1.0,
                                       ),
                                       delegate: SliverChildBuilderDelegate(
-                                        (context, index) => CustomProductsAllItem(
+                                        (context, index) =>
+                                            CustomProductsAllItem(
                                           viewModel: viewModel,
                                           onTap: () {
-                                            // showDialog(
-                                            //   context: context,
-                                            //   barrierDismissible: false,
-                                            //   builder: (context) =>
-                                            //   EditProduct(
-                                            //     viewModel: viewModel,
-                                            //     product: products[index],
-                                            //   ),
-                                            // );
                                             Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) => EditProduct(
-                                                    viewModel: viewModel,
-                                                    product: products[index],
-                                                  ),
-                                                ));
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditProduct(
+                                                  viewModel: viewModel,
+                                                  product: products[index],
+                                                ),
+                                              ),
+                                            );
                                           },
                                           product: products[index],
                                         ),
@@ -129,7 +122,3 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 }
-
-
-
-

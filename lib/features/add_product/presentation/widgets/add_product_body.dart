@@ -12,6 +12,7 @@ import '../../../add_images/data/models/images_model.dart';
 import '../../../add_images/presentation/manager/images_cubit.dart';
 import '../../../layout/presentation/widgets/desktop/add_images.dart';
 import '../manager/add_product_cubit.dart';
+import 'choose_categories.dart';
 
 class AddProductBody extends StatelessWidget {
   const AddProductBody({
@@ -158,28 +159,7 @@ class AddProductBody extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: DropdownButtonFormField<int>(
-                        decoration: InputDecoration(
-                          labelText: 'الحالة',
-                          labelStyle: const TextStyle(fontSize: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        items: const [
-                          DropdownMenuItem(value: 1, child: Text('نشر حالا')),
-                          DropdownMenuItem(value: 0, child: Text('عدم النشر ')),
-                        ],
-                        onChanged: (value) {
-                          viewModel.changeProductStatus(value!);
-                        },
-                        validator: (value) {
-                          if (value == null ) {
-                            return 'الرجاء اختيار الحالة';
-                          }
-                          return null;
-                        },
-                      ),
+                      child: ChooseCategories(addProductCubit: viewModel),
                     ),
                   ],
                 ),
@@ -207,3 +187,5 @@ class AddProductBody extends StatelessWidget {
     );
   }
 }
+
+

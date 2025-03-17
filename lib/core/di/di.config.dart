@@ -33,8 +33,16 @@ import '../../features/add_product/domain/use_cases/add_product_use_case.dart'
     as _i790;
 import '../../features/add_product/presentation/manager/add_product_cubit.dart'
     as _i272;
-import '../../features/categories/domain/use_cases/images_use_case.dart'
-    as _i149;
+import '../../features/categories/data/data_sources/categories_data_sourses.dart'
+    as _i379;
+import '../../features/categories/data/repositories/categories_repo_impl.dart'
+    as _i137;
+import '../../features/categories/domain/repositories/categories_repo.dart'
+    as _i594;
+import '../../features/categories/domain/use_cases/categories_use_case.dart'
+    as _i548;
+import '../../features/categories/presentation/manager/categories_cubit.dart'
+    as _i572;
 import '../../features/products/data/data_sources/products_data_source_repo.dart'
     as _i1;
 import '../../features/products/data/data_sources/products_data_source_repo_impl.dart'
@@ -62,6 +70,12 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.lazySingleton<_i361.Dio>(() => dioModule.providerDio());
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i379.CategoriesDataSources>(
+        () => _i379.CategoriesDataSources(gh<_i680.ApiService>()));
+    gh.factory<_i594.CategoriesRepo>(() => _i137.CategoriesRepoImpl(
+        categoriesDataSources: gh<_i379.CategoriesDataSources>()));
+    gh.factory<_i548.CategoriesUseCase>(
+        () => _i548.CategoriesUseCase(gh<_i594.CategoriesRepo>()));
     gh.factory<_i1.ProductsDataSourceRepo>(
         () => _i647.ProductsDataSourceRepoImpl(gh<_i680.ApiService>()));
     gh.factory<_i759.ImagesDataSources>(
@@ -82,8 +96,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i340.ImagesRepoImpl(gh<_i759.ImagesDataSources>()));
     gh.factory<_i728.ImagesUseCase>(
         () => _i728.ImagesUseCase(gh<_i378.ImagesRepo>()));
-    gh.factory<_i149.ImagesUseCase>(
-        () => _i149.ImagesUseCase(gh<_i378.ImagesRepo>()));
+    gh.factory<_i572.CategoriesCubit>(
+        () => _i572.CategoriesCubit(gh<_i548.CategoriesUseCase>()));
     gh.factory<_i258.HomeUseCase>(
         () => _i258.HomeUseCase(gh<_i482.ProductsRepo>()));
     gh.factory<_i537.ProductsCubit>(

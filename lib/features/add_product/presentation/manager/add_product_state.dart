@@ -6,6 +6,7 @@ sealed class AddProductState {}
 final class AddProductInitial extends AddProductState {}
 final class ChangeImage extends AddProductState {}
 final class ChangeProductStatus extends AddProductState {}
+final class ChangeChangeCategory extends AddProductState {}
 final class AddProductLoading extends AddProductState {}
 final class AddProductSuccess extends AddProductState {
   final AddProductEntity? addProductEntity;

@@ -35,6 +35,10 @@ class AddProductCubit extends Cubit<AddProductState> {
     status = statusProduct;
     emit(ChangeProductStatus());
   }
+  void changeCategory(int idCategory) {
+    categoryId = idCategory;
+    emit(ChangeChangeCategory());
+  }
 
   Future<void> addProduct() async {
     emit(AddProductLoading());

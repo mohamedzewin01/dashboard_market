@@ -9,4 +9,5 @@ class ApiConstants {
   static const String uploadImage = "images/uploadImage.php";
   static const String deleteImage = "images/deleteImage.php";
   static const String addProduct = "products/addproduct.php";
+  static const String fetchCategories = "categories/fetchCategories.php";
 }
