@@ -23,6 +23,18 @@ import '../../features/add_images/domain/use_cases/images_use_case.dart'
     as _i728;
 import '../../features/add_images/presentation/manager/images_cubit.dart'
     as _i208;
+import '../../features/add_product/data/data_sources/add_product_datasources.dart'
+    as _i979;
+import '../../features/add_product/data/repositories/add_product_repo_impl.dart'
+    as _i599;
+import '../../features/add_product/domain/repositories/add_product_repo.dart'
+    as _i281;
+import '../../features/add_product/domain/use_cases/add_product_use_case.dart'
+    as _i790;
+import '../../features/add_product/presentation/manager/add_product_cubit.dart'
+    as _i272;
+import '../../features/categories/domain/use_cases/images_use_case.dart'
+    as _i149;
 import '../../features/products/data/data_sources/products_data_source_repo.dart'
     as _i1;
 import '../../features/products/data/data_sources/products_data_source_repo_impl.dart'
@@ -54,14 +66,24 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i647.ProductsDataSourceRepoImpl(gh<_i680.ApiService>()));
     gh.factory<_i759.ImagesDataSources>(
         () => _i759.ImagesDataSources(apiService: gh<_i680.ApiService>()));
+    gh.factory<_i979.AddProductDataSources>(
+        () => _i979.AddProductDataSources(apiService: gh<_i680.ApiService>()));
+    gh.factory<_i281.AddProductRepo>(() => _i599.AddProductRepoImpl(
+        addProductDataSources: gh<_i979.AddProductDataSources>()));
+    gh.factory<_i790.AddProductUseCase>(
+        () => _i790.AddProductUseCase(gh<_i281.AddProductRepo>()));
     gh.factory<_i482.ProductsRepo>(
         () => _i249.ProductsRepoImpl(gh<_i1.ProductsDataSourceRepo>()));
+    gh.factory<_i272.AddProductCubit>(
+        () => _i272.AddProductCubit(gh<_i790.AddProductUseCase>()));
     gh.factory<_i208.ImagesCubit>(
         () => _i208.ImagesCubit(gh<_i759.ImagesDataSources>()));
     gh.factory<_i378.ImagesRepo>(
         () => _i340.ImagesRepoImpl(gh<_i759.ImagesDataSources>()));
     gh.factory<_i728.ImagesUseCase>(
         () => _i728.ImagesUseCase(gh<_i378.ImagesRepo>()));
+    gh.factory<_i149.ImagesUseCase>(
+        () => _i149.ImagesUseCase(gh<_i378.ImagesRepo>()));
     gh.factory<_i258.HomeUseCase>(
         () => _i258.HomeUseCase(gh<_i482.ProductsRepo>()));
     gh.factory<_i537.ProductsCubit>(

@@ -205,6 +205,74 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<AddProductResponse?> addProduct(
+    String? productName,
+    num? productPrice,
+    num? priceAfter,
+    String? description,
+    String? dateDiscount,
+    int? status,
+    String? imagePath,
+    int? category,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (productName != null) {
+      _data.fields.add(MapEntry('name', productName));
+    }
+    if (productPrice != null) {
+      _data.fields.add(MapEntry('price', productPrice.toString()));
+    }
+    if (priceAfter != null) {
+      _data.fields.add(MapEntry('price_after', priceAfter.toString()));
+    }
+    if (description != null) {
+      _data.fields.add(MapEntry('description', description));
+    }
+    if (dateDiscount != null) {
+      _data.fields.add(MapEntry('date_descount', dateDiscount));
+    }
+    if (status != null) {
+      _data.fields.add(MapEntry('stauts', status.toString()));
+    }
+    if (imagePath != null) {
+      _data.fields.add(MapEntry('imagePath', imagePath));
+    }
+    if (category != null) {
+      _data.fields.add(MapEntry('category', category.toString()));
+    }
+    final _options = _setStreamType<AddProductResponse>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'multipart/form-data',
+      )
+          .compose(
+            _dio.options,
+            'products/addproduct.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late AddProductResponse? _value;
+    try {
+      _value = _result.data == null
+          ? null
+          : AddProductResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

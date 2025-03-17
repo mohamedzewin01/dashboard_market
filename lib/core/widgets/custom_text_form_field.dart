@@ -277,7 +277,7 @@ class CustomTextFormField extends StatelessWidget {
           fontSize: FontSize.s14,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: const EdgeInsets.all(AppSize.s6),
+        contentPadding: const EdgeInsets.all(AppSize.s18),
         enabledBorder: outLintInputBorderMethod(
           const BorderSide(
               color: ColorManager.placeHolderColor, width: AppSize.w1_5),
