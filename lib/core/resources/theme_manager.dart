@@ -41,7 +41,16 @@ ThemeData getApplicationTheme() {
     ),
   );
 }
-
+AppBarTheme appBarTheme() {
+  return  AppBarTheme(
+    color: ColorManager.cardColor.withAlpha(200),
+    elevation: AppSize.s5,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+}
 OutlineInputBorder outLintInputBorderMethod(
     BorderSide borderSide, BorderRadius borderRadius) {
   return OutlineInputBorder(

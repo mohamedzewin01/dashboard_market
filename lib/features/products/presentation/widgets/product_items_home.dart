@@ -60,13 +60,13 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
           log(constraints.maxWidth.toString());
           return Column(
             children: [
-
               Row(
                 children: [
-                  Spacer(),
+                  crossAxisCount > 2 ? Spacer():SizedBox(width: 16,),
                   Expanded(
-
+                    flex: 2,
                     child: CustomSearchTextFormField(
+                      hintText: '... ابحث',
                       prefixIcon: Icon(Icons.search),
                       controller: searchController,
                       onChanged: (value) {
@@ -74,6 +74,7 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
                       },
                     ),
                   ),
+                  crossAxisCount > 2 ? Spacer():SizedBox(width: 16,),
                 ],
               ),
               SizedBox(

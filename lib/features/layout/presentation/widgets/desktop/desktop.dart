@@ -17,45 +17,59 @@ class DesktopLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 9,
-          child: BlocBuilder<LayoutCubit, LayoutState>(
-            builder: (context, state) {
-              return Scaffold(
-                body: Navigator(
-                    key: GlobalKey<NavigatorState>(),
-                    onGenerateRoute: (settings) {
-                      return MaterialPageRoute(
-                        builder: (context) => IndexedStack(
-                          index: LayoutCubit.get(context).index,
-                          children: viewOptions,
-                        ),
-                      );
-                    }),
-              );
-            },
-          ),
+    return Scaffold(
+      backgroundColor:   ColorManager.white.withAlpha(240) ,
+      body: Card(
+        elevation: 6,
+        clipBehavior: Clip.antiAlias,
+        child: Row(
+          children: [
+            Expanded(
+              flex: 9,
+              child: BlocBuilder<LayoutCubit, LayoutState>(
+                builder: (context, state) {
+                  return Navigator(
+                      key: GlobalKey<NavigatorState>(),
+                      onGenerateRoute: (settings) {
+                        return MaterialPageRoute(
+                          builder: (context) => IndexedStack(
+                            index: LayoutCubit.get(context).index,
+                            children: AppConstants.viewOptionsDesktop,
+                          ),
+                        );
+                      });
+                },
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
+              child: Card(
+                elevation: 6,
+                clipBehavior: Clip.antiAlias,
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width * .14,
+                  constraints: const BoxConstraints(minWidth: 200),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                      ColorManager.white,
+                      ColorManager.offwhite.withAlpha(50),
+                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: CustomDrawer(),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        Container(
-          color: ColorManager.placeHolderColor,
-          width: 150,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: CustomDrawer(),
-          ),
-        ),
-      ],
+      )
     );
+
+
   }
 }
 
-const viewOptions = <Widget>[
-  HomeView(),
-  ProductsView(),
-  AddProductView(),
-  ImagesView(),
-  CategoriesView(),
-  SettingView(),
-];
+
