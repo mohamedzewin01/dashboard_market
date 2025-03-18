@@ -52,7 +52,7 @@ abstract class ApiService {
       @Part(name:'name') String? productName,
       @Part(name:'price') num? productPrice,
       @Part(name:'price_after') num? priceAfter,
-      @Part(name:'description') String? description,
+      @Part(name:'app_description') String? description,
       @Part(name:'date_descount') String? dateDiscount,
       @Part(name:'stauts') int? status,
       @Part(name:'imagePath') String? imagePath,

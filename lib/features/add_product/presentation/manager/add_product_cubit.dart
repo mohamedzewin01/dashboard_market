@@ -55,6 +55,13 @@ class AddProductCubit extends Cubit<AddProductState> {
     switch (result) {
       case Success<AddProductEntity?>():
         {
+          productNameController.clear();
+          productPriceController.clear();
+          priceAfterController.clear();
+          descriptionController.clear();
+           imagePath = '';
+           status = 0;
+           categoryId = 1;
           emit(AddProductSuccess(result.data));
         }
         break;

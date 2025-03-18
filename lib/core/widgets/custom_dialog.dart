@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:dashboard_market/core/widgets/permission_service.dart';
+import 'package:dashboard_market/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 
 
@@ -120,16 +121,10 @@ class CustomDialog {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        Future.delayed(const Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 1), () {
           if (context.mounted) {
             Navigator.of(context).pop();
-            if (goto != null) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => goto,
-                  ));
-            }
+            LayoutCubit.get(context).changeIndex(0);
           }
         });
 
@@ -151,7 +146,7 @@ class CustomDialog {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  "Registration Successful!",
+                  "تم اضافة المنتج بنجاح",
                   style: getBoldStyle(color: ColorManager.white, fontSize: 20),
                 ),
                 const SizedBox(height: 10),

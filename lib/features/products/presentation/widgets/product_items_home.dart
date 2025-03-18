@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../../products/data/models/response/AllProductsRespose.dart';
-import '../../../products/presentation/cubit/home_cubit.dart';
-import '../../../products/presentation/widgets/edit_product.dart';
-import '../../../products/presentation/widgets/products_all_items.dart';
-import '../../../products/presentation/widgets/search_bar.dart';
+import '../../data/models/response/AllProductsRespose.dart';
+import '../cubit/home_cubit.dart';
+import 'edit_product.dart';
+import 'products_all_items.dart';
+import 'search_bar.dart';
 
 class ProductItemsHome extends StatefulWidget {
   const ProductItemsHome({

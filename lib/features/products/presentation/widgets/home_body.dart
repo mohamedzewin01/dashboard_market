@@ -1,11 +1,11 @@
 
 
-import 'package:dashboard_market/features/home/presentation/widgets/product_items_home.dart';
+import 'package:dashboard_market/features/products/presentation/widgets/product_items_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../../products/data/models/response/AllProductsRespose.dart';
-import '../../../products/presentation/cubit/home_cubit.dart';
+import '../../data/models/response/AllProductsRespose.dart';
+import '../cubit/home_cubit.dart';
 
 
 

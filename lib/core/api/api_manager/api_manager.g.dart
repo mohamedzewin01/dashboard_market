@@ -231,7 +231,7 @@ class _ApiService implements ApiService {
       _data.fields.add(MapEntry('price_after', priceAfter.toString()));
     }
     if (description != null) {
-      _data.fields.add(MapEntry('description', description));
+      _data.fields.add(MapEntry('app_description', description));
     }
     if (dateDiscount != null) {
       _data.fields.add(MapEntry('date_descount', dateDiscount));

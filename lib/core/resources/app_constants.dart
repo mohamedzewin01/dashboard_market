@@ -10,7 +10,7 @@ class AppConstants {
 
   static const viewOptions = <Widget>[
     HomeView(),
-    ProductsScreen(),
+    ProductsView(),
     ImagesView()   ,
     SettingView(),
   ];

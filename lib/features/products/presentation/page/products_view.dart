@@ -1,25 +1,20 @@
-import 'dart:developer';
-
-import 'package:dashboard_market/features/products/presentation/widgets/edit_product.dart';
-import 'package:dashboard_market/features/products/presentation/widgets/products_all_items.dart';
-import 'package:dashboard_market/features/products/presentation/widgets/search_bar.dart';
+import 'package:dashboard_market/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/di.dart';
-import '../../../../core/resources/app_constants.dart';
-import '../../../../core/resources/color_manager.dart';
-import '../../data/models/response/AllProductsRespose.dart';
-import '../cubit/home_cubit.dart';
+import '../../../../core/resources/style_manager.dart';
+import '../../../products/presentation/cubit/home_cubit.dart';
+import '../../../products/presentation/widgets/home_body.dart';
 
-class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({super.key});
+class ProductsView extends StatefulWidget {
+  const ProductsView({super.key});
 
   @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
+  State<ProductsView> createState() => _ProductsViewState();
 }
 
-class _ProductsScreenState extends State<ProductsScreen> {
+class _ProductsViewState extends State<ProductsView> {
   late ProductsCubit viewModel;
 
   @override
@@ -30,91 +25,39 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () {
-        return viewModel.getHomeData();
-      },
-      child: SafeArea(
+    return BlocProvider.value(
+      value: viewModel..getHomeData(),
+      child: DefaultTabController(
+        length: 3,
         child: Scaffold(
-          key: listGenerate,
-          backgroundColor: ColorManager.white,
-          body: BlocProvider(
-            create: (context) => viewModel..getHomeData(),
-            child: BlocBuilder<ProductsCubit, ProductsState>(
-              builder: (context, state) {
-                if (state is ProductsLoading) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: ColorManager.primaryColor,
-                    ),
-                  );
-                }
-                if (state is ProductsSuccess) {
-                  List<Products>? products =
-                      state.homeEntity?.products?.reversed.toList() ?? [];
-                  return RefreshIndicator(
-                    color: ColorManager.primaryColor,
-                    onRefresh: () => viewModel.getHomeData(),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          int crossAxisCount = constraints.maxWidth > 900
-                              ? 5
-                              : constraints.maxWidth > 700
-                                  ? 3
-                                  : 2;
-                          log(constraints.maxWidth.toString());
-                          return Column(
-                            children: [
-                              SizedBox(
-                                height: 16,
-                              ),
-                              Expanded(
-                                child: CustomScrollView(
-                                  slivers: [
-                                    SliverGrid(
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: crossAxisCount,
-                                        crossAxisSpacing: 16.0,
-                                        mainAxisSpacing: 16.0,
-                                        childAspectRatio: 1.0,
-                                      ),
-                                      delegate: SliverChildBuilderDelegate(
-                                        (context, index) =>
-                                            CustomProductsAllItem(
-                                          viewModel: viewModel,
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    EditProduct(
-                                                  viewModel: viewModel,
-                                                  product: products[index],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          product: products[index],
-                                        ),
-                                        childCount: products.length,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                }
-                return SizedBox();
-              },
+          appBar: AppBar(
+            title:  Text("سوبر ماركت فضاء الخليج",style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 18),),
+            centerTitle: true,
+            bottom: TabBar(
+              dividerColor: Colors.transparent,
+              indicatorColor: ColorManager.primaryColor,
+              // indicatorSize: TabBarIndicatorSize.tab,
+              indicatorWeight: 4,
+              unselectedLabelColor: Colors.black,
+              labelColor: ColorManager.primaryColor,
+              labelStyle: getBoldStyle(color: ColorManager.primaryColor,fontSize: 16),
+              unselectedLabelStyle: getMediumStyle(color: Colors.black,fontSize: 14),
+
+              tabs: [
+                Tab(
+                  text: "جميع المنتجات",
+                ),
+                Tab(
+                  text: "المنتجات نشطة",
+                ),
+                Tab(
+                  text: "المنتجات غير نشطة",
+                ),
+              ],
             ),
+          ),
+          body: HomeBody(
+            viewModel: viewModel,
           ),
         ),
       ),

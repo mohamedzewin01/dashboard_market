@@ -1,5 +1,6 @@
 import 'package:dashboard_market/core/functions/helper.dart';
 import 'package:dashboard_market/core/resources/cashed_image.dart';
+import 'package:dashboard_market/core/widgets/custom_dialog.dart';
 import 'package:dashboard_market/features/add_product/presentation/widgets/show_all_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +11,7 @@ import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../add_images/data/models/images_model.dart';
 import '../../../add_images/presentation/manager/images_cubit.dart';
+import '../../../home/presentation/pages/home_view.dart';
 import '../../../layout/presentation/widgets/desktop/add_images.dart';
 import '../manager/add_product_cubit.dart';
 import 'choose_categories.dart';
@@ -26,7 +28,9 @@ class AddProductBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AddProductCubit, AddProductState>(
       listener: (context, state) {
-        // TODO: implement listener
+       if(state is AddProductSuccess){
+         CustomDialog.showSuccessDialog(context,goto: const HomeView());
+       }
       },
       builder: (context, state) {
         return Padding(

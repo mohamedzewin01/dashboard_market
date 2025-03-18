@@ -51,11 +51,11 @@ class DesktopLayout extends StatelessWidget {
   }
 }
 
- const viewOptions = <Widget>[
+const viewOptions = <Widget>[
   HomeView(),
-  ProductsScreen(),
+  ProductsView(),
   AddProductView(),
-  ImagesView()   ,
+  ImagesView(),
   CategoriesView(),
-   SettingView(),
+  SettingView(),
 ];
