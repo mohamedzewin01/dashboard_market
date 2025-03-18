@@ -8,6 +8,7 @@ import '../../../products/data/models/response/AllProductsRespose.dart';
 import '../../../products/presentation/cubit/home_cubit.dart';
 
 
+
 class HomeBody extends StatelessWidget {
   const HomeBody({
     super.key, required this.viewModel,
@@ -41,57 +42,52 @@ final ProductsCubit viewModel;
             return SizedBox();
           },
         ),
-        BlocProvider(
-          create: (context) => viewModel..getHomeData(),
-          child: BlocBuilder<ProductsCubit, ProductsState>(
-            builder: (context, state) {
-              if (state is ProductsLoading) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: ColorManager.primaryColor,
-                  ),
-                );
-              }
-              if (state is ProductsSuccess) {
-                List<Products>? products =
-                    state.homeEntity?.products?.reversed.toList() ?? [];
-                List<Products>? products2 =[];
-                products2 = products.where((element) => element.status == 1).toList();
-                return RefreshIndicator(
+        BlocBuilder<ProductsCubit, ProductsState>(
+          builder: (context, state) {
+            if (state is ProductsLoading) {
+              return Center(
+                child: CircularProgressIndicator(
                   color: ColorManager.primaryColor,
-                  onRefresh: () => viewModel.getHomeData(),
-                  child: ProductItemsHome(viewModel: viewModel, products: products2),
-                );
-              }
-              return SizedBox();
-            },
-          ),
+                ),
+              );
+            }
+            if (state is ProductsSuccess) {
+              List<Products>? products =
+                  state.homeEntity?.products?.reversed.toList() ?? [];
+              List<Products>? products2 =[];
+              products2 = products.where((element) => element.status == 1).toList();
+              return RefreshIndicator(
+                color: ColorManager.primaryColor,
+                onRefresh: () => viewModel.getHomeData(),
+                child: ProductItemsHome(viewModel: viewModel, products: products2),
+              );
+            }
+
+            return Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,));
+          },
         ),
-        BlocProvider(
-          create: (context) => viewModel..getHomeData(),
-          child: BlocBuilder<ProductsCubit, ProductsState>(
-            builder: (context, state) {
-              if (state is ProductsLoading) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: ColorManager.primaryColor,
-                  ),
-                );
-              }
-              if (state is ProductsSuccess) {
-                List<Products>? products =
-                    state.homeEntity?.products?.reversed.toList() ?? [];
-                List<Products>? products3 =[];
-                products3 = products.where((element) => element.status == 0).toList();
-                return RefreshIndicator(
+        BlocBuilder<ProductsCubit, ProductsState>(
+          builder: (context, state) {
+            if (state is ProductsLoading) {
+              return Center(
+                child: CircularProgressIndicator(
                   color: ColorManager.primaryColor,
-                  onRefresh: () => viewModel.getHomeData(),
-                  child: ProductItemsHome(viewModel: viewModel, products: products3),
-                );
-              }
-              return SizedBox();
-            },
-          ),
+                ),
+              );
+            }
+            if (state is ProductsSuccess) {
+              List<Products>? products =
+                  state.homeEntity?.products?.reversed.toList() ?? [];
+              List<Products>? products3 =[];
+              products3 = products.where((element) => element.status == 0).toList();
+              return RefreshIndicator(
+                color: ColorManager.primaryColor,
+                onRefresh: () => viewModel.getHomeData(),
+                child: ProductItemsHome(viewModel: viewModel, products: products3),
+              );
+            }
+            return Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,));
+          },
         )
 
 

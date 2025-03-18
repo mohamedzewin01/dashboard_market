@@ -1,15 +1,15 @@
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../products/data/models/response/AllProductsRespose.dart';
 import '../../../products/presentation/cubit/home_cubit.dart';
 import '../../../products/presentation/widgets/edit_product.dart';
 import '../../../products/presentation/widgets/products_all_items.dart';
 import '../../../products/presentation/widgets/search_bar.dart';
 
-class ProductItemsHome extends StatelessWidget {
+class ProductItemsHome extends StatefulWidget {
   const ProductItemsHome({
     super.key,
     required this.viewModel,
@@ -20,6 +20,33 @@ class ProductItemsHome extends StatelessWidget {
   final List<Products>? products;
 
   @override
+  State<ProductItemsHome> createState() => _ProductItemsHomeState();
+}
+
+class _ProductItemsHomeState extends State<ProductItemsHome> {
+  List<Products>? filteredProducts = [];
+  String query = "";
+
+  @override
+  void initState() {
+    super.initState();
+    filteredProducts = widget.products;
+  }
+
+  void updateSearch(String searchQuery) {
+    setState(() {
+      query = searchQuery;
+      filteredProducts = widget.products
+          ?.where((product) => product.productName!
+              .toLowerCase()
+              .contains(searchQuery.toLowerCase()))
+          .toList();
+    });
+  }
+
+  TextEditingController searchController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -28,11 +55,27 @@ class ProductItemsHome extends StatelessWidget {
           int crossAxisCount = constraints.maxWidth > 900
               ? 5
               : constraints.maxWidth > 700
-              ? 3
-              : 2;
+                  ? 3
+                  : 2;
           log(constraints.maxWidth.toString());
           return Column(
             children: [
+
+              Row(
+                children: [
+                  Spacer(),
+                  Expanded(
+
+                    child: CustomSearchTextFormField(
+                      prefixIcon: Icon(Icons.search),
+                      controller: searchController,
+                      onChanged: (value) {
+                        updateSearch(value);
+                      },
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(
                 height: 16,
               ),
@@ -40,32 +83,29 @@ class ProductItemsHome extends StatelessWidget {
                 child: CustomScrollView(
                   slivers: [
                     SliverGrid(
-                      gridDelegate:
-                      SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: crossAxisCount,
                         crossAxisSpacing: 16.0,
                         mainAxisSpacing: 16.0,
                         childAspectRatio: 1.0,
                       ),
                       delegate: SliverChildBuilderDelegate(
-                            (context, index) =>
-                            CustomProductsAllItem(
-                              viewModel: viewModel,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        EditProduct(
-                                          viewModel: viewModel,
-                                          product: products![index],
-                                        ),
-                                  ),
-                                );
-                              },
-                              product: products![index],
-                            ),
-                        childCount: products?.length,
+                        (context, index) => CustomProductsAllItem(
+                          viewModel: widget.viewModel,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditProduct(
+                                  viewModel: widget.viewModel,
+                                  product: filteredProducts![index],
+                                ),
+                              ),
+                            );
+                          },
+                          product: filteredProducts![index],
+                        ),
+                        childCount: filteredProducts?.length,
                       ),
                     ),
                   ],

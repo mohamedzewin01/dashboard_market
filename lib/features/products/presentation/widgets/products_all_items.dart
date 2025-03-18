@@ -7,6 +7,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/custom_riyal_saudi.dart';
 import '../../data/models/response/AllProductsRespose.dart';
 import '../cubit/home_cubit.dart';
@@ -31,7 +32,7 @@ class CustomProductsAllItem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 border: Border.all(color: ColorManager.placeHolderColor),
-                borderRadius: BorderRadius.circular(0)),
+                borderRadius: BorderRadius.circular(12)),
             child: Column(
               children: [
                 Expanded(
@@ -70,10 +71,10 @@ class CustomProductsAllItem extends StatelessWidget {
                       product.productName ?? '',
                       overflow: TextOverflow.ellipsis,
                       textDirection: TextDirection.rtl,
-                      style: GoogleFonts.roboto(
+                      style: getSemiBoldStyle(
                           color: ColorManager.black,
                           fontSize: 14,
-                          fontWeight: FontWeight.bold),
+                          ),
                       maxLines: 1,
                     ),
                     Row(
@@ -87,7 +88,7 @@ class CustomProductsAllItem extends StatelessWidget {
                               maxLines: 1,
                               textAlign: TextAlign.right,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
+                              style: getSemiBoldStyle(
                                 color: ColorManager.primary,
                                 fontSize: 12,
                               ),

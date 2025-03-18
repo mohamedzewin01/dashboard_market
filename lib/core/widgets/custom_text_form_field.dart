@@ -310,3 +310,108 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 }
+
+class CustomSearchTextFormField extends StatelessWidget {
+  const CustomSearchTextFormField({
+    super.key,
+    required this.controller,
+    this.labelText,
+    this.hintText,
+    this.obscureText,
+    this.validator,
+    this.suffix,
+    this.keyboardType,
+    this.enabled,
+    this.prefixIcon,
+    this.initialValue,
+    this.onChanged,
+    this.inputAction, this.minLines, this.maxLines,
+  });
+
+  final TextEditingController controller;
+  final String? labelText;
+  final String? hintText;
+  final String? initialValue;
+  final bool? obscureText;
+  final bool? enabled;
+  final int? minLines;
+  final int? maxLines;
+  final String? Function(String?)? validator;
+  final Widget? suffix;
+  final Widget? prefixIcon;
+  final TextInputType? keyboardType;
+  final TextInputAction? inputAction;
+  final void Function(String)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      textDirection: TextDirection.rtl,
+      textAlign: TextAlign.center,
+      textInputAction: inputAction,
+      cursorColor: ColorManager.placeHolderColor,
+      style:getSemiBoldStyle(color: ColorManager.black,fontSize: FontSize.s16),
+      initialValue: initialValue,
+      readOnly: enabled ?? false,
+      minLines: minLines,
+      maxLines: maxLines,
+      controller: controller,
+      keyboardType: keyboardType,
+      decoration: InputDecoration(
+        isDense: true,
+        errorStyle: TextStyle(fontSize: 14,),
+        prefixIcon: prefixIcon,
+        prefixIconColor: ColorManager.placeHolderColor,
+        suffixIcon: suffix != null
+            ? Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            suffix!,
+          ],
+        )
+            : null,
+        suffixIconColor: ColorManager.placeHolderColor,
+        labelText: labelText,
+        labelStyle: getRegularStyle(
+          color: ColorManager.placeHolderColor,
+          fontSize: FontSize.s16,
+        ),
+        hintText: hintText,
+        hintStyle: getRegularStyle(
+          color: ColorManager.placeHolderColor2,
+          fontSize: FontSize.s14,
+        ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding: const EdgeInsets.all(AppSize.s18),
+        enabledBorder: outLintInputBorderMethod(
+          const BorderSide(
+              color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+          const BorderRadius.all(Radius.circular(AppSize.s12)),
+        ),
+        focusedBorder: outLintInputBorderMethod(
+          const BorderSide(
+              color: ColorManager.primaryColor, width: AppSize.w1_5),
+          const BorderRadius.all(Radius.circular(AppSize.s12)),
+        ),
+        errorBorder: outLintInputBorderMethod(
+          const BorderSide(
+              color: ColorManager.primaryColor, width: AppSize.w1_5),
+          const BorderRadius.all(Radius.circular(AppSize.s12)),
+        ),
+        focusedErrorBorder: outLintInputBorderMethod(
+          const BorderSide(
+              color: ColorManager.primaryColor, width: AppSize.w1_5),
+          const BorderRadius.all(Radius.circular(AppSize.s12)),
+        ),
+        disabledBorder: outLintInputBorderMethod(
+            const BorderSide(
+                color: ColorManager.placeHolderColor, width: AppSize.w1_5),
+            const BorderRadius.all(Radius.circular(AppSize.s12))),
+      ),
+      obscureText: obscureText ?? false,
+      validator: validator,
+      onChanged: onChanged,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+    );
+  }
+}

@@ -40,7 +40,7 @@ class DesktopLayout extends StatelessWidget {
         ),
         Container(
           color: ColorManager.placeHolderColor,
-          width: 250,
+          width: 150,
           child: Padding(
             padding: const EdgeInsets.only(left: 10),
             child: CustomDrawer(),

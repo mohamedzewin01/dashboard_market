@@ -24,24 +24,30 @@ class _SwitchStatusProductsState extends State<SwitchStatusProducts> {
     return Transform.scale(
       scale: .6,
       child: Switch(
-        mouseCursor: MouseCursor.defer,
-        // hoverColor: ColorManager.orange,
-        activeTrackColor: Colors.green,
-        activeColor: Colors.white,
-        inactiveThumbColor:Colors.grey,
-        inactiveTrackColor: Colors.white,
-        value: widget.product.status == 1,
+        mouseCursor: SystemMouseCursors.click,
+        // activeColor: Colors.green,
+        // inactiveThumbColor: Colors.red,
+        // inactiveTrackColor: Colors.red.shade100,
+        activeTrackColor: Colors.lightGreen.shade400,
+        activeColor: Colors.green.shade800,
+        inactiveThumbColor: Colors.grey.shade400, // لون المفتاح عند عدم التفعيل
+        inactiveTrackColor: Colors.grey.shade300, // لون المسار عند عدم التفعيل
+        value: widget.product.status == 1, // حالة المنتج
         onChanged: (value) {
           setState(() {
+            // تحديث حالة المنتج عبر ViewModel
             widget.viewModel.editProduct(
               EditProductRequest(
-                  idProduct: widget.product.idProduct, status: value ? 1 : 0),
+                idProduct: widget.product.idProduct,
+                status: value ? 1 : 0,
+              ),
             );
+            // تحديث حالة المنتج محليًا
             widget.product.status = value ? 1 : 0;
           });
-          widget.product.status == 0;
         },
       ),
+
     );
   }
 }

@@ -55,6 +55,7 @@ dependencies:
   share_plus:
 #  image_picker_web: any
   path_provider:
+  getwidget: ^6.0.0
 
 
 

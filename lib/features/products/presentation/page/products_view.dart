@@ -67,7 +67,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
                           log(constraints.maxWidth.toString());
                           return Column(
                             children: [
-                              CustomSearchBar(viewModel: viewModel),
                               SizedBox(
                                 height: 16,
                               ),
