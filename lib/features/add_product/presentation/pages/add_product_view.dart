@@ -26,8 +26,8 @@ class _AddProductViewState extends State<AddProductView> {
       appBar: AppBar(
         title: const Text("Add Product"),
       ),
-      body: BlocProvider.value(
-        value: viewModel,
+      body: BlocProvider(
+        create: (context) =>viewModel ,
         child: LayoutBuilder(
           builder: (context, constraints) {
             if (constraints.maxWidth < 600) {

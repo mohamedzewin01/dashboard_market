@@ -1,3 +1,4 @@
+import '../../data/models/add_category_responces.dart';
 import '../../data/models/fetch_categories.dart';
 
 class FetchCategoriesEntity {
@@ -11,5 +12,13 @@ class FetchCategoriesEntity {
     this.categories,
   });
 
+}
 
+class AddCategoryEntity {
+  final String? status;
+  final Category? category;
+  AddCategoryEntity ({
+    this.status,
+    this.category,
+  });
 }

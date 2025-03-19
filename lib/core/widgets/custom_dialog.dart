@@ -124,7 +124,6 @@ class CustomDialog {
         Future.delayed(const Duration(seconds: 1), () {
           if (context.mounted) {
             Navigator.of(context).pop();
-            LayoutCubit.get(context).changeIndex(0);
           }
         });
 

@@ -15,30 +15,30 @@ ThemeData getApplicationTheme() {
     systemNavigationBarDividerColor: Colors.transparent,
   ));
   return ThemeData(
-    inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.all(AppPadding.p18),
-      hintStyle: getRegularStyle(
-          color: ColorManager.placeHolderColor, fontSize: FontSize.s14),
-      labelStyle:
-          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s16),
-      errorStyle: getRegularStyle(color: ColorManager.error),
-      enabledBorder: outLintInputBorderMethod(
-        const BorderSide(color: ColorManager.black, width: AppSize.w1_5),
-        const BorderRadius.all(Radius.circular(AppSize.s12)),
-      ),
-      focusedBorder: outLintInputBorderMethod(
-        const BorderSide(color: ColorManager.grey, width: AppSize.w1_5),
-        const BorderRadius.all(Radius.circular(AppSize.s12)),
-      ),
-      errorBorder: outLintInputBorderMethod(
-        const BorderSide(color: ColorManager.error, width: AppSize.w1_5),
-        const BorderRadius.all(Radius.circular(AppSize.s12)),
-      ),
-      focusedErrorBorder: outLintInputBorderMethod(
-        const BorderSide(color: ColorManager.black, width: AppSize.w1_5),
-        const BorderRadius.all(Radius.circular(AppSize.s12)),
-      ),
-    ),
+    // inputDecorationTheme: InputDecorationTheme(
+    //   contentPadding: const EdgeInsets.all(AppPadding.p18),
+    //   hintStyle: getRegularStyle(
+    //       color: ColorManager.placeHolderColor, fontSize: FontSize.s14),
+    //   labelStyle:
+    //       getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s16),
+    //   errorStyle: getRegularStyle(color: ColorManager.error),
+    //   enabledBorder: outLintInputBorderMethod(
+    //     const BorderSide(color: ColorManager.black, width: AppSize.w1_5),
+    //     const BorderRadius.all(Radius.circular(AppSize.s12)),
+    //   ),
+    //   focusedBorder: outLintInputBorderMethod(
+    //     const BorderSide(color: ColorManager.grey, width: AppSize.w1_5),
+    //     const BorderRadius.all(Radius.circular(AppSize.s12)),
+    //   ),
+    //   errorBorder: outLintInputBorderMethod(
+    //     const BorderSide(color: ColorManager.error, width: AppSize.w1_5),
+    //     const BorderRadius.all(Radius.circular(AppSize.s12)),
+    //   ),
+    //   focusedErrorBorder: outLintInputBorderMethod(
+    //     const BorderSide(color: ColorManager.black, width: AppSize.w1_5),
+    //     const BorderRadius.all(Radius.circular(AppSize.s12)),
+    //   ),
+    // ),
   );
 }
 AppBarTheme appBarTheme() {

@@ -71,7 +71,7 @@ class SectionListImages extends StatelessWidget {
                                   onPressed: () async {
                                     await viewModel.deleteImages(
                                       listImage[index].idImage.toString(),
-                                      listImage[index].imageName.toString(),
+                                      listImage[index].imagePath??'',
                                     );
                                     if (context.mounted) {
                                       Navigator.pop(context);

@@ -53,6 +53,16 @@ import '../../features/products/domain/repo/products_repo.dart' as _i482;
 import '../../features/products/domain/use_cases/products_use_case.dart'
     as _i258;
 import '../../features/products/presentation/cubit/home_cubit.dart' as _i537;
+import '../../features/setting/data/data_sources/store_data_sources.dart'
+    as _i630;
+import '../../features/setting/data/repositories/store_info_repo_impl.dart'
+    as _i904;
+import '../../features/setting/domain/repositories/store_info_repo.dart'
+    as _i504;
+import '../../features/setting/domain/use_cases/store_info_use_cases.dart'
+    as _i556;
+import '../../features/setting/presentation/manager/store_info_cubit.dart'
+    as _i212;
 import '../api/api_manager/api_manager.dart' as _i680;
 import '../api/dio_module.dart' as _i784;
 
@@ -72,12 +82,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
     gh.factory<_i379.CategoriesDataSources>(
         () => _i379.CategoriesDataSources(gh<_i680.ApiService>()));
+    gh.factory<_i630.StoreDataSources>(
+        () => _i630.StoreDataSources(gh<_i680.ApiService>()));
+    gh.factory<_i504.StoreInfoRepo>(() => _i904.StoreInfoRepoImpl(
+        storeDataSources: gh<_i630.StoreDataSources>()));
     gh.factory<_i594.CategoriesRepo>(() => _i137.CategoriesRepoImpl(
         categoriesDataSources: gh<_i379.CategoriesDataSources>()));
     gh.factory<_i548.CategoriesUseCase>(
         () => _i548.CategoriesUseCase(gh<_i594.CategoriesRepo>()));
     gh.factory<_i1.ProductsDataSourceRepo>(
         () => _i647.ProductsDataSourceRepoImpl(gh<_i680.ApiService>()));
+    gh.factory<_i556.StoreInfoUseCases>(
+        () => _i556.StoreInfoUseCases(gh<_i504.StoreInfoRepo>()));
     gh.factory<_i759.ImagesDataSources>(
         () => _i759.ImagesDataSources(apiService: gh<_i680.ApiService>()));
     gh.factory<_i979.AddProductDataSources>(
@@ -94,6 +110,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i208.ImagesCubit(gh<_i759.ImagesDataSources>()));
     gh.factory<_i378.ImagesRepo>(
         () => _i340.ImagesRepoImpl(gh<_i759.ImagesDataSources>()));
+    gh.factory<_i212.StoreInfoCubit>(
+        () => _i212.StoreInfoCubit(gh<_i556.StoreInfoUseCases>()));
     gh.factory<_i728.ImagesUseCase>(
         () => _i728.ImagesUseCase(gh<_i378.ImagesRepo>()));
     gh.factory<_i572.CategoriesCubit>(

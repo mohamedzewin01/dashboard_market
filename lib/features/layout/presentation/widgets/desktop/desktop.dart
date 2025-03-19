@@ -17,6 +17,7 @@ class DesktopLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = LayoutCubit.get(context);
     return Scaffold(
       backgroundColor:   ColorManager.white.withAlpha(240) ,
       body: Card(
@@ -32,10 +33,12 @@ class DesktopLayout extends StatelessWidget {
                       key: GlobalKey<NavigatorState>(),
                       onGenerateRoute: (settings) {
                         return MaterialPageRoute(
-                          builder: (context) => IndexedStack(
-                            index: LayoutCubit.get(context).index,
-                            children: AppConstants.viewOptionsDesktop,
-                          ),
+                          builder: (context) => AppConstants.viewOptionsDesktop[cubit.index],
+                          // IndexedStack(
+                          //   index: LayoutCubit.get(context).index,
+                          //   children: AppConstants.viewOptionsDesktop,
+                          // ),
+
                         );
                       });
                 },

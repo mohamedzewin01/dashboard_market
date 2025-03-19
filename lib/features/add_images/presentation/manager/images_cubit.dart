@@ -19,6 +19,12 @@ class ImagesCubit extends Cubit<ImagesState> {
   final ImagesDataSources _imagesDataSources;
 
   ImagesCubit(this._imagesDataSources) : super(ImagesInitial());
+  int categoryId = 0;
+  void changeCategory(int idCategory) {
+    categoryId = idCategory;
+    // emit(ChangeChangeCategoryImage());
+  }
+
 
   Future<void> fetchImages() async {
     emit(LoadingImages());
@@ -46,7 +52,7 @@ class ImagesCubit extends Cubit<ImagesState> {
   TextEditingController nameController = TextEditingController();
 final formKey = GlobalKey<FormState>();
   Future<void> upLoadImages() async {
-    await _imagesDataSources.upLoadImage(imageFile!, nameController.text, '1');
+    await _imagesDataSources.upLoadImage(imageFile!, nameController.text, categoryId.toString());
   }
 
   Future<void> deleteImages(String imageId, String imageName) async {

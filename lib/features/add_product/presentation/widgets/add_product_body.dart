@@ -5,14 +5,11 @@ import 'package:dashboard_market/features/add_product/presentation/widgets/show_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/di/di.dart';
+
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../../add_images/data/models/images_model.dart';
-import '../../../add_images/presentation/manager/images_cubit.dart';
 import '../../../home/presentation/pages/home_view.dart';
-import '../../../layout/presentation/widgets/desktop/add_images.dart';
 import '../manager/add_product_cubit.dart';
 import 'choose_categories.dart';
 
@@ -35,7 +32,6 @@ class AddProductBody extends StatelessWidget {
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(16),
-
           child: Form(
             key: viewModel.formKey,
             child: Column(
@@ -48,13 +44,22 @@ class AddProductBody extends StatelessWidget {
                     width: 100,
                     child: IconButton(
                       onPressed: () {
-                        showBottomSheet(
+                        showModalBottomSheet(
                           context: context,
-                          builder: (context) =>
-                              ShowAllImagesToAddProduct(
-                                addProductCubit: viewModel,
-                              ),
+                          isScrollControlled: true, // يسمح بتمدد الـ BottomSheet وفقًا للمحتوى
+                          backgroundColor: ColorManager.white,
+                          elevation: 8,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20),
+                            ),
+                          ),
+                          builder: (context) => ShowAllImagesToAddProduct(
+                            addProductCubit: viewModel,
+                          ),
                         );
+
                       },
                       icon: viewModel.imagePath.isNotEmpty
                           ? CustomImage(url: viewModel.imagePath)

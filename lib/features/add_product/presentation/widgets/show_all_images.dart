@@ -1,5 +1,67 @@
-import 'dart:developer';
+// import 'dart:developer';
+//
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+//
+// import '../../../../core/di/di.dart';
+// import '../../../../core/resources/cashed_image.dart';
+// import '../../../../core/resources/color_manager.dart';
+// import '../../../add_images/data/models/images_model.dart';
+// import '../../../add_images/presentation/manager/images_cubit.dart';
+// import '../manager/add_product_cubit.dart';
+//
+// class ShowAllImagesToAddProduct extends StatefulWidget {
+//   const ShowAllImagesToAddProduct({
+//     super.key, required this.addProductCubit,
+//   });
+//   final AddProductCubit addProductCubit;
+//   @override
+//   State<ShowAllImagesToAddProduct> createState() => _ShowAllImagesToAddProductState();
+// }
+//
+// class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
+//   late ImagesCubit viewModel;
+//
+//   @override
+//   void initState() {
+//     viewModel = getIt.get<ImagesCubit>();
+//     super.initState();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocProvider(
+//       create: (context) => viewModel..fetchImages(),
+//       child: BlocBuilder<ImagesCubit, ImagesState>(
+//         builder: (context, state) {
+//           if(state is SuccessImages){
+//             List<Images>? images = state.imagesEntity.images ?? [];
+//             return ListView.builder(
+//                 itemCount: images.length,
+//                 itemBuilder: (context, index) => ListTile(
+//                   leading:SizedBox(
+//                       height: 60,
+//                       width: 60,
+//                       child: CustomImage(url: images[index].imagePath??'')),
+//                   title: Text(images[index].imageName??''),
+//                   onTap: ()async{
+//                widget. addProductCubit.imagePath = images[index].imagePath??'';
+//                    log(  widget. addProductCubit.imagePath);
+//                 widget. addProductCubit.changeImagePath(images[index].imagePath??'');
+//
+//                     Navigator.pop(context);
+//                   },
+//                 ));
+//
+//           }
+//           return Center(child: CircularProgressIndicator(color: ColorManager.orange,));
+//         },
+//       ),
+//     );
+//   }
+// }
 
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,21 +73,39 @@ import '../../../add_images/presentation/manager/images_cubit.dart';
 import '../manager/add_product_cubit.dart';
 
 class ShowAllImagesToAddProduct extends StatefulWidget {
-  const ShowAllImagesToAddProduct({
-    super.key, required this.addProductCubit,
-  });
+  const ShowAllImagesToAddProduct({super.key, required this.addProductCubit});
+
   final AddProductCubit addProductCubit;
+
   @override
-  State<ShowAllImagesToAddProduct> createState() => _ShowAllImagesToAddProductState();
+  State<ShowAllImagesToAddProduct> createState() =>
+      _ShowAllImagesToAddProductState();
 }
 
 class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
   late ImagesCubit viewModel;
+  TextEditingController searchController = TextEditingController();
+  List<Images>? allImages = []; // القائمة الكاملة
+  List<Images>? filteredImages = []; // القائمة المفلترة
 
   @override
   void initState() {
-    viewModel = getIt.get<ImagesCubit>();
     super.initState();
+    viewModel = getIt.get<ImagesCubit>();
+  }
+
+  void filterImages(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        filteredImages = allImages;
+      } else {
+        filteredImages = allImages
+            ?.where((image) =>
+                image.imageName?.toLowerCase().contains(query.toLowerCase()) ??
+                false)
+            .toList();
+      }
+    });
   }
 
   @override
@@ -34,27 +114,54 @@ class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
       create: (context) => viewModel..fetchImages(),
       child: BlocBuilder<ImagesCubit, ImagesState>(
         builder: (context, state) {
-          if(state is SuccessImages){
-            List<Images>? images = state.imagesEntity.images ?? [];
-            return ListView.builder(
-                itemCount: images.length,
-                itemBuilder: (context, index) => ListTile(
-                  leading:SizedBox(
-                      height: 60,
-                      width: 60,
-                      child: CustomImage(url: images[index].imagePath??'')),
-                  title: Text(images[index].imageName??''),
-                  onTap: ()async{
-               widget. addProductCubit.imagePath = images[index].imagePath??'';
-                   log(  widget. addProductCubit.imagePath);
-                widget. addProductCubit.changeImagePath(images[index].imagePath??'');
-
-                    Navigator.pop(context);
-                  },
-                ));
-
+          if (state is SuccessImages) {
+            allImages = state.imagesEntity.images ?? [];
+            filteredImages =
+                filteredImages?.isNotEmpty == true ? filteredImages : allImages;
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      hintText: 'ابحث عن صورة...',
+                      prefixIcon: Icon(Icons.search, color: ColorManager.grey),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    onChanged: filterImages,
+                  ),
+                ),
+                Expanded(
+                  child: filteredImages!.isEmpty
+                      ? Center(child: Text('لا توجد صور مطابقة'))
+                      : ListView.builder(
+                          itemCount: filteredImages?.length ?? 0,
+                          itemBuilder: (context, index) => ListTile(
+                            leading: SizedBox(
+                              height: 60,
+                              width: 60,
+                              child: CustomImage(
+                                  url: filteredImages![index].imagePath ?? ''),
+                            ),
+                            title: Text(filteredImages![index].imageName ?? ''),
+                            onTap: () {
+                              widget.addProductCubit.imagePath =
+                                  filteredImages![index].imagePath ?? '';
+                              log(widget.addProductCubit.imagePath);
+                              widget.addProductCubit.changeImagePath(
+                                  filteredImages![index].imagePath ?? '');
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                ),
+              ],
+            );
           }
-          return Center(child: CircularProgressIndicator(color: ColorManager.orange,));
+          return Center(
+              child: CircularProgressIndicator(color: ColorManager.orange));
         },
       ),
     );

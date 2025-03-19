@@ -1,6 +1,8 @@
 
 
 
+import 'dart:io';
+
 import 'package:dashboard_market/core/common/api_result.dart';
 import 'package:dashboard_market/features/categories/data/data_sources/categories_data_sourses.dart';
 
@@ -15,5 +17,10 @@ class CategoriesRepoImpl  implements CategoriesRepo{
   @override
   Future<Result<FetchCategoriesEntity?>> fetchCategoriesData() {
     return categoriesDataSources.getCategories();
+  }
+
+  @override
+  Future<Result<AddCategoryEntity?>> addCategory(File imageFile, String categoryName, int status) {
+    return categoriesDataSources.addCategories(imageFile, categoryName, status);
   }
 }

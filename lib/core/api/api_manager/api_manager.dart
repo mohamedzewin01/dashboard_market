@@ -9,9 +9,11 @@ import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import '../../../features/add_images/data/models/delete_image.dart';
 import '../../../features/add_images/data/models/upload_image_model.dart';
+import '../../../features/categories/data/models/add_category_responces.dart';
 import '../../../features/products/data/models/request/edit_product_request.dart';
 import '../../../features/products/data/models/response/AllProductsRespose.dart';
 import '../../../features/products/data/models/response/edit_product_response.dart';
+import '../../../features/setting/data/models/store_info_responce.dart';
 import '../api_constants.dart';
 
 part 'api_manager.g.dart';
@@ -63,8 +65,15 @@ abstract class ApiService {
   @POST(ApiConstants.fetchCategories)
   Future<FetchCategoriesResponse?> getCategories();
 
+  @POST(ApiConstants.addCategories)
+  @MultiPart()
+  Future<AddCategoryResponse?> addCategory(
+      @Part(name:'image') File? imageFile,
+      @Part(name:'name') String? categoryName,
+      @Part(name:'status') int? status);
 
-
+  @POST(ApiConstants.storeInfo)
+  Future<StoreInfoResponse?> getStoreInfo();
 
 }
 
