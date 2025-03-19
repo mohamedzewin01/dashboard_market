@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:dashboard_market/features/setting/domain/use_cases/store_info_use_cases.dart';
 import 'package:injectable/injectable.dart';
@@ -23,4 +25,9 @@ class StoreInfoCubit extends Cubit<StoreInfoState> {
         emit(StoreInfoFailure(result.exception));
     }
   }
+
+
+  String imagePath = '';
+  int status = 1;
+  File? imageFile;
 }
