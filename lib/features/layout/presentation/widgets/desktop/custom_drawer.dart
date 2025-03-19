@@ -19,37 +19,37 @@ class CustomDrawer extends StatelessWidget {
     List<ItemsDrawer> drawerItems = [
       ItemsDrawer(
         title: 'الرئيسية',
-        svgPath: Assets.master,
+        svgPath: Assets.home,
         page: 0,
         onTap: () => LayoutCubit.get(context).changeIndex(0),
       ),
       ItemsDrawer(
         title: 'المنتجات',
-        svgPath: Assets.products,
+        svgPath: Assets.productsTap,
         page: 1,
         onTap: () => LayoutCubit.get(context).changeIndex(1),
       ),
       ItemsDrawer(
         title: 'اضافة منتج',
-        svgPath: Assets.uploadImage,
+        svgPath: Assets.addProduct,
         page: 2,
         onTap: () => LayoutCubit.get(context).changeIndex(2),
       ),
       ItemsDrawer(
         title: 'الصور',
-        svgPath: Assets.uploadImage,
+        svgPath: Assets.uploadImages,
         page: 3,
         onTap: () => LayoutCubit.get(context).changeIndex(3),
       ),
       ItemsDrawer(
         title: 'الاقسام',
-        svgPath: Assets.uploadImage,
+        svgPath: Assets.categories,
         page: 4,
         onTap: () => LayoutCubit.get(context).changeIndex(4),
       ),
       ItemsDrawer(
         title: 'الاعدادات',
-        svgPath: Assets.setting,
+        svgPath: Assets.settingTap,
         page: 5,
         onTap: () => LayoutCubit.get(context).changeIndex(5),
       ),
@@ -104,7 +104,7 @@ class CustomDrawer extends StatelessWidget {
               ItemsDrawer(
                 page: 6,
                 title: 'خروج',
-                svgPath: '',
+                svgPath: Assets.exit,
                 onTap: () => CustomDialog.showExitDialog(context),
               ),
               SizedBox(

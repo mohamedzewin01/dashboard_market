@@ -8,6 +8,14 @@ class Assets {
   static const String assetsImagesImageDefault =
       'assets/images/image_default.jpg';
   static const String imagesImageDefault = 'assets/images/image_default.jpg';
+  static const String home = 'assets/images/home.png';
+  static const String productsTap = 'assets/images/products.png';
+  static const String uploadImages = 'assets/images/uploadImages.png';
+  static const String categories = 'assets/images/categories.png';
+  static const String addProduct = 'assets/images/add-product.png';
+  static const String settingTap = 'assets/images/setting.png';
+  static const String exit = 'assets/images/exit.png';
   static const String imagesRialRemovebgPreview =
       'assets/images/rial-removebg-preview.png';
+
 }

@@ -1,3 +1,4 @@
+import 'package:dashboard_market/features/auth/presentation/pages/login_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/layout/presentation/pages/layout_view.dart';
@@ -20,6 +21,8 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutesManager.splashScreen:
+        return MaterialPageRoute(builder: (_) => LoginView());
+      case RoutesManager.layout:
         return MaterialPageRoute(builder: (_) => LayoutScreen());
 
       default:

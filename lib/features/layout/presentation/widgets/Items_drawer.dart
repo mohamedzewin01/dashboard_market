@@ -46,11 +46,7 @@ class ItemsDrawer extends StatelessWidget {
               ),
             ),
             onTap: onTap,
-            leading: SvgPicture.asset(
-              svgPath,
-              colorFilter:
-              ColorFilter.mode(ColorManager.black, BlendMode.srcIn),
-            ),
+            leading: Image.asset(svgPath,height: 25,width: 25,),
           ),
         ),
       ),
