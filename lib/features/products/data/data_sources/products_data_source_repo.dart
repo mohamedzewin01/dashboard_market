@@ -7,5 +7,6 @@ import '../models/request/edit_product_request.dart';
 
 abstract class ProductsDataSourceRepo {
   Future<Result<ProductsEntity?>> getProductsData();
+  Future<Result<DeleteProductEntity?>> deleteProductsData(String productId);
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest);
 }

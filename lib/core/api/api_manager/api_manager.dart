@@ -12,6 +12,7 @@ import '../../../features/add_images/data/models/upload_image_model.dart';
 import '../../../features/categories/data/models/add_category_responces.dart';
 import '../../../features/products/data/models/request/edit_product_request.dart';
 import '../../../features/products/data/models/response/AllProductsRespose.dart';
+import '../../../features/products/data/models/response/delete_product_responces.dart';
 import '../../../features/products/data/models/response/edit_product_response.dart';
 import '../../../features/setting/data/models/store_info_edit_response.dart';
 import '../../../features/setting/data/models/store_info_request.dart';
@@ -86,4 +87,8 @@ abstract class ApiService {
     @Part(name: 'image') File? imageFile,
     @Part(name: 'imagePath') String? categoryName,
   );
+
+  @POST(ApiConstants.deleteProduct)
+  Future<DeleteProductResponses?> deleteProduct(
+      @Part(name: 'productid') String? productId,);
 }

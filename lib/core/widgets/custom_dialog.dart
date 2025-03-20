@@ -115,7 +115,82 @@ class CustomDialog {
       },
     );
   }
+  static void showDeleteDialog(BuildContext context, {void Function()? onPressed}) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: ColorManager.primary.withAlpha(200),
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: ColorManager.primary.withAlpha(100),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "هل تريد حذف المنتج نهائياُ",
+                  textAlign: TextAlign.center,
+                  style: getBoldStyle(color: ColorManager.white, fontSize: 18),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    // زر NO
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        side: const BorderSide(
+                            color: ColorManager.orange, width: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: const Text(
+                        "NO",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
 
+                    // زر YES
+                    ElevatedButton(
+                      onPressed:(){
+                        if(onPressed!=null){
+                          onPressed();
+                          Navigator.pop(context);
+                        }
+
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: const Text(
+                        "Yes",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
   static void showSuccessDialog(BuildContext context, {Widget? goto}) {
     showDialog(
       context: context,

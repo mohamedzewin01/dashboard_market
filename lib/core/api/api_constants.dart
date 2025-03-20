@@ -14,4 +14,5 @@ class ApiConstants {
   static const String storeInfo = "setting/storeInfo.php";
   static const String editStoreInfo = "setting/editStoreInfo.php";
   static const String uploadImageStore = "setting/uploadImageStore.php";
+  static const String deleteProduct = "products/deleteProduct.php";
 }

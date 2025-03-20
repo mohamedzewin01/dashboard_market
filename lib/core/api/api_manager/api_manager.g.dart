@@ -472,6 +472,39 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<DeleteProductResponses?> deleteProduct(String? productId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (productId != null) {
+      _data.fields.add(MapEntry('productid', productId));
+    }
+    final _options = _setStreamType<DeleteProductResponses>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'products/deleteProduct.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late DeleteProductResponses? _value;
+    try {
+      _value = _result.data == null
+          ? null
+          : DeleteProductResponses.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

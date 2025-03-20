@@ -30,4 +30,12 @@ class ProductsDataSourceRepoImpl implements ProductsDataSourceRepo {
       return response?.toEditProductEntity();
     });
   }
+
+  @override
+  Future<Result<DeleteProductEntity?>> deleteProductsData(String productId) {
+   return executeApi(()async {
+     var response =await apiService.deleteProduct(productId);
+     return response?.toDeleteProductEntity();
+   },);
+  }
 }

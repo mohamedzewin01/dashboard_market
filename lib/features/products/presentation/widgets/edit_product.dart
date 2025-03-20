@@ -11,6 +11,7 @@ import '../../../../core/api/api_constants.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 
+import '../../../../core/widgets/custom_dialog.dart';
 import '../../data/models/response/AllProductsRespose.dart';
 import '../cubit/home_cubit.dart';
 
@@ -46,6 +47,7 @@ class _EditProductState extends State<EditProduct> {
         builder: (context, constraints) {
           if (constraints.maxWidth < 600) {
             return EditProductBody(
+                idProduct: widget.product.idProduct.toString(),
                 widget: widget,
                 nameController: nameController,
                 descriptionController: descriptionController,
@@ -63,6 +65,7 @@ class _EditProductState extends State<EditProduct> {
                 Expanded(
                   flex: 2,
                   child: EditProductBody(
+                      idProduct: widget.product.idProduct.toString(),
                       widget: widget,
                       nameController: nameController,
                       descriptionController: descriptionController,
@@ -91,6 +94,7 @@ class EditProductBody extends StatelessWidget {
     required this.descriptionController,
     required this.priceController,
     required this.newPriceController,
+    required this.idProduct,
   });
 
   final EditProduct widget;
@@ -98,6 +102,7 @@ class EditProductBody extends StatelessWidget {
   final TextEditingController descriptionController;
   final TextEditingController priceController;
   final TextEditingController newPriceController;
+  final String idProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +229,6 @@ class EditProductBody extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Spacer(),
                   Expanded(
                     flex: 2,
                     child: CustomElevatedButton(
@@ -232,22 +236,40 @@ class EditProductBody extends StatelessWidget {
                         title: 'حفظ',
                         onPressed: () async {
                           print(nameController.text);
-                        await  widget.viewModel.editProduct(EditProductRequest(
+                          await widget.viewModel.editProduct(EditProductRequest(
                             idProduct: widget.product.idProduct,
                             productName: nameController.text,
                             description: descriptionController.text,
-                            productPrice:priceController.text,
-
+                            productPrice: priceController.text,
                             productPriceAfterDiscount: newPriceController.text,
                           ));
-                         widget. viewModel.getHomeData();
-                        if(context.mounted){
-                          Navigator.pop(context);
-                        }
-
+                          widget.viewModel.getHomeData();
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
                         }),
                   ),
-                  Spacer(),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: CustomElevatedButton(
+                        buttonColor: ColorManager.error,
+                        title: 'حذف ',
+                        onPressed: () async {
+                          CustomDialog.showDeleteDialog(context,
+                              onPressed: () async {
+                            await widget.viewModel.deleteProduct(
+                              productId: idProduct,
+                            );
+                            if (context.mounted) {
+                              Navigator.pop(context);
+
+                            }
+                          });
+                        }),
+                  ),
                 ],
               )
             ],

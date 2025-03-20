@@ -6,13 +6,13 @@ import '../resources/values_manager.dart';
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton(
       {super.key,
-      required this.buttonColor,
+       this.buttonColor,
       required this.title,
       required this.onPressed,
       this.style,
       this.width});
 
-  final Color buttonColor;
+  final Color? buttonColor;
   final String title;
   final void Function() onPressed;
   final TextStyle? style;
@@ -23,7 +23,7 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: ColorManager.orange,
+        backgroundColor: buttonColor??ColorManager.orange,
         minimumSize: Size(width ?? 31, 38),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(AppSize.s24)),

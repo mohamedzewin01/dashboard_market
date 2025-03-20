@@ -43,4 +43,11 @@ TextEditingController searchController = TextEditingController();
     await _homeUseCase.editProductsData(editProductRequest);
     log('Success');
   }
+
+  Future<void> deleteProduct({required String productId}) async {
+
+    await _homeUseCase.deleteProductsData(productId);
+    getHomeData();
+    log('Success');
+  }
 }

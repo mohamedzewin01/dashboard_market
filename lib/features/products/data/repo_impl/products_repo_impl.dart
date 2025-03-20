@@ -23,4 +23,9 @@ class ProductsRepoImpl implements ProductsRepo {
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest) {
     return productsDataSourceRepo.editProductsData( editProductRequest);
   }
+
+  @override
+  Future<Result<DeleteProductEntity?>> deleteProductsData(String productId) {
+   return productsDataSourceRepo.deleteProductsData(productId);
+  }
 }
