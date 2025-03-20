@@ -25,31 +25,37 @@ class ItemsDrawer extends StatelessWidget {
         color: ColorManager.white,
         elevation: 10,
         clipBehavior: Clip.antiAlias,
-        child: Transform.scale(
-          scale: .9,
-          child: ListTile(
-            hoverColor: Colors.orange,
-            selectedColor: Colors.orange ,
-            // focusColor: Colors.orange,
-            // selectedColor: Colors.orange,
-            // selectedTileColor: Colors.orange,
-            mouseCursor: MouseCursor.defer,
-            title: Center(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  title,
-                  textDirection: TextDirection.rtl,
-                  style: getSemiBoldStyle(
-                      fontSize: 14, color: ColorManager.primaryColor),
-                ),
+        child: Material(
+          color: Colors.transparent, // لتجنب تأثير الـ Card
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(12),
+            hoverColor: ColorManager.orange.withAlpha(180),
+            splashColor: ColorManager.orange.withAlpha(240),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(svgPath, height: 25, width: 25),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      textDirection: TextDirection.rtl,
+                      style: getSemiBoldStyle(
+                          fontSize: 14, color: ColorManager.primaryColor),
+                    ),
+                  ),
+                ],
               ),
             ),
-            onTap: onTap,
-            leading: Image.asset(svgPath,height: 25,width: 25,),
           ),
         ),
       ),
     );
   }
+
+
 }

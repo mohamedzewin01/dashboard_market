@@ -66,7 +66,7 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
                   Expanded(
                     flex: 2,
                     child: CustomSearchTextFormField(
-                      hintText: '... ابحث',
+                      hintText: 'ابحث عن المنتجات ...',
                       prefixIcon: Icon(Icons.search),
                       controller: searchController,
                       onChanged: (value) {

@@ -1,4 +1,5 @@
 import 'package:dashboard_market/core/resources/cashed_image.dart';
+import 'package:dashboard_market/core/resources/style_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/di.dart';
@@ -44,11 +45,10 @@ class _ChooseImageCategoriesState extends State<ChooseImageCategories> {
               return const Text('لا توجد بيانات متاحة');
             }
             return DropdownButtonFormField<int>(
-
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(AppSize.s8),
                 labelText: 'القسم',
-                labelStyle: const TextStyle(fontSize: 16),
+                labelStyle: getSemiBoldStyle(color: ColorManager.orange),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: ColorManager.placeHolderColor),
                   borderRadius: BorderRadius.circular(12),
@@ -63,20 +63,22 @@ class _ChooseImageCategoriesState extends State<ChooseImageCategories> {
                   .entries
                   .map(
                     (entry) => DropdownMenuItem(
-                      value: entry.key,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                              height: 25,
-                              width: 25,
-                              child: CustomImage(
-                                  url: entry.value.categoryImage ?? '')),
-                          Text(entry.value.categoryName ?? 'غير معروف'),
-                        ],
-                      ),
-                    ),
-                  )
+                  value: entry.key,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(entry.value.categoryName ?? 'غير معروف',style: getSemiBoldStyle(color: ColorManager.black),),
+                      SizedBox(width: 25,),
+
+                      SizedBox(
+                          height: 35,
+                          width: 35,
+                          child: CustomImage(
+                              url: entry.value.categoryImage ?? '')),
+                    ],
+                  ),
+                ),
+              )
                   .toList(),
               onChanged: (value) {
                 widget.addImagesCubit

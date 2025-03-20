@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../home/presentation/pages/home_view.dart';
@@ -46,7 +47,7 @@ class AddProductBody extends StatelessWidget {
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
-                          isScrollControlled: true, // يسمح بتمدد الـ BottomSheet وفقًا للمحتوى
+                          isScrollControlled: true,
                           backgroundColor: ColorManager.white,
                           elevation: 8,
                           shape: const RoundedRectangleBorder(
@@ -152,9 +153,19 @@ class AddProductBody extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        items: const [
-                          DropdownMenuItem(value: 1, child: Text('نشر حالا')),
-                          DropdownMenuItem(value: 0, child: Text('عدم النشر ')),
+                        items:  [
+                          DropdownMenuItem(value: 1, child: Row(
+                            children: [
+                              const Icon(Icons.check,color: Colors.green,),
+                              Text('نشر حالا',style: getSemiBoldStyle(color: Colors.green,),),
+                            ],
+                          )),
+                          DropdownMenuItem(value: 0, child: Row(
+                            children: [
+                              const Icon(Icons.close,color: ColorManager.error,),
+                              Text('عدم النشر ',style: getSemiBoldStyle(color: ColorManager.error,),),
+                            ],
+                          )),
                         ],
                         onChanged: (value) {
                           viewModel.changeProductStatus(value!);

@@ -1,4 +1,6 @@
 import 'package:dashboard_market/core/resources/cashed_image.dart';
+import 'package:dashboard_market/core/resources/color_manager.dart';
+import 'package:dashboard_market/core/resources/style_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -58,11 +60,11 @@ class _ChooseCategoriesState extends State<ChooseCategories> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           SizedBox(
-                              height: 25,
-                              width: 25,
+                              height: 35,
+                              width: 35,
                               child: CustomImage(
                                   url: entry.value.categoryImage ?? '')),
-                          Text(entry.value.categoryName ?? 'غير معروف'),
+                          Text(entry.value.categoryName ?? 'غير معروف',style: getSemiBoldStyle(color: ColorManager.black),),
                         ],
                       ),
                     ),

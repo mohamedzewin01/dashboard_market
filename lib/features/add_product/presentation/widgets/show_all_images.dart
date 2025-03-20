@@ -62,6 +62,8 @@
 // }
 
 import 'dart:developer';
+import 'package:dashboard_market/core/resources/style_manager.dart';
+import 'package:dashboard_market/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -135,7 +137,24 @@ class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
                 ),
                 Expanded(
                   child: filteredImages!.isEmpty
-                      ? Center(child: Text('لا توجد صور مطابقة'))
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('لا توجد صور مطابقة',style: getSemiBoldStyle(color: ColorManager.orange,fontSize: 24),),
+                            SizedBox(height: 25,),
+                            IconButton(
+                                onPressed: () {
+                                  LayoutCubit.get(context).changeIndex(3);
+                                },
+                                icon: CircleAvatar(
+                                    backgroundColor: ColorManager.orange,
+                                    child: Icon(
+                                      Icons.add_a_photo,
+                                      color: ColorManager.white,
+                                    )))
+                          ],
+                        ))
                       : ListView.builder(
                           itemCount: filteredImages?.length ?? 0,
                           itemBuilder: (context, index) => ListTile(

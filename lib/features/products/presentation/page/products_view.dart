@@ -31,6 +31,7 @@ class _ProductsViewState extends State<ProductsView> {
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
+          backgroundColor: ColorManager.orange.withAlpha(10),
           appBar: AppBar(
             backgroundColor: ColorManager.white.withAlpha(100),
             title: Text(

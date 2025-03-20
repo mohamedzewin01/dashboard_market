@@ -243,7 +243,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.initialValue,
     this.onChanged,
-    this.inputAction, this.minLines, this.maxLines,
+    this.inputAction, this.minLines, this.maxLines, this.onFieldSubmitted,
   });
 
   final TextEditingController controller;
@@ -260,6 +260,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextInputAction? inputAction;
   final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -277,6 +278,7 @@ class CustomTextFormField extends StatelessWidget {
         maxLines: maxLines,
         controller: controller,
         keyboardType: keyboardType,
+        onFieldSubmitted: onFieldSubmitted,
         decoration: InputDecoration(
           isDense: true,
           errorStyle: TextStyle(fontSize: 14,),

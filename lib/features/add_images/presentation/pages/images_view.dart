@@ -36,7 +36,7 @@ class _ImagesViewState extends State<ImagesView> {
       create: (context) => viewModel..fetchImages(),
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: ColorManager.orange.withAlpha(10),
           body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: LayoutBuilder(builder: (context, constraints) {
@@ -51,17 +51,15 @@ class _ImagesViewState extends State<ImagesView> {
                     var listImage =
                         state.imagesEntity.images?.reversed.toList();
                     
-                    return SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          SectionUploadImages(viewModel: viewModel),
-                          Divider(),
-                          SectionListImages(
-                              crossAxisCount: crossAxisCount,
-                              listImage: listImage ?? [],
-                              viewModel: viewModel)
-                        ],
-                      ),
+                    return Column(
+                      children: [
+                        SectionUploadImages(viewModel: viewModel),
+                        Divider(),
+                        SectionListImages(
+                            crossAxisCount: crossAxisCount,
+                            listImage: listImage ?? [],
+                            viewModel: viewModel)
+                      ],
                     );
                   }
                   return Center(child: CircularProgressIndicator());
