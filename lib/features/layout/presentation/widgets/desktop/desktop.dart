@@ -25,26 +25,6 @@ class DesktopLayout extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: Row(
           children: [
-            Expanded(
-              flex: 9,
-              child: BlocBuilder<LayoutCubit, LayoutState>(
-                builder: (context, state) {
-                  return Navigator(
-                      key: GlobalKey<NavigatorState>(),
-                      onGenerateRoute: (settings) {
-                        return MaterialPageRoute(
-                          builder: (context) => AppConstants.viewOptionsDesktop[cubit.index],
-                          // IndexedStack(
-                          //   index: LayoutCubit.get(context).index,
-                          //   children: AppConstants.viewOptionsDesktop,
-                          // ),
-
-                        );
-                      });
-                },
-              ),
-            ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
               child: Card(
@@ -66,6 +46,27 @@ class DesktopLayout extends StatelessWidget {
                 ),
               ),
             ),
+            Expanded(
+              flex: 9,
+              child: BlocBuilder<LayoutCubit, LayoutState>(
+                builder: (context, state) {
+                  return Navigator(
+                      key: GlobalKey<NavigatorState>(),
+                      onGenerateRoute: (settings) {
+                        return MaterialPageRoute(
+                          builder: (context) => AppConstants.viewOptionsDesktop[cubit.index],
+                          // IndexedStack(
+                          //   index: LayoutCubit.get(context).index,
+                          //   children: AppConstants.viewOptionsDesktop,
+                          // ),
+
+                        );
+                      });
+                },
+              ),
+            ),
+
+
           ],
         ),
       )

@@ -9,6 +9,7 @@ class EditProductRequest {
     this.descount,
     this.dateDescount,
     this.category,
+    this.productPrice
   }) {
     // التأكد من أن idProduct غير فارغ
     if (idProduct == null) {
@@ -26,6 +27,7 @@ class EditProductRequest {
     descount = json['descount'];
     dateDescount = json['date_descount'];
     category = json['category'];
+    productPrice = json['product_price'];
 
     if (idProduct == null) {
       throw ArgumentError('idProduct is required');
@@ -41,6 +43,7 @@ class EditProductRequest {
   String? descount;
   String? dateDescount;
   String? category;
+  String? productPrice;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -58,6 +61,7 @@ class EditProductRequest {
     if (descount != null) map['descount'] = descount;
     if (dateDescount != null) map['date_descount'] = dateDescount;
     if (category != null) map['category'] = category;
+    if (productPrice != null) map['product_price'] = productPrice;
     return map;
   }
 }

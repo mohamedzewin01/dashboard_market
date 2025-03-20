@@ -27,13 +27,17 @@ class _ProductsViewState extends State<ProductsView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create:(context) =>  viewModel..getHomeData(),
+      create: (context) => viewModel..getHomeData(),
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: ColorManager.white.withAlpha(100),
-            title:  Text("سوبر ماركت فضاء الخليج",style: getSemiBoldStyle(color: ColorManager.primaryColor,fontSize: 18),),
+            title: Text(
+              "سوبر ماركت فضاء الخليج",
+              style: getSemiBoldStyle(
+                  color: ColorManager.primaryColor, fontSize: 18),
+            ),
             centerTitle: true,
             bottom: TabBar(
               // isScrollable: true,
@@ -41,24 +45,26 @@ class _ProductsViewState extends State<ProductsView> {
               indicatorColor: ColorManager.primaryColor,
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorPadding: const EdgeInsets.all(10),
-              labelPadding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
+              labelPadding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               // overlayColor:WidgetStateProperty.all(ColorManager.offwhite.withAlpha(100), ),
-             // indicator: BoxDecoration(
-             //   gradient: LinearGradient(colors: [ColorManager.offwhite,ColorManager.orange]),
-             //   color: ColorManager.orange.withAlpha(100),
-             //
-             //   borderRadius: BorderRadius.circular(20),
-             //
-             // ),
+              // indicator: BoxDecoration(
+              //   gradient: LinearGradient(colors: [ColorManager.offwhite,ColorManager.orange]),
+              //   color: ColorManager.orange.withAlpha(100),
+              //
+              //   borderRadius: BorderRadius.circular(20),
+              //
+              // ),
 
               indicatorWeight: 4,
               unselectedLabelColor: Colors.black,
               labelColor: ColorManager.primaryColor,
-              labelStyle: getBoldStyle(color: ColorManager.primaryColor,fontSize: 14),
-              unselectedLabelStyle: getMediumStyle(color: Colors.black,fontSize: 12),
+              labelStyle:
+                  getBoldStyle(color: ColorManager.primaryColor, fontSize: 14),
+              unselectedLabelStyle:
+                  getMediumStyle(color: Colors.black, fontSize: 12),
               tabs: [
                 Tab(
-
                   text: "جميع المنتجات",
                 ),
                 Tab(

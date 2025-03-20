@@ -54,83 +54,85 @@ class _SettingViewState extends State<SettingView> {
                       store?.storeDiscountTitle ?? '';
                   viewModel.imageName = store?.storeImage ?? '';
                   log(viewModel.imageName);
-                  return Column(
-                    children: [
-                      Stack(
-                        children: [
-                          viewModel.imagePath.isNotEmpty
-                              ? Container(
-                                  width: double.infinity,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image:
-                                          FileImage(File(viewModel.imagePath)),
-                                      fit: BoxFit.fill,
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            viewModel.imagePath.isNotEmpty
+                                ? Container(
+                                    width: double.infinity,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image:
+                                            FileImage(File(viewModel.imagePath)),
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    width: double.infinity,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: CachedNetworkImageProvider(
+                                            '${ApiConstants.baseUrlImage}${store?.storeImage}'),
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
-                                )
-                              : Container(
-                                  width: double.infinity,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: CachedNetworkImageProvider(
-                                          '${ApiConstants.baseUrlImage}${store?.storeImage}'),
-                                      fit: BoxFit.fill,
-                                    ),
+                            Positioned(
+                              bottom: 0,
+                              left: 0,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  final XFile? xFile = await ImagePicker()
+                                      .pickImage(source: ImageSource.gallery);
+                                  if (xFile != null) {
+                                    setState(() {
+                                      viewModel.imageFile = File(xFile.path);
+                                      viewModel.imagePath = xFile.path;
+                                      viewModel.uploadImageStore();
+                                    });
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CircleAvatar(
+                                    backgroundColor: ColorManager.orange,
+                                    child: Icon(Icons.change_circle_outlined),
                                   ),
-                                ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            child: GestureDetector(
-                              onTap: () async {
-                                final XFile? xFile = await ImagePicker()
-                                    .pickImage(source: ImageSource.gallery);
-                                if (xFile != null) {
-                                  setState(() {
-                                    viewModel.imageFile = File(xFile.path);
-                                    viewModel.imagePath = xFile.path;
-                                    viewModel.uploadImageStore();
-                                  });
-                                }
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: CircleAvatar(
-                                  backgroundColor: ColorManager.orange,
-                                  child: Icon(Icons.change_circle_outlined),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          if (constraints.maxWidth < 600) {
-                            return StoreInfoBody(
-                              viewModel: viewModel,
+                          ],
+                        ),
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            if (constraints.maxWidth < 600) {
+                              return StoreInfoBody(
+                                viewModel: viewModel,
+                              );
+                            }
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                children: [
+                                  Spacer(),
+                                  Expanded(
+                                      flex: 2,
+                                      child: StoreInfoBody(
+                                        viewModel: viewModel,
+                                      )),
+                                  Spacer(),
+                                ],
+                              ),
                             );
-                          }
-                          return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Row(
-                              children: [
-                                Spacer(),
-                                Expanded(
-                                    flex: 2,
-                                    child: StoreInfoBody(
-                                      viewModel: viewModel,
-                                    )),
-                                Spacer(),
-                              ],
-                            ),
-                          );
-                        },
-                      )
-                    ],
+                          },
+                        )
+                      ],
+                    ),
                   );
                 }
                 return Center(

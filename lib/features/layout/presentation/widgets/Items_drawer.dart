@@ -22,18 +22,18 @@ class ItemsDrawer extends StatelessWidget {
     return Transform.scale(
       scale: .9,
       child: Card(
-        color:LayoutCubit.get(context).index == page?ColorManager.orange: ColorManager.white,
+        color: ColorManager.white,
         elevation: 10,
         clipBehavior: Clip.antiAlias,
         child: Transform.scale(
           scale: .9,
           child: ListTile(
             hoverColor: Colors.orange,
-            focusColor: Colors.orange,
-            selectedColor: Colors.orange,
-            selectedTileColor: Colors.orange,
-
-            mouseCursor: MouseCursor.uncontrolled,
+            selectedColor: Colors.orange ,
+            // focusColor: Colors.orange,
+            // selectedColor: Colors.orange,
+            // selectedTileColor: Colors.orange,
+            mouseCursor: MouseCursor.defer,
             title: Center(
               child: FittedBox(
                 fit: BoxFit.scaleDown,

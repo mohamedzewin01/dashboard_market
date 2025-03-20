@@ -1,5 +1,3 @@
-
-
 import 'package:dashboard_market/features/products/presentation/widgets/product_items_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,15 +5,13 @@ import '../../../../core/resources/color_manager.dart';
 import '../../data/models/response/AllProductsRespose.dart';
 import '../cubit/home_cubit.dart';
 
-
-
 class HomeBody extends StatelessWidget {
   const HomeBody({
-    super.key, required this.viewModel,
+    super.key,
+    required this.viewModel,
   });
-final ProductsCubit viewModel;
 
-
+  final ProductsCubit viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,8 @@ final ProductsCubit viewModel;
               return RefreshIndicator(
                 color: ColorManager.primaryColor,
                 onRefresh: () => viewModel.getHomeData(),
-                child: ProductItemsHome(viewModel: viewModel, products: products),
+                child:
+                    ProductItemsHome(viewModel: viewModel, products: products),
               );
             }
             return SizedBox();
@@ -54,16 +51,21 @@ final ProductsCubit viewModel;
             if (state is ProductsSuccess) {
               List<Products>? products =
                   state.homeEntity?.products?.reversed.toList() ?? [];
-              List<Products>? products2 =[];
-              products2 = products.where((element) => element.status == 1).toList();
+              List<Products>? products2 = [];
+              products2 =
+                  products.where((element) => element.status == 1).toList();
               return RefreshIndicator(
                 color: ColorManager.primaryColor,
                 onRefresh: () => viewModel.getHomeData(),
-                child: ProductItemsHome(viewModel: viewModel, products: products2),
+                child:
+                    ProductItemsHome(viewModel: viewModel, products: products2),
               );
             }
 
-            return Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,));
+            return Center(
+                child: CircularProgressIndicator(
+              color: ColorManager.primaryColor,
+            ));
           },
         ),
         BlocBuilder<ProductsCubit, ProductsState>(
@@ -78,23 +80,23 @@ final ProductsCubit viewModel;
             if (state is ProductsSuccess) {
               List<Products>? products =
                   state.homeEntity?.products?.reversed.toList() ?? [];
-              List<Products>? products3 =[];
-              products3 = products.where((element) => element.status == 0).toList();
+              List<Products>? products3 = [];
+              products3 =
+                  products.where((element) => element.status == 0).toList();
               return RefreshIndicator(
                 color: ColorManager.primaryColor,
                 onRefresh: () => viewModel.getHomeData(),
-                child: ProductItemsHome(viewModel: viewModel, products: products3),
+                child:
+                    ProductItemsHome(viewModel: viewModel, products: products3),
               );
             }
-            return Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,));
+            return Center(
+                child: CircularProgressIndicator(
+              color: ColorManager.primaryColor,
+            ));
           },
         )
-
-
       ],
     );
   }
 }
-
-
-

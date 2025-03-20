@@ -50,15 +50,18 @@ class _ImagesViewState extends State<ImagesView> {
                   if (state is SuccessImages) {
                     var listImage =
                         state.imagesEntity.images?.reversed.toList();
-                    return Column(
-                      children: [
-                        SectionUploadImages(viewModel: viewModel),
-                        Divider(),
-                        SectionListImages(
-                            crossAxisCount: crossAxisCount,
-                            listImage: listImage ?? [],
-                            viewModel: viewModel)
-                      ],
+                    
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          SectionUploadImages(viewModel: viewModel),
+                          Divider(),
+                          SectionListImages(
+                              crossAxisCount: crossAxisCount,
+                              listImage: listImage ?? [],
+                              viewModel: viewModel)
+                        ],
+                      ),
                     );
                   }
                   return Center(child: CircularProgressIndicator());
