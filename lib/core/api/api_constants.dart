@@ -12,4 +12,6 @@ class ApiConstants {
   static const String fetchCategories = "categories/fetchCategories.php";
   static const String addCategories = "categories/addCategory.php";
   static const String storeInfo = "setting/storeInfo.php";
+  static const String editStoreInfo = "setting/editStoreInfo.php";
+  static const String uploadImageStore = "setting/uploadImageStore.php";
 }

@@ -10,3 +10,23 @@ class StoreInfoEntity {
     this.store,
   });
 }
+
+class StoreInfoEditEntity {
+  final String? message;
+
+  StoreInfoEditEntity({
+    this.message,
+  });
+}
+
+class UploadImageStoreEntity {
+  final String? status;
+  final String? message;
+
+  UploadImageStoreEntity ({
+    this.status,
+    this.message,
+  });
+
+
+}

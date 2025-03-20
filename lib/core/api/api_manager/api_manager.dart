@@ -13,7 +13,10 @@ import '../../../features/categories/data/models/add_category_responces.dart';
 import '../../../features/products/data/models/request/edit_product_request.dart';
 import '../../../features/products/data/models/response/AllProductsRespose.dart';
 import '../../../features/products/data/models/response/edit_product_response.dart';
+import '../../../features/setting/data/models/store_info_edit_response.dart';
+import '../../../features/setting/data/models/store_info_request.dart';
 import '../../../features/setting/data/models/store_info_responce.dart';
+import '../../../features/setting/data/models/upload_image_store_response.dart';
 import '../api_constants.dart';
 
 part 'api_manager.g.dart';
@@ -38,29 +41,27 @@ abstract class ApiService {
   @POST(ApiConstants.uploadImage)
   @MultiPart()
   Future<UpLoadImageModel?> uploadImage(
-      @Part(name:'image') File? imageFile,
-      @Part(name:'ImageName') String? imageName,
-      @Part(name:'ImageCategory') String? imageCategory);
+      @Part(name: 'image') File? imageFile,
+      @Part(name: 'ImageName') String? imageName,
+      @Part(name: 'ImageCategory') String? imageCategory);
 
   @POST(ApiConstants.deleteImage)
   @MultiPart()
-  Future<DeleteImage?> deleteImage(
-      @Part(name:'imageId') String? imageId,
-      @Part(name:'image') String? imageName);
+  Future<DeleteImage?> deleteImage(@Part(name: 'imageId') String? imageId,
+      @Part(name: 'image') String? imageName);
 
   @POST(ApiConstants.addProduct)
   @MultiPart()
   Future<AddProductResponse?> addProduct(
-      @Part(name:'name') String? productName,
-      @Part(name:'price') num? productPrice,
-      @Part(name:'price_after') num? priceAfter,
-      @Part(name:'app_description') String? description,
-      @Part(name:'date_descount') String? dateDiscount,
-      @Part(name:'stauts') int? status,
-      @Part(name:'imagePath') String? imagePath,
-      @Part(name:'category') int? category,);
-
-
+    @Part(name: 'name') String? productName,
+    @Part(name: 'price') num? productPrice,
+    @Part(name: 'price_after') num? priceAfter,
+    @Part(name: 'app_description') String? description,
+    @Part(name: 'date_descount') String? dateDiscount,
+    @Part(name: 'stauts') int? status,
+    @Part(name: 'imagePath') String? imagePath,
+    @Part(name: 'category') int? category,
+  );
 
   @POST(ApiConstants.fetchCategories)
   Future<FetchCategoriesResponse?> getCategories();
@@ -68,14 +69,21 @@ abstract class ApiService {
   @POST(ApiConstants.addCategories)
   @MultiPart()
   Future<AddCategoryResponse?> addCategory(
-      @Part(name:'image') File? imageFile,
-      @Part(name:'name') String? categoryName,
-      @Part(name:'status') int? status);
+      @Part(name: 'image') File? imageFile,
+      @Part(name: 'name') String? categoryName,
+      @Part(name: 'status') int? status);
 
   @POST(ApiConstants.storeInfo)
   Future<StoreInfoResponse?> getStoreInfo();
 
+  @POST(ApiConstants.editStoreInfo)
+  Future<StoreInfoEditResponse?> editStoreInfo(
+      @Body() StoreInfoRequest? storeInfoRequest);
+
+  @POST(ApiConstants.uploadImageStore)
+  @MultiPart()
+  Future<UploadImageStoreResponse?> uploadImageStore(
+    @Part(name: 'image') File? imageFile,
+    @Part(name: 'imagePath') String? categoryName,
+  );
 }
-
-
-

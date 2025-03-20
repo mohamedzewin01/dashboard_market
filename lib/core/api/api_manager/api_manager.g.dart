@@ -387,6 +387,91 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<StoreInfoEditResponse?> editStoreInfo(
+    StoreInfoRequest? storeInfoRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(storeInfoRequest?.toJson() ?? <String, dynamic>{});
+    final _options = _setStreamType<StoreInfoEditResponse>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'setting/editStoreInfo.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late StoreInfoEditResponse? _value;
+    try {
+      _value = _result.data == null
+          ? null
+          : StoreInfoEditResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<UploadImageStoreResponse?> uploadImageStore(
+    File? imageFile,
+    String? categoryName,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (imageFile != null) {
+      _data.files.add(
+        MapEntry(
+          'image',
+          MultipartFile.fromFileSync(
+            imageFile.path,
+            filename: imageFile.path.split(Platform.pathSeparator).last,
+          ),
+        ),
+      );
+    }
+    if (categoryName != null) {
+      _data.fields.add(MapEntry('imagePath', categoryName));
+    }
+    final _options = _setStreamType<UploadImageStoreResponse>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'multipart/form-data',
+      )
+          .compose(
+            _dio.options,
+            'setting/uploadImageStore.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late UploadImageStoreResponse? _value;
+    try {
+      _value = _result.data == null
+          ? null
+          : UploadImageStoreResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

@@ -10,6 +10,7 @@ import '../../../../core/resources/cashed_image.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../layout/presentation/cubit/layout_cubit.dart';
 import '../manager/categories_cubit.dart';
 import '../widgets/Add_categories.dart';
 
@@ -36,7 +37,7 @@ class _CategoriesViewState extends State<CategoriesView> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth < 600) {
-            return HomeView();
+            LayoutCubit.get(context).changeIndex(0);
           } else {
             return Row(
               children: [
@@ -54,6 +55,7 @@ class _CategoriesViewState extends State<CategoriesView> {
               ],
             );
           }
+          return Center(child: CircularProgressIndicator());
         },
       ),
     );
