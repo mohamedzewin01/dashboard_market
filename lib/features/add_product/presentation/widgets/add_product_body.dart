@@ -99,11 +99,11 @@ class AddProductBody extends StatelessWidget {
                       child: CustomTextFormField(
                         controller: viewModel.priceAfterController,
                         validator: (value) {
-                          if (value!.trim().isEmpty) {
-                            return 'ادخل سعر المنتج بعد الخصم';
-                          }
+                          // if (value!.trim().isEmpty) {
+                          //   return 'ادخل سعر المنتج بعد الخصم';
+                          // }
                           RegExp priceRegExp = RegExp(r'^\d+(\.\d{1,2})?$');
-                          if (!priceRegExp.hasMatch(value)) {
+                          if (!priceRegExp.hasMatch(value!)) {
                             return 'الرجاء إدخال سعر صحيح';
                           }
                           double discountedPrice =

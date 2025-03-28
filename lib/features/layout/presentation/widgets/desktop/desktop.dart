@@ -18,61 +18,62 @@ class DesktopLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = LayoutCubit.get(context);
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
-      backgroundColor:   ColorManager.white.withAlpha(240) ,
-      body: Card(
-        elevation: 6,
-        clipBehavior: Clip.antiAlias,
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 4),
-              child: Card(
-                elevation: 6,
-                clipBehavior: Clip.antiAlias,
-                child: Container(
-                  width: MediaQuery.sizeOf(context).width * .14,
-                  constraints: const BoxConstraints(minWidth: 200),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      ColorManager.white,
-                      ColorManager.offwhite.withAlpha(50),
-                    ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: CustomDrawer(),
+        backgroundColor: ColorManager.white.withAlpha(240),
+        body: Card(
+          elevation: 6,
+          clipBehavior: Clip.antiAlias,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0, vertical: 4),
+                child: Card(
+                  elevation: 6,
+                  clipBehavior: Clip.antiAlias,
+                  child: Container(
+                    width: MediaQuery
+                        .sizeOf(context)
+                        .width * .14,
+                    constraints: const BoxConstraints(minWidth: 200),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        ColorManager.white,
+                        ColorManager.offwhite.withAlpha(50),
+                      ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: CustomDrawer(),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 9,
-              child: BlocBuilder<LayoutCubit, LayoutState>(
-                builder: (context, state) {
-                  return Navigator(
-                      key: GlobalKey<NavigatorState>(),
-                      onGenerateRoute: (settings) {
-                        return MaterialPageRoute(
-                          builder: (context) => AppConstants.viewOptionsDesktop[cubit.index],
-                          // IndexedStack(
-                          //   index: LayoutCubit.get(context).index,
-                          //   children: AppConstants.viewOptionsDesktop,
-                          // ),
+              Expanded(
+                flex: 9,
+                child: BlocBuilder<LayoutCubit, LayoutState>(
+                  builder: (context, state) {
+                    return Navigator(
+                        key: navigatorKey,
+                        onGenerateRoute: (settings) {
+                          return MaterialPageRoute(
+                            builder: (context) =>
+                            AppConstants.viewOptionsDesktop[cubit.index],
+                            // IndexedStack(
+                            //   index: LayoutCubit.get(context).index,
+                            //   children: AppConstants.viewOptionsDesktop,
+                            // ),
 
-                        );
-                      });
-                },
+                          );
+                        });
+                  },
+                ),
               ),
-            ),
-
-
-          ],
-        ),
-      )
+            ],
+          ),
+        )
     );
-
-
   }
 }
 

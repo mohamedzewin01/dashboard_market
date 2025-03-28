@@ -105,9 +105,10 @@ class CustomProductsAllItem extends StatelessWidget {
                     ),
                     IntrinsicHeight(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment:product.productPriceAfterDiscount != 0 ? MainAxisAlignment.spaceEvenly:MainAxisAlignment.center,
+
                         children: [
-                          product.productPrice != 0
+                          product.productPriceAfterDiscount != 0
                               ? Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -131,13 +132,36 @@ class CustomProductsAllItem extends StatelessWidget {
                                     ),
                                   ],
                                 )
-                              : const SizedBox(),
-                          product.productPrice != 0
+                              : Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const CustomRiyalSaudi(
+                                color: ColorManager.error,
+                                size: 12,
+                              ),
+                              const SizedBox(
+                                width: 3,
+                              ),
+                              Text(
+                                product.productPrice.toString(),
+                                style: const TextStyle(
+                                  color: ColorManager.error,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+
+                                  decorationColor: ColorManager.primary,
+                                  decorationThickness: 2,
+                                ),
+                              ),
+                            ],
+                          ),
+                          product.productPriceAfterDiscount != 0
                               ? VerticalDivider(
                                   color: ColorManager.placeHolderColor,
                                 )
                               : SizedBox(),
-                          Row(
+                          product.productPriceAfterDiscount == 0?SizedBox(): Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               CustomRiyalSaudi(),
@@ -161,7 +185,7 @@ class CustomProductsAllItem extends StatelessWidget {
               ],
             ),
           ),
-          product.productPrice == 0
+          product.productPriceAfterDiscount == 0
               ? SizedBox()
               : Positioned(
                   top: 0,
