@@ -29,7 +29,7 @@ class _ProductsViewState extends State<ProductsView> {
     return BlocProvider(
       create: (context) => viewModel..getHomeData(),
       child: DefaultTabController(
-        length: 3,
+        length: 5,
         child: Scaffold(
           backgroundColor: ColorManager.orange.withAlpha(10),
           appBar: AppBar(
@@ -41,7 +41,7 @@ class _ProductsViewState extends State<ProductsView> {
             ),
             centerTitle: true,
             bottom: TabBar(
-              // isScrollable: true,
+              isScrollable: false,
               dividerColor: Colors.transparent,
               indicatorColor: ColorManager.primaryColor,
               indicatorSize: TabBarIndicatorSize.tab,
@@ -73,6 +73,12 @@ class _ProductsViewState extends State<ProductsView> {
                 ),
                 Tab(
                   text: "المنتجات غير نشطة",
+                ),
+                Tab(
+                  text: "العروض",
+                ),
+                Tab(
+                  text: "بدون عروض",
                 ),
               ],
             ),

@@ -95,7 +95,63 @@ class HomeBody extends StatelessWidget {
               color: ColorManager.primaryColor,
             ));
           },
-        )
+        ),
+        BlocBuilder<ProductsCubit, ProductsState>(
+          builder: (context, state) {
+            if (state is ProductsLoading) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: ColorManager.primaryColor,
+                ),
+              );
+            }
+            if (state is ProductsSuccess) {
+              List<Products>? products =
+                  state.homeEntity?.products?.reversed.toList() ?? [];
+              List<Products>? products3 = [];
+              products3 =
+                  products.where((element) => element.descount != 0).toList();
+              return RefreshIndicator(
+                color: ColorManager.primaryColor,
+                onRefresh: () => viewModel.getHomeData(),
+                child:
+                ProductItemsHome(viewModel: viewModel, products: products3),
+              );
+            }
+            return Center(
+                child: CircularProgressIndicator(
+                  color: ColorManager.primaryColor,
+                ));
+          },
+        ),
+        BlocBuilder<ProductsCubit, ProductsState>(
+          builder: (context, state) {
+            if (state is ProductsLoading) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: ColorManager.primaryColor,
+                ),
+              );
+            }
+            if (state is ProductsSuccess) {
+              List<Products>? products =
+                  state.homeEntity?.products?.reversed.toList() ?? [];
+              List<Products>? products3 = [];
+              products3 =
+                  products.where((element) => element.descount == 0).toList();
+              return RefreshIndicator(
+                color: ColorManager.primaryColor,
+                onRefresh: () => viewModel.getHomeData(),
+                child:
+                ProductItemsHome(viewModel: viewModel, products: products3),
+              );
+            }
+            return Center(
+                child: CircularProgressIndicator(
+                  color: ColorManager.primaryColor,
+                ));
+          },
+        ),
       ],
     );
   }

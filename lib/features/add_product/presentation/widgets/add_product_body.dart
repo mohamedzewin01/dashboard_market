@@ -86,7 +86,9 @@ class AddProductBody extends StatelessWidget {
                     if (value!.trim().isEmpty) return 'ادخل موصفات المنتج';
                     if (value
                         .trim()
-                        .length < 3) return 'موصفات المنتج قصير جدا';
+                        .length < 3) {
+                      return 'موصفات المنتج قصير جدا';
+                    }
                     return null;
                   },
                   labelText: "موصفات المنتج",

@@ -15,6 +15,7 @@ class Assets {
   static const String addProduct = 'assets/images/add-product.png';
   static const String settingTap = 'assets/images/setting.png';
   static const String exit = 'assets/images/exit.png';
+  static const String banners = 'assets/images/Banners.png';
   static const String imagesRialRemovebgPreview =
       'assets/images/rial-removebg-preview.png';
 

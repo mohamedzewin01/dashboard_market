@@ -112,7 +112,7 @@ class _AddCategoriesState extends State<AddCategories> {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           childAspectRatio: 1.5,
                             crossAxisSpacing: 5,
-                            mainAxisExtent: 150,
+                            // mainAxisExtent: 150,
                             crossAxisCount: 3),
                         itemBuilder: (context, index) => Card(
                           child: Column(

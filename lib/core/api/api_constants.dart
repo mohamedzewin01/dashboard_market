@@ -1,7 +1,7 @@
 class ApiConstants {
   static const String baseUrl = "https://artawiya.com/fadaalhalj/api/v2/";
   static const String baseUrlImage =
-      "https://artawiya.com/fadaalhalj/api/v1/upload/";
+      "https://artawiya.com/fadaalhalj/api/v2/upload/";
   static const String home = "products/viewHome";
   static const String products = "products/fetchAllProducts.php";
   static const String editProducts = "products/editProduct.php";
@@ -15,4 +15,5 @@ class ApiConstants {
   static const String editStoreInfo = "setting/editStoreInfo.php";
   static const String uploadImageStore = "setting/uploadImageStore.php";
   static const String deleteProduct = "products/deleteProduct.php";
+  static const String fetchBanners = "banners/fetchBanners.php";
 }

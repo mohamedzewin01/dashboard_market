@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dashboard_market/features/add_images/data/models/images_model.dart';
 import 'package:dashboard_market/features/add_product/data/models/add_product_responces.dart';
+import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -91,4 +92,9 @@ abstract class ApiService {
   @POST(ApiConstants.deleteProduct)
   Future<DeleteProductResponses?> deleteProduct(
       @Part(name: 'productid') String? productId,);
+
+
+  @POST(ApiConstants.fetchBanners)
+  Future<BannersModelsResponse?> fetchBanners();
+
 }

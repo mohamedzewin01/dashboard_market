@@ -33,6 +33,13 @@ import '../../features/add_product/domain/use_cases/add_product_use_case.dart'
     as _i790;
 import '../../features/add_product/presentation/manager/add_product_cubit.dart'
     as _i272;
+import '../../features/banners/data/data_sources/banners_data_source_repo_impl.dart'
+    as _i6;
+import '../../features/banners/data/repo_impl/banners_repo_impl.dart' as _i194;
+import '../../features/banners/domain/repo/banners_repo.dart' as _i42;
+import '../../features/banners/domain/use_cases/banners_use_cases.dart'
+    as _i740;
+import '../../features/banners/presentation/cubit/banners_cubit.dart' as _i296;
 import '../../features/categories/data/data_sources/categories_data_sourses.dart'
     as _i379;
 import '../../features/categories/data/repositories/categories_repo_impl.dart'
@@ -80,20 +87,28 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.lazySingleton<_i361.Dio>(() => dioModule.providerDio());
     gh.factory<_i680.ApiService>(() => _i680.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i6.BannersDataSource>(
+        () => _i6.BannersDataSource(gh<_i680.ApiService>()));
     gh.factory<_i379.CategoriesDataSources>(
         () => _i379.CategoriesDataSources(gh<_i680.ApiService>()));
     gh.factory<_i630.StoreDataSources>(
         () => _i630.StoreDataSources(gh<_i680.ApiService>()));
+    gh.factory<_i42.BannersRepo>(
+        () => _i194.BannersRepoImpl(gh<_i6.BannersDataSource>()));
     gh.factory<_i504.StoreInfoRepo>(() => _i904.StoreInfoRepoImpl(
         storeDataSources: gh<_i630.StoreDataSources>()));
     gh.factory<_i594.CategoriesRepo>(() => _i137.CategoriesRepoImpl(
         categoriesDataSources: gh<_i379.CategoriesDataSources>()));
+    gh.factory<_i740.BannersUseCases>(
+        () => _i740.BannersUseCases(gh<_i42.BannersRepo>()));
     gh.factory<_i548.CategoriesUseCase>(
         () => _i548.CategoriesUseCase(gh<_i594.CategoriesRepo>()));
     gh.factory<_i1.ProductsDataSourceRepo>(
         () => _i647.ProductsDataSourceRepoImpl(gh<_i680.ApiService>()));
     gh.factory<_i556.StoreInfoUseCases>(
         () => _i556.StoreInfoUseCases(gh<_i504.StoreInfoRepo>()));
+    gh.factory<_i296.BannersCubit>(
+        () => _i296.BannersCubit(gh<_i740.BannersUseCases>()));
     gh.factory<_i759.ImagesDataSources>(
         () => _i759.ImagesDataSources(apiService: gh<_i680.ApiService>()));
     gh.factory<_i979.AddProductDataSources>(

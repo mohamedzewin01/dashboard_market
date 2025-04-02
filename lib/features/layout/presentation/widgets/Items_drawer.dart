@@ -8,10 +8,10 @@ import '../cubit/layout_cubit.dart';
 
 class ItemsDrawer extends StatelessWidget {
   const ItemsDrawer(
-      {super.key, required this.title, required this.svgPath, this.onTap,  required this.page});
+      {super.key, required this.title, required this.imagePath, this.onTap,  required this.page});
 
   final String title;
-  final String svgPath;
+  final String imagePath;
 
   final int page;
   final void Function()? onTap;
@@ -37,7 +37,7 @@ class ItemsDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(svgPath, height: 25, width: 25),
+                  Image.asset(imagePath, height: 25, width: 25),
                   SizedBox(width: 10),
                   Expanded(
                     child: Text(

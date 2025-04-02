@@ -19,40 +19,47 @@ class CustomDrawer extends StatelessWidget {
     List<ItemsDrawer> drawerItems = [
       ItemsDrawer(
         title: 'الرئيسية',
-        svgPath: Assets.home,
+        imagePath: Assets.home,
         page: 0,
         onTap: () => LayoutCubit.get(context).changeIndex(0),
       ),
       ItemsDrawer(
         title: 'المنتجات',
-        svgPath: Assets.productsTap,
+        imagePath: Assets.productsTap,
         page: 1,
         onTap: () => LayoutCubit.get(context).changeIndex(1),
       ),
       ItemsDrawer(
         title: 'اضافة منتج',
-        svgPath: Assets.addProduct,
+        imagePath: Assets.addProduct,
         page: 2,
         onTap: () => LayoutCubit.get(context).changeIndex(2),
       ),
       ItemsDrawer(
         title: 'الصور',
-        svgPath: Assets.uploadImages,
+        imagePath: Assets.uploadImages,
         page: 3,
         onTap: () => LayoutCubit.get(context).changeIndex(3),
       ),
       ItemsDrawer(
         title: 'الاقسام',
-        svgPath: Assets.categories,
+        imagePath: Assets.categories,
         page: 4,
         onTap: () => LayoutCubit.get(context).changeIndex(4),
       ),
       ItemsDrawer(
-        title: 'الاعدادات',
-        svgPath: Assets.settingTap,
-        page: 5,
+        title: ' البانرات',
+        imagePath: Assets.banners,
+        page: 6,
         onTap: () => LayoutCubit.get(context).changeIndex(5),
       ),
+      ItemsDrawer(
+        title: 'الاعدادات',
+        imagePath: Assets.settingTap,
+        page: 5,
+        onTap: () => LayoutCubit.get(context).changeIndex(6),
+      ),
+
     ];
     return CustomScrollView(
       slivers: [
@@ -104,7 +111,7 @@ class CustomDrawer extends StatelessWidget {
               ItemsDrawer(
                 page: 6,
                 title: 'خروج',
-                svgPath: Assets.exit,
+                imagePath: Assets.exit,
                 onTap: () => CustomDialog.showExitDialog(context),
               ),
               SizedBox(
@@ -112,6 +119,10 @@ class CustomDrawer extends StatelessWidget {
               ),
               Text(
                 'محمد زوين \n0558568986',
+                style: getSemiBoldStyle(color: ColorManager.primaryColor),
+              ),
+              Text(
+                'v 1.0.1',
                 style: getSemiBoldStyle(color: ColorManager.primaryColor),
               ),
               SizedBox(
