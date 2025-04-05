@@ -156,7 +156,7 @@ class AddBannerBody extends StatelessWidget {
                   ),
                 ),
                 CustomTextFormField(
-                  maxLength: 15,
+                  maxLength: 20,
                   hintText: 'العنوان',
                   controller: viewModel.bannerTitleController,
                   onChanged: (value) {
@@ -164,7 +164,7 @@ class AddBannerBody extends StatelessWidget {
                   },
                 ),
                 CustomTextFormField(
-                    maxLength: 15,
+                    maxLength: 20,
                     controller: viewModel.bannerSubTitleController,
                     hintText: 'العنوان الفرعي',
                     onChanged: (value) {

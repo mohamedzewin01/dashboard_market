@@ -43,8 +43,6 @@ class _BannersViewState extends State<BannersView> {
             children: [
               Expanded(child: AddBannerView()),
               Expanded(child: BannersBody(viewModel: viewModel)),
-
-
             ],
           ),
         ),
