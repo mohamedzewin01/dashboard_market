@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dashboard_market/features/add_images/data/models/images_model.dart';
 import 'package:dashboard_market/features/add_product/data/models/add_product_responces.dart';
+import 'package:dashboard_market/features/banners/data/models/response/AddBannerModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
 import 'package:dio/dio.dart';
@@ -96,5 +97,15 @@ abstract class ApiService {
 
   @POST(ApiConstants.fetchBanners)
   Future<BannersModelsResponse?> fetchBanners();
+
+  @POST(ApiConstants.addBanners)
+  @MultiPart()
+  Future<AddBannerModel?> addBanner(
+      @Part(name: 'title') String? title,
+      @Part(name: 'description') String? description,
+      @Part(name: 'productId') String? productId,
+      @Part(name: 'imagePath') File? imagePath,
+      @Part(name: 'status') String? status,
+      );
 
 }

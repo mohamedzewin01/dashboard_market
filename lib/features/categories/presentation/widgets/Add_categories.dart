@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dashboard_market/core/resources/cashed_image.dart';
 import 'package:dashboard_market/core/resources/style_manager.dart';
 import 'package:flutter/material.dart';
@@ -118,11 +119,11 @@ class _AddCategoriesState extends State<AddCategories> {
                           child: Column(
                             children: [
                               AspectRatio(
-                                  aspectRatio: 16 / 9,
+                                  aspectRatio: 2,
                                   child: CustomImage(
                                       url:
                                           categories[index].categoryImage ?? '')),
-                              Text(
+                              AutoSizeText(
                                 categories[index].categoryName ?? '',
                                 style:
                                     getSemiBoldStyle(color: ColorManager.orange),

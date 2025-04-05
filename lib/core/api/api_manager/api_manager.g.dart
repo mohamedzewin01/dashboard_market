@@ -534,6 +534,69 @@ class _ApiService implements ApiService {
     return _value;
   }
 
+  @override
+  Future<AddBannerModel?> addBanner(
+    String? title,
+    String? description,
+    String? productId,
+    File? imagePath,
+    String? status,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (title != null) {
+      _data.fields.add(MapEntry('title', title));
+    }
+    if (description != null) {
+      _data.fields.add(MapEntry('description', description));
+    }
+    if (productId != null) {
+      _data.fields.add(MapEntry('productId', productId));
+    }
+    if (imagePath != null) {
+      _data.files.add(
+        MapEntry(
+          'imagePath',
+          MultipartFile.fromFileSync(
+            imagePath.path,
+            filename: imagePath.path.split(Platform.pathSeparator).last,
+          ),
+        ),
+      );
+    }
+    if (status != null) {
+      _data.fields.add(MapEntry('status', status));
+    }
+    final _options = _setStreamType<AddBannerModel>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'multipart/form-data',
+      )
+          .compose(
+            _dio.options,
+            'banners/addbanners.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late AddBannerModel? _value;
+    try {
+      _value =
+          _result.data == null ? null : AddBannerModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

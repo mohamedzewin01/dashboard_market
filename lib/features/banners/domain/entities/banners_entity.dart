@@ -1,3 +1,4 @@
+import 'package:dashboard_market/features/banners/data/models/response/AddBannerModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 
 class BannersEntity {
@@ -13,3 +14,14 @@ class BannersEntity {
 
 }
 
+class AddBannersEntity {
+  AddBannersEntity({
+    this.status,
+    this.newBanner,});
+
+
+  String? status;
+  NewBanner? newBanner;
+
+
+}

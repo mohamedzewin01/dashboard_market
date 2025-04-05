@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:dashboard_market/core/functions/reduce_image_size.dart';
 import 'package:dashboard_market/features/add_images/presentation/manager/images_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -25,17 +26,33 @@ class UpLoadImage extends StatefulWidget {
 class _TabBodySellerState extends State<UpLoadImage> {
 
   Future<File?> _pickImage() async {
+    final XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (xFile != null) {
+      final File originalImageFile = File(xFile.path);
+      final String extension = xFile.path.split('.').last.toLowerCase();
 
-      final XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (xFile != null) {
-              setState(() {
-                widget.viewModel.imageFile = File(xFile.path);
-              });
-        return File(xFile.path);
+      if (extension == 'webp') {
+        setState(() {
+          widget.viewModel.imageFile = originalImageFile;
+        });
+        return originalImageFile;
       }
+
+      final File resizedImageFile = await resizeAndCompressImage(
+        imageFile: originalImageFile,
+      );
+
+      setState(() {
+        widget.viewModel.imageFile = resizedImageFile;
+      });
+
+      return resizedImageFile;
+    }
 
     return null;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +63,7 @@ class _TabBodySellerState extends State<UpLoadImage> {
         onTap: _pickImage,
         child: Column(
           children: [
-            if (widget.viewModel.imageBytes != null || widget.viewModel.imageFile != null)
+            if ( widget.viewModel.imageFile != null)
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: ColorManager.primaryColor, width: 3),

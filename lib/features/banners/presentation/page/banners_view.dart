@@ -6,6 +6,7 @@ import 'package:dashboard_market/core/resources/cashed_image.dart';
 import 'package:dashboard_market/core/widgets/adaptive%20layout.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 import 'package:dashboard_market/features/banners/presentation/cubit/banners_cubit.dart';
+import 'package:dashboard_market/features/banners/presentation/widgets/add_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,9 +41,10 @@ class _BannersViewState extends State<BannersView> {
           tabletLayout: (context) => BannersBody(viewModel: viewModel),
           desktopLayout: (context) => Row(
             children: [
+              Expanded(child: AddBannerView()),
               Expanded(child: BannersBody(viewModel: viewModel)),
-              Expanded(child: BannersBody(viewModel: viewModel)),
-              Expanded(child: BannersBody(viewModel: viewModel)),
+
+
             ],
           ),
         ),
@@ -69,23 +71,22 @@ class BannersBody extends StatelessWidget {
           List<Banners>? banners =
               state.bannersEntity?.banners?.reversed.toList() ?? [];
           return Scaffold(
-            body: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  pinned: true,
-                  expandedHeight: 200,
-                  title: Text('بانرات'),
-                ),
-                SliverList.separated(
-                  itemCount: banners.length,
-                  itemBuilder: (context, index) => ItemBanners(
-                    banner: banners[index],
-                  ),
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: 10,
-                  ),
-                )
-              ],
+            body: Padding(
+              padding: const EdgeInsets.all(16),
+              child: CustomScrollView(
+                slivers: [
+
+                  SliverList.separated(
+                    itemCount: banners.length,
+                    itemBuilder: (context, index) => ItemBanners(
+                      banner: banners[index],
+                    ),
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 10,
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         }
@@ -97,18 +98,6 @@ class BannersBody extends StatelessWidget {
   }
 }
 
-// class ItemBanners extends StatelessWidget {
-//   const ItemBanners({super.key, required this.banner});
-// final Banners banner;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//       child: AspectRatio(
-//           aspectRatio: 4,
-//           child: CustomImage(url: banner.bannersUrlImage ?? '')),
-//     );
-//   }
-// }
 
 class ItemBanners extends StatelessWidget {
   const ItemBanners({super.key, required this.banner});
@@ -167,7 +156,6 @@ class ItemBanners extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width - 48,
               decoration: BoxDecoration(
-                // اختيار لون عشوائي من القائمة
                 color: colors[random.nextInt(colors.length)],
               ),
               child: Row(

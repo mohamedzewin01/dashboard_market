@@ -243,7 +243,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.initialValue,
     this.onChanged,
-    this.inputAction, this.minLines, this.maxLines, this.onFieldSubmitted,
+    this.inputAction, this.minLines, this.maxLines, this.onFieldSubmitted, this.autofocus, this.maxLength,
   });
 
   final TextEditingController controller;
@@ -252,8 +252,10 @@ class CustomTextFormField extends StatelessWidget {
   final String? initialValue;
   final bool? obscureText;
   final bool? enabled;
+  final bool? autofocus;
   final int? minLines;
   final int? maxLines;
+  final int? maxLength;
   final String? Function(String?)? validator;
   final Widget? suffix;
   final Widget? prefixIcon;
@@ -267,6 +269,8 @@ class CustomTextFormField extends StatelessWidget {
     return SizedBox(
       height: 65,
       child: TextFormField(
+        autofocus: autofocus??false,
+        maxLength:maxLength ,
         textDirection: TextDirection.rtl,
         textAlign: TextAlign.center,
         textInputAction: inputAction,

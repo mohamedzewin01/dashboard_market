@@ -1,3 +1,5 @@
+
+
 import 'package:dashboard_market/features/banners/presentation/page/banners_view.dart';
 import 'package:flutter/material.dart';
 import '../../features/add_images/presentation/pages/images_view.dart';
@@ -28,6 +30,44 @@ class AppConstants {
     SettingView(),
 
   ];
+ static final List<Color> colors = [
+    Colors.orange,
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.purple,
+    Colors.teal,
+    Colors.pink,
+    Colors.cyan,
+    Colors.indigo,
+    Colors.lime,
+    Colors.deepOrange,
+    Colors.deepPurple,
+    Colors.lightGreen,
+    Colors.lightBlue,
+    Colors.brown,
+    Colors.grey,
+  ];
+
+  static final List<String> actionString = [
+    '💥', // انفجار - يعبر عن الحماس
+    '🎉', // احتفال - يعبر عن السعادة
+    '🎁', // هدية - يعبر عن المكافآت
+    '💯', // مئة بالمئة - يعبر عن الجودة
+    '✨', // بريق - يعبر عن التميز
+    '🔥', // نار - يعبر عن العروض الساخنة
+    '🚀', // صاروخ - يعبر عن السرعة
+    '🌟', // نجمة - يعبر عن التفوق
+    '🛍️', // حقيبة تسوق - يعبر عن الشراء
+    '📣', // مكبر صوت - يعبر عن الإعلان
+    '⚡', // صاعقة - يعبر عن العروض القوية
+    '🔔', // جرس - يعبر عن التنبيه بالعروض
+    '🏷️', // بطاقة خصم - يعبر عن التخفيضات
+    '🌟', // نجمة - يعبر عن التفوق];
+  ];
+
+  // مولد عشوائي
+
 
 }
 

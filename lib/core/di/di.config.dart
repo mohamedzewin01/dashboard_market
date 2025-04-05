@@ -39,6 +39,8 @@ import '../../features/banners/data/repo_impl/banners_repo_impl.dart' as _i194;
 import '../../features/banners/domain/repo/banners_repo.dart' as _i42;
 import '../../features/banners/domain/use_cases/banners_use_cases.dart'
     as _i740;
+import '../../features/banners/presentation/cubit/add_banners_cubit/add_banners_cubit.dart'
+    as _i1043;
 import '../../features/banners/presentation/cubit/banners_cubit.dart' as _i296;
 import '../../features/categories/data/data_sources/categories_data_sourses.dart'
     as _i379;
@@ -109,6 +111,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i556.StoreInfoUseCases(gh<_i504.StoreInfoRepo>()));
     gh.factory<_i296.BannersCubit>(
         () => _i296.BannersCubit(gh<_i740.BannersUseCases>()));
+    gh.factory<_i1043.AddBannersCubit>(
+        () => _i1043.AddBannersCubit(gh<_i740.BannersUseCases>()));
     gh.factory<_i759.ImagesDataSources>(
         () => _i759.ImagesDataSources(apiService: gh<_i680.ApiService>()));
     gh.factory<_i979.AddProductDataSources>(

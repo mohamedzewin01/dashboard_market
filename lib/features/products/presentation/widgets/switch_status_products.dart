@@ -25,9 +25,6 @@ class _SwitchStatusProductsState extends State<SwitchStatusProducts> {
       scale: .6,
       child: Switch(
         mouseCursor: SystemMouseCursors.click,
-        // activeColor: Colors.green,
-        // inactiveThumbColor: Colors.red,
-        // inactiveTrackColor: Colors.red.shade100,
         activeTrackColor: Colors.lightGreen.shade400,
         activeColor: Colors.green.shade800,
         inactiveThumbColor: Colors.grey.shade400, // لون المفتاح عند عدم التفعيل

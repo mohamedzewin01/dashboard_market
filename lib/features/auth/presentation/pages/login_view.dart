@@ -37,6 +37,8 @@ class _LoginViewState extends State<LoginView> {
                         Expanded(
                             flex: 1,
                             child: CustomTextFormField(
+                              autofocus: true,
+
                               inputAction: TextInputAction.go,
                               onFieldSubmitted: (value) =>  Navigator.pushReplacementNamed(context, RoutesManager.layout),
                               controller:passwordController,

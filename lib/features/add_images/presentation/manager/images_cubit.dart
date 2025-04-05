@@ -47,7 +47,7 @@ class ImagesCubit extends Cubit<ImagesState> {
 
 
 
-  Uint8List? imageBytes;
+  // Uint8List? imageBytes;
    File? imageFile;
   TextEditingController nameController = TextEditingController();
 final formKey = GlobalKey<FormState>();
