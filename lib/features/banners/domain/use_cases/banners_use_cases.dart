@@ -17,4 +17,13 @@ class BannersUseCases {
   Future<Result<AddBannersEntity?>> addBanners(String? title,
           String? description, int? productId, File imagePath, int? status) =>
       bannersRepo.addBanners(title, description, productId, imagePath, status);
+
+  Future<Result<DeleteBannerEntity?>> deleteBanner(
+          int? bannerId, String? imagePath) =>
+      bannersRepo.deleteBanner(bannerId, imagePath);
+
+
+  Future<Result<ChangeStatusEntity?>> changeStatus(int? bannerId ,int? status){
+    return bannersRepo.changeStatus(bannerId, status);
+  }
 }

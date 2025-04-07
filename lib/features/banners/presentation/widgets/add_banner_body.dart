@@ -5,6 +5,7 @@ import 'package:dashboard_market/core/resources/color_manager.dart';
 import 'package:dashboard_market/core/widgets/custom_elevated_button.dart';
 import 'package:dashboard_market/core/widgets/custom_text_form_field.dart';
 import 'package:dashboard_market/features/banners/presentation/cubit/add_banners_cubit/add_banners_cubit.dart';
+import 'package:dashboard_market/features/banners/presentation/cubit/banners_cubit.dart';
 import 'package:dashboard_market/features/banners/presentation/widgets/switch_status_banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +68,7 @@ class AddBannerBody extends StatelessWidget {
                                             topLeft: Radius.circular(18),
                                             bottomLeft: Radius.circular(18),
                                           ),
-                                          color: Colors.green,
+                                          // color: Colors.green,
                                         ),
                                       ),
                                     ),
@@ -136,8 +137,6 @@ class AddBannerBody extends StatelessWidget {
                   onTap: viewModel.pickImageBanner,
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(
-                          color: ColorManager.primaryColor, width: 3),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Container(
@@ -179,8 +178,12 @@ class AddBannerBody extends StatelessWidget {
                 ),
                 CustomElevatedButton(
                   title: 'حفظ',
-                  onPressed: () {
-                    viewModel.addBanners();
+                  onPressed: () async {
+                    await viewModel.addBanners();
+                    if(context.mounted){
+                      BannersCubit.get(context).fetchBanners();
+                    }
+
                   },
                 ),
               ],

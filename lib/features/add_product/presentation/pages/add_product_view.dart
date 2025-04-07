@@ -27,11 +27,11 @@ class _AddProductViewState extends State<AddProductView> {
     return Scaffold(
       backgroundColor: ColorManager.orange.withAlpha(10),
       appBar: AppBar(
-        backgroundColor: ColorManager.orange.withAlpha(80),
+        backgroundColor: ColorManager.orange,
         title: Text(
           "اضافة منتجات",
           style:
-              getSemiBoldStyle(color: ColorManager.primaryColor, fontSize: 18),
+              getSemiBoldStyle(color: ColorManager.white, fontSize: 18),
         ),
         centerTitle: true,
       ),

@@ -84,31 +84,11 @@ class _TabBodySellerState extends State<UpLoadImage> {
                   ),
                 ),
               )
-            else
-              Container(
-                decoration: BoxDecoration(
+            else  const Icon(
+              Icons.add_a_photo_outlined,
+              color: Colors.grey,
+            ),
 
-                  border: Border.all(color: ColorManager.primaryColor, width: 3),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: AspectRatio(
-                  aspectRatio: 16/9,
-                  child: Container(
-                    padding: EdgeInsets.all(0),
-                    clipBehavior: Clip.antiAlias,
-
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Image.asset(
-                      'assets/images/image_default.jpg',
-                      // 'widget.urlImage',
-                      fit: BoxFit.fill,
-                      width: double.infinity,
-                    ),
-                  ),
-                ),
-              ),
           ],
         ),
       ),

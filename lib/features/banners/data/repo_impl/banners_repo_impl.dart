@@ -23,4 +23,14 @@ class BannersRepoImpl implements BannersRepo {
     return bannersDataSource.addBanner(
         title, description, productId, imagePath, status);
   }
+
+  @override
+  Future<Result<DeleteBannerEntity?>> deleteBanner(int? bannerId, String? imagePath) {
+    return bannersDataSource.deleteBanner(bannerId, imagePath);
+  }
+
+  @override
+  Future<Result<ChangeStatusEntity?>> changeStatus(int? bannerId, int? status) {
+    return bannersDataSource.changeStatus(bannerId, status);
+  }
 }

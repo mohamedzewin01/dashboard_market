@@ -196,7 +196,7 @@ class EditProductBody extends StatelessWidget {
                   Expanded(child: SizedBox()),
                   Expanded(
                       child: Text(
-                    'السعر قبل الخصم',
+                    'السعر الأصلي',
                     style: getSemiBoldStyle(
                         color: ColorManager.black, fontSize: 16),
                     textDirection: TextDirection.rtl,
@@ -215,14 +215,19 @@ class EditProductBody extends StatelessWidget {
                     ),
                   ),
                   Expanded(child: SizedBox()),
+
                   Expanded(
                       child: Text(
-                    'السعر النهائي',
+                    'السعر بعد الخصم',
                     style: getSemiBoldStyle(
                         color: ColorManager.black, fontSize: 16),
                     textDirection: TextDirection.rtl,
                   )),
                 ],
+              ),
+              Text(
+                "في حالة عدم وجود خصم يتم وضع صفر (0) في خانة السعر بعد الخصم",
+                style: getSemiBoldStyle(color: ColorManager.error),
               ),
               const SizedBox(
                 height: 5,

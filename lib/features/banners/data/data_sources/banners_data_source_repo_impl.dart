@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dashboard_market/core/api/api_extentions.dart';
 import 'package:dashboard_market/core/api/api_manager/api_manager.dart';
 import 'package:dashboard_market/core/common/api_result.dart';
+import 'package:dashboard_market/features/banners/data/models/response/ChangeStatusModel.dart';
 import 'package:dashboard_market/features/banners/domain/entities/banners_entity.dart';
 import 'package:injectable/injectable.dart';
 
@@ -28,6 +29,24 @@ class BannersDataSource {
         var response = await apiService.addBanner(
             title, description, productId.toString(), imagePath, status.toString());
         return response?.toAddBannersEntity();
+      },
+    );
+  }
+
+  Future<Result<DeleteBannerEntity?>> deleteBanner(int? bannerId ,String? imagePath) {
+    return executeApi(
+      () async {
+        var response = await apiService.deleteBanner(bannerId.toString(), imagePath);
+        return response?.toDeleteBannerEntity();
+      },
+    );
+  }
+
+  Future<Result<ChangeStatusEntity?>> changeStatus(int? bannerId ,int? status) {
+    return executeApi(
+      () async {
+        var response = await apiService.changeStatus(bannerId.toString(), status.toString());
+        return response?.toChangeStatusEntity();
       },
     );
   }

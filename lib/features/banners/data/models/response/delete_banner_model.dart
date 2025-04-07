@@ -1,39 +1,36 @@
 import 'package:dashboard_market/features/banners/domain/entities/banners_entity.dart';
 
-class BannersModelsResponse {
-  BannersModelsResponse({
+class DeleteBannerModel {
+  DeleteBannerModel({
     this.status,
-    this.banners,
+    this.deletedData,
   });
 
-  BannersModelsResponse.fromJson(dynamic json) {
+  DeleteBannerModel.fromJson(dynamic json) {
     status = json['status'];
-    if (json['banners'] != null) {
-      banners = [];
-      json['banners'].forEach((v) {
-        banners?.add(Banners.fromJson(v));
-      });
-    }
+    deletedData = json['deleted_data'] != null
+        ? DeletedData.fromJson(json['deleted_data'])
+        : null;
   }
 
   String? status;
-  List<Banners>? banners;
+  DeletedData? deletedData;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['status'] = status;
-    if (banners != null) {
-      map['banners'] = banners?.map((v) => v.toJson()).toList();
+    if (deletedData != null) {
+      map['deleted_data'] = deletedData?.toJson();
     }
     return map;
   }
 
-  BannersEntity toBannersEntity() =>
-      BannersEntity(status: status, banners: banners);
+  DeleteBannerEntity toDeleteBannerEntity() =>
+      DeleteBannerEntity(status: status, deletedData: deletedData);
 }
 
-class Banners {
-  Banners({
+class DeletedData {
+  DeletedData({
     this.bannersId,
     this.bannersUrlImage,
     this.bannersTitle,
@@ -43,7 +40,7 @@ class Banners {
     this.bannersCreatedAt,
   });
 
-  Banners.fromJson(dynamic json) {
+  DeletedData.fromJson(dynamic json) {
     bannersId = json['banners_id'];
     bannersUrlImage = json['banners_url_image'];
     bannersTitle = json['banners_title'];
@@ -53,12 +50,12 @@ class Banners {
     bannersCreatedAt = json['banners_created_at'];
   }
 
-  int? bannersId;
+  num? bannersId;
   String? bannersUrlImage;
   String? bannersTitle;
   String? bannersDescription;
-  int? bannersProductId;
-  int? bannersStatus;
+  num? bannersProductId;
+  num? bannersStatus;
   String? bannersCreatedAt;
 
   Map<String, dynamic> toJson() {

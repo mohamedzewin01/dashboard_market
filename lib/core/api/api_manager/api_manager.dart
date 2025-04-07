@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:dashboard_market/features/add_images/data/models/images_model.dart';
 import 'package:dashboard_market/features/add_product/data/models/add_product_responces.dart';
 import 'package:dashboard_market/features/banners/data/models/response/AddBannerModel.dart';
+import 'package:dashboard_market/features/banners/data/models/response/ChangeStatusModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
+import 'package:dashboard_market/features/banners/data/models/response/delete_banner_model.dart';
 import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -107,5 +109,20 @@ abstract class ApiService {
       @Part(name: 'imagePath') File? imagePath,
       @Part(name: 'status') String? status,
       );
+
+  @POST(ApiConstants.deleteBanners)
+  @MultiPart()
+  Future<DeleteBannerModel?> deleteBanner(
+      @Part(name: 'bannersID') String? bannersId,
+      @Part(name: 'image_name') String? imagePath,
+      );
+
+  @POST(ApiConstants.editBanners)
+  @MultiPart()
+  Future<ChangeStatusModel?> changeStatus(
+      @Part(name: 'bannersId') String? bannersId,
+      @Part(name: 'bannersStatus') String? status,
+      );
+
 
 }

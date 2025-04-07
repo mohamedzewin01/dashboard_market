@@ -1,6 +1,8 @@
 import 'package:dashboard_market/features/banners/data/models/response/AddBannerModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 
+import '../../data/models/response/delete_banner_model.dart';
+
 class BannersEntity {
   BannersEntity({
       this.status, 
@@ -24,4 +26,21 @@ class AddBannersEntity {
   NewBanner? newBanner;
 
 
+}
+
+class DeleteBannerEntity {
+  DeleteBannerEntity({
+    this.status,
+    this.deletedData,});
+
+
+  String? status;
+  DeletedData? deletedData;
+
+}
+
+class ChangeStatusEntity {
+  ChangeStatusEntity({
+    this.message,});
+  String? message;
 }

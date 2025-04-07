@@ -17,6 +17,7 @@ class ColorManager {
   static const Color primaryColor = Color(0xff2382AA);
   static const Color cardColor = Color(0xffE9F5FA);
   static const Color lightGrey2 = Color(0xff7D7D7D);
-
+  static const Color indigoDark2 = Color(0xff303f9f);
+  static const Color indigoLight = Color(0xff7986cb);
   static const Color white2 = Color(0xDBDBDBFF);
 }

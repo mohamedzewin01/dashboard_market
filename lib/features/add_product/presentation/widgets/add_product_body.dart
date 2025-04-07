@@ -5,7 +5,6 @@ import 'package:dashboard_market/features/add_product/presentation/widgets/show_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
@@ -26,9 +25,9 @@ class AddProductBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AddProductCubit, AddProductState>(
       listener: (context, state) {
-       if(state is AddProductSuccess){
-         CustomDialog.showSuccessDialog(context,goto: const HomeView());
-       }
+        if (state is AddProductSuccess) {
+          CustomDialog.showSuccessDialog(context, goto: const HomeView());
+        }
       },
       builder: (context, state) {
         return Padding(
@@ -39,42 +38,45 @@ class AddProductBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               spacing: 16,
               children: [
-                Card(
-                  child: SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: IconButton(
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          backgroundColor: ColorManager.white,
-                          elevation: 8,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20),
+                SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        elevation: 8,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        builder: (context) => ShowAllImagesToAddProduct(
+                          addProductCubit: viewModel,
+                        ),
+                      );
+                    },
+                    icon: viewModel.imagePath.isNotEmpty
+                        ? Container(
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
                             ),
+                            child: CustomImage(url: viewModel.imagePath))
+                        : const Icon(
+                            Icons.add_a_photo_outlined,
+                            color: Colors.grey,
                           ),
-                          builder: (context) => ShowAllImagesToAddProduct(
-                            addProductCubit: viewModel,
-                          ),
-                        );
-
-                      },
-                      icon: viewModel.imagePath.isNotEmpty
-                          ? CustomImage(url: viewModel.imagePath)
-                          : const Icon(Icons.photo),
-                    ),
                   ),
                 ),
                 CustomTextFormField(
                   controller: viewModel.productNameController,
                   validator: (value) {
                     if (value!.trim().isEmpty) return 'ادخل اسم المنتج';
-                    if (value
-                        .trim()
-                        .length < 3) return 'الاسم قصير جدا';
+                    if (value.trim().length < 3) return 'الاسم قصير جدا';
                     return null;
                   },
                   labelText: "اسم المنتج",
@@ -84,9 +86,7 @@ class AddProductBody extends StatelessWidget {
                   controller: viewModel.descriptionController,
                   validator: (value) {
                     if (value!.trim().isEmpty) return 'ادخل موصفات المنتج';
-                    if (value
-                        .trim()
-                        .length < 3) {
+                    if (value.trim().length < 3) {
                       return 'موصفات المنتج قصير جدا';
                     }
                     return null;
@@ -110,8 +110,9 @@ class AddProductBody extends StatelessWidget {
                           }
                           double discountedPrice =
                               double.tryParse(value.trim()) ?? 0.0;
-                          double originalPrice = double.tryParse(
-                              viewModel.productPriceController.text.trim()) ??
+                          double originalPrice = double.tryParse(viewModel
+                                  .productPriceController.text
+                                  .trim()) ??
                               0.0;
                           if (discountedPrice >= originalPrice) {
                             return 'السعر بعد الخصم يجب أن يكون أقل من سعر المنتج';
@@ -142,7 +143,13 @@ class AddProductBody extends StatelessWidget {
                     ),
                   ],
                 ),
-
+                Text(
+                  "في حالة عدم وجود خصم يتم وضع صفر (0) في خانة السعر بعد الخصم",
+                  style: getSemiBoldStyle(color: ColorManager.error),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
                   spacing: 16,
                   children: [
@@ -155,25 +162,45 @@ class AddProductBody extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        items:  [
-                          DropdownMenuItem(value: 1, child: Row(
-                            children: [
-                              const Icon(Icons.check,color: Colors.green,),
-                              Text('نشر حالا',style: getSemiBoldStyle(color: Colors.green,),),
-                            ],
-                          )),
-                          DropdownMenuItem(value: 0, child: Row(
-                            children: [
-                              const Icon(Icons.close,color: ColorManager.error,),
-                              Text('عدم النشر ',style: getSemiBoldStyle(color: ColorManager.error,),),
-                            ],
-                          )),
+                        items: [
+                          DropdownMenuItem(
+                              value: 1,
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.check,
+                                    color: Colors.green,
+                                  ),
+                                  Text(
+                                    'نشر حالا',
+                                    style: getSemiBoldStyle(
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          DropdownMenuItem(
+                              value: 0,
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.close,
+                                    color: ColorManager.error,
+                                  ),
+                                  Text(
+                                    'عدم النشر ',
+                                    style: getSemiBoldStyle(
+                                      color: ColorManager.error,
+                                    ),
+                                  ),
+                                ],
+                              )),
                         ],
                         onChanged: (value) {
                           viewModel.changeProductStatus(value!);
                         },
                         validator: (value) {
-                          if (value == null ) {
+                          if (value == null) {
                             return 'الرجاء اختيار الحالة';
                           }
                           return null;
@@ -195,7 +222,6 @@ class AddProductBody extends StatelessWidget {
                           if (viewModel.formKey.currentState!.validate()) {
                             viewModel.addProduct();
                           }
-
                         },
                       ),
                     ),
@@ -209,5 +235,3 @@ class AddProductBody extends StatelessWidget {
     );
   }
 }
-
-

@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/api/api_constants.dart';
+import '../widgets/switch_status_banner.dart';
 
 class BannersView extends StatefulWidget {
   const BannersView({
@@ -41,7 +42,7 @@ class _BannersViewState extends State<BannersView> {
           tabletLayout: (context) => BannersBody(viewModel: viewModel),
           desktopLayout: (context) => Row(
             children: [
-              Expanded(child: AddBannerView()),
+              SizedBox(width: 390, child: AddBannerView()),
               Expanded(child: BannersBody(viewModel: viewModel)),
             ],
           ),
@@ -70,17 +71,17 @@ class BannersBody extends StatelessWidget {
               state.bannersEntity?.banners?.reversed.toList() ?? [];
           return Scaffold(
             body: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(24),
               child: CustomScrollView(
                 slivers: [
-
                   SliverList.separated(
                     itemCount: banners.length,
                     itemBuilder: (context, index) => ItemBanners(
+                      viewModel: viewModel,
                       banner: banners[index],
                     ),
                     separatorBuilder: (context, index) => SizedBox(
-                      height: 10,
+                      height: 16,
                     ),
                   )
                 ],
@@ -96,11 +97,11 @@ class BannersBody extends StatelessWidget {
   }
 }
 
-
 class ItemBanners extends StatelessWidget {
-  const ItemBanners({super.key, required this.banner});
+  const ItemBanners({super.key, required this.banner, required this.viewModel});
 
   final Banners banner;
+  final BannersCubit viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +145,6 @@ class ItemBanners extends StatelessWidget {
     final Random random = Random();
 
     return ClipRRect(
-
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       child: AspectRatio(
         aspectRatio: 4.5,
@@ -165,7 +165,7 @@ class ItemBanners extends StatelessWidget {
                           topLeft: Radius.circular(18),
                           bottomLeft: Radius.circular(18),
                         ),
-                        color: Colors.green,
+                        // color: Colors.green.shade200,
                         image: DecorationImage(
                           image: NetworkImage(
                             '${ApiConstants.baseUrlImage}${banner.bannersUrlImage}',
@@ -174,7 +174,6 @@ class ItemBanners extends StatelessWidget {
                         ),
                       ),
                     ),
-
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -221,6 +220,17 @@ class ItemBanners extends StatelessWidget {
               ),
             ),
             Positioned(
+              // top: 0,
+              bottom: 0,
+              right: 0,
+              child: SwitchChangeStatus(
+                viewModel:viewModel ,
+                banner:banner ,
+
+
+              ),
+            ),
+            Positioned(
               top: 0,
               // right: 0,
               left: 0,
@@ -232,6 +242,79 @@ class ItemBanners extends StatelessWidget {
                 ),
               ),
             ),
+            Positioned(
+              top: 5,
+              right: 5,
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: 15,
+                child: IconButton(
+                  color: Colors.redAccent,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        title: Row(
+                          children: [
+                            Icon(Icons.warning_rounded,
+                                color: Colors.red, size: 28),
+                            SizedBox(width: 8),
+                            Text(
+                              'تأكيد الحذف',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                        content: Text(
+                          'هل أنت متأكد من حذف البانر؟',
+                          style: TextStyle(fontSize: 16, color: Colors.black54),
+                        ),
+                        actionsAlignment: MainAxisAlignment.spaceBetween,
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Text(
+                              'إلغاء',
+                              style: TextStyle(
+                                  color: Colors.grey.shade700, fontSize: 16),
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            onPressed: () async {
+                              await viewModel.deleteBanner(
+                                  bannerId: banner.bannersId,
+                                  imagePath: banner.bannersUrlImage);
+                              if (context.mounted) {
+                                Navigator.pop(context);
+                              }
+                            },
+                            child: Text(
+                              'حذف',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  icon: Icon(Icons.delete, color: Colors.redAccent, size: 20),
+                ),
+              ),
+            )
           ],
         ),
       ),

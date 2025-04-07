@@ -486,7 +486,7 @@ class _ApiService implements ApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'products/deleteProduct.php',
+            'products/delete_Product.php',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -590,6 +590,94 @@ class _ApiService implements ApiService {
     try {
       _value =
           _result.data == null ? null : AddBannerModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<DeleteBannerModel?> deleteBanner(
+    String? bannersId,
+    String? imagePath,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (bannersId != null) {
+      _data.fields.add(MapEntry('bannersID', bannersId));
+    }
+    if (imagePath != null) {
+      _data.fields.add(MapEntry('image_name', imagePath));
+    }
+    final _options = _setStreamType<DeleteBannerModel>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'multipart/form-data',
+      )
+          .compose(
+            _dio.options,
+            'banners/delete_banners',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late DeleteBannerModel? _value;
+    try {
+      _value = _result.data == null
+          ? null
+          : DeleteBannerModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ChangeStatusModel?> changeStatus(
+    String? bannersId,
+    String? status,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (bannersId != null) {
+      _data.fields.add(MapEntry('bannersId', bannersId));
+    }
+    if (status != null) {
+      _data.fields.add(MapEntry('bannersStatus', status));
+    }
+    final _options = _setStreamType<ChangeStatusModel>(
+      Options(
+        method: 'POST',
+        headers: _headers,
+        extra: _extra,
+        contentType: 'multipart/form-data',
+      )
+          .compose(
+            _dio.options,
+            'banners/editbanners.php',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late ChangeStatusModel? _value;
+    try {
+      _value = _result.data == null
+          ? null
+          : ChangeStatusModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -46,24 +46,25 @@ class _AddCategoriesState extends State<AddCategories> {
             mainAxisAlignment: MainAxisAlignment.start,
             spacing: 16,
             children: [
-              Card(
-                child: SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: IconButton(
-                    onPressed: () async {
-                      final XFile? xFile = await ImagePicker()
-                          .pickImage(source: ImageSource.gallery);
-                      if (xFile != null) {
-                        setState(() {
-                          viewModel.imageFile = File(xFile.path);
-                          viewModel.imagePath = xFile.path;
-                        });
-                      }
-                    },
-                    icon: viewModel.imagePath.isNotEmpty
-                        ? Image.file(viewModel.imageFile!)
-                        : const Icon(Icons.photo),
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: IconButton(
+                  onPressed: () async {
+                    final XFile? xFile = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
+                    if (xFile != null) {
+                      setState(() {
+                        viewModel.imageFile = File(xFile.path);
+                        viewModel.imagePath = xFile.path;
+                      });
+                    }
+                  },
+                  icon: viewModel.imagePath.isNotEmpty
+                      ? Image.file(viewModel.imageFile!)
+                      :  const Icon(
+                    Icons.add_a_photo_outlined,
+                    color: Colors.grey,
                   ),
                 ),
               ),

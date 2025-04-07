@@ -42,6 +42,9 @@ class AddBannersCubit extends Cubit<AddBannersState> {
     switch (result) {
       case Success<AddBannersEntity?>():
         if (!isClosed) {
+          bannerTitleController.clear();
+          bannerSubTitleController.clear();
+          imageFile = null;
           emit(AddBannersSuccess(result.data!));
         }
       case Fail<AddBannersEntity?>():
