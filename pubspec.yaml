@@ -49,6 +49,23 @@ dependencies:
   flutter_bloc: ^9.0.0
   device_preview: ^1.2.0
   skeletonizer: ^1.4.2
+  image_cropper:
+  image_picker: ^1.1.2
+  image: ^4.3.0
+  share_plus:
+  path_provider:
+  getwidget: ^6.0.0
+  auto_size_text: ^3.0.0
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  windows:
+    generate: true
+    image_path: "assets/images/app_icon.png"
+    icon_size: 48
+  image_path: "assets/images/app_icon.png"
 
 dev_dependencies:
   flutter_test:

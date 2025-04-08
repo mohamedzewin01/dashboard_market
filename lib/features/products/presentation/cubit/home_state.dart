@@ -1,20 +1,20 @@
 part of 'home_cubit.dart';
 
 @immutable
-sealed class HomeState {}
+sealed class ProductsState {}
 
-final class HomeInitial extends HomeState {}
+final class ProductsInitial extends ProductsState {}
 
-final class HomeLoading extends HomeState {}
+final class ProductsLoading extends ProductsState {}
 
-final class HomeSuccess extends HomeState {
+final class ProductsSuccess extends ProductsState {
   final ProductsEntity? homeEntity;
 
-  HomeSuccess(this.homeEntity);
+  ProductsSuccess(this.homeEntity);
 }
 
-final class HomeFail extends HomeState {
+final class ProductsFail extends ProductsState {
   final Exception exception;
 
-  HomeFail(this.exception);
+  ProductsFail(this.exception);
 }

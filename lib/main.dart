@@ -1,7 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'core/di/di.dart';
 import 'core/resources/myTheme.dart';
 import 'core/resources/routes_manager.dart';
@@ -40,14 +40,16 @@ class MyApp extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: [
-              Locale('en'),
+              // Locale('en'),
               Locale('ar'),
             ],
             theme: AppThemes.lightTheme1,
             themeMode: ThemeMode.light,
             debugShowCheckedModeBanner: false,
+
             onGenerateRoute: RouteGenerator.getRoute,
             initialRoute: RoutesManager.splashScreen,
+
             // products: SplashScreen(),
           );
         },

@@ -7,17 +7,20 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/custom_riyal_saudi.dart';
 import '../../data/models/response/AllProductsRespose.dart';
+import '../cubit/home_cubit.dart';
 
 class CustomProductsAllItem extends StatelessWidget {
   const CustomProductsAllItem({
     super.key,
     required this.product,
-    this.onTap,
+    this.onTap, required this.viewModel,
   });
 
   final Products product;
+  final ProductsCubit viewModel;
   final void Function()? onTap;
 
   @override
@@ -29,7 +32,7 @@ class CustomProductsAllItem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 border: Border.all(color: ColorManager.placeHolderColor),
-                borderRadius: BorderRadius.circular(0)),
+                borderRadius: BorderRadius.circular(12)),
             child: Column(
               children: [
                 Expanded(
@@ -68,10 +71,10 @@ class CustomProductsAllItem extends StatelessWidget {
                       product.productName ?? '',
                       overflow: TextOverflow.ellipsis,
                       textDirection: TextDirection.rtl,
-                      style: GoogleFonts.roboto(
+                      style: getSemiBoldStyle(
                           color: ColorManager.black,
                           fontSize: 14,
-                          fontWeight: FontWeight.bold),
+                          ),
                       maxLines: 1,
                     ),
                     Row(
@@ -85,7 +88,7 @@ class CustomProductsAllItem extends StatelessWidget {
                               maxLines: 1,
                               textAlign: TextAlign.right,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
+                              style: getSemiBoldStyle(
                                 color: ColorManager.primary,
                                 fontSize: 12,
                               ),
@@ -102,9 +105,10 @@ class CustomProductsAllItem extends StatelessWidget {
                     ),
                     IntrinsicHeight(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment:product.productPriceAfterDiscount != 0 ? MainAxisAlignment.spaceEvenly:MainAxisAlignment.center,
+
                         children: [
-                          product.productPrice != 0
+                          product.productPriceAfterDiscount != 0
                               ? Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -128,13 +132,36 @@ class CustomProductsAllItem extends StatelessWidget {
                                     ),
                                   ],
                                 )
-                              : const SizedBox(),
-                          product.productPrice != 0
+                              : Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const CustomRiyalSaudi(
+                                color: ColorManager.error,
+                                size: 12,
+                              ),
+                              const SizedBox(
+                                width: 3,
+                              ),
+                              Text(
+                                product.productPrice.toString(),
+                                style: const TextStyle(
+                                  color: ColorManager.error,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+
+                                  decorationColor: ColorManager.primary,
+                                  decorationThickness: 2,
+                                ),
+                              ),
+                            ],
+                          ),
+                          product.productPriceAfterDiscount != 0
                               ? VerticalDivider(
                                   color: ColorManager.placeHolderColor,
                                 )
                               : SizedBox(),
-                          Row(
+                          product.productPriceAfterDiscount == 0?SizedBox(): Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               CustomRiyalSaudi(),
@@ -158,7 +185,7 @@ class CustomProductsAllItem extends StatelessWidget {
               ],
             ),
           ),
-          product.productPrice == 0
+          product.productPriceAfterDiscount == 0
               ? SizedBox()
               : Positioned(
                   top: 0,
@@ -187,7 +214,9 @@ class CustomProductsAllItem extends StatelessWidget {
           Positioned(
             top: 0, // to shift little up
             right: 0,
-            child: SwitchStatusProducts(product: product),
+            child: SwitchStatusProducts(
+                viewModel: viewModel,
+                product: product),
           )
         ],
       ),

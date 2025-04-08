@@ -9,3 +9,13 @@ class ProductsEntity {
   String? status;
   List<Products>? products;
 }
+
+class DeleteProductEntity {
+
+  String? message;
+
+
+  DeleteProductEntity({ this.message,});
+
+
+}
