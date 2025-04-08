@@ -1,3 +1,4 @@
+import 'package:dashboard_market/core/secrets.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -10,7 +11,7 @@ abstract class DioModule {
   Dio providerDio() {
     Dio dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstants.baseUrl,
+        baseUrl: Secrets.baseUrl,
         connectTimeout: const Duration(milliseconds: 5000),
         receiveTimeout: const Duration(milliseconds: 5000),
       ),

@@ -1,7 +1,9 @@
+
+
+import 'package:dashboard_market/core/secrets.dart';
+
 class ApiConstants {
-  static const String baseUrl = "https://artawiya.com/fadaalhalj/api/v2/";
-  static const String baseUrlImage =
-      "${baseUrl}upload/";
+  static const String baseUrlImage = "${Secrets.baseUrl}upload/";
   static const String home = "products/viewHome";
   static const String products = "products/fetchAllProducts.php";
   static const String editProducts = "products/editProduct.php";
@@ -19,5 +21,4 @@ class ApiConstants {
   static const String addBanners = "banners/addbanners.php";
   static const String deleteBanners = "banners/delete_banners";
   static const String editBanners = "banners/editbanners.php";
-
 }

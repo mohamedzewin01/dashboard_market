@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dashboard_market/core/secrets.dart';
 import 'package:dashboard_market/features/add_images/data/models/images_model.dart';
 import 'package:dashboard_market/features/add_product/data/models/add_product_responces.dart';
 import 'package:dashboard_market/features/banners/data/models/response/AddBannerModel.dart';
@@ -28,7 +29,7 @@ part 'api_manager.g.dart';
 
 @injectable
 @singleton
-@RestApi(baseUrl: ApiConstants.baseUrl)
+@RestApi(baseUrl: Secrets.baseUrl)
 abstract class ApiService {
   @FactoryMethod()
   factory ApiService(Dio dio) = _ApiService;
