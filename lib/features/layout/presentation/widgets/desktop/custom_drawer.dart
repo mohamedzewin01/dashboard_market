@@ -1,3 +1,4 @@
+import 'package:dashboard_market/core/resources/app_constants.dart';
 import 'package:dashboard_market/core/resources/style_manager.dart';
 import 'package:dashboard_market/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
@@ -122,7 +123,7 @@ class CustomDrawer extends StatelessWidget {
                 style: getSemiBoldStyle(color: ColorManager.primaryColor),
               ),
               Text(
-                'v 1.0.1',
+                AppConstants.version,
                 style: getSemiBoldStyle(color: ColorManager.primaryColor),
               ),
               SizedBox(

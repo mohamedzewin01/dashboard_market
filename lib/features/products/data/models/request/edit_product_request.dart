@@ -42,7 +42,7 @@ class EditProductRequest {
   String? productPriceAfterDiscount;
   String? descount;
   String? dateDescount;
-  String? category;
+  int? category;
   String? productPrice;
 
   Map<String, dynamic> toJson() {

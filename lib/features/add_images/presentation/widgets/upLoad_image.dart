@@ -56,17 +56,19 @@ class _TabBodySellerState extends State<UpLoadImage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.sizeOf(context).width * .10),
-      child: GestureDetector(
-        onTap: _pickImage,
+    return GestureDetector(
+      onTap: _pickImage,
+      child: Padding(
+        padding:EdgeInsets.symmetric(
+            horizontal: 20),
         child: Column(
           children: [
             if ( widget.viewModel.imageFile != null)
               Container(
+                height: 100,
+                width: 100,
                 decoration: BoxDecoration(
-                  border: Border.all(color: ColorManager.primaryColor, width: 3),
+                  // border: Border.all(color: ColorManager.primaryColor, width: 3),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: AspectRatio(

@@ -32,11 +32,13 @@ class CustomItemImage extends StatelessWidget {
             Column(
               children: [
                 AspectRatio(
-                  aspectRatio: 8 / 9,
+                  aspectRatio: 10 / 9,
                   child: CustomImage(url: imagePath),
                 ),
+                SizedBox(height: 4,),
                 Text(
                   imageName,
+                  textAlign: TextAlign.center,
                   style: getBoldStyle(color: ColorManager.black),
                 ),
               ],

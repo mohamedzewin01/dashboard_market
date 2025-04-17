@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dashboard_market/core/resources/cashed_image.dart';
 import 'package:dashboard_market/core/resources/style_manager.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,10 @@ import '../../../categories/data/models/fetch_categories.dart';
 import '../../../categories/presentation/manager/categories_cubit.dart';
 import '../manager/images_cubit.dart';
 
-
 class ChooseImageCategories extends StatefulWidget {
   const ChooseImageCategories({
-    super.key, required this.addImagesCubit,
-
+    super.key,
+    required this.addImagesCubit,
   });
 
   final ImagesCubit addImagesCubit;
@@ -63,22 +63,23 @@ class _ChooseImageCategoriesState extends State<ChooseImageCategories> {
                   .entries
                   .map(
                     (entry) => DropdownMenuItem(
-                  value: entry.key,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(entry.value.categoryName ?? 'غير معروف',style: getSemiBoldStyle(color: ColorManager.black),),
-                      SizedBox(width: 25,),
-
-                      SizedBox(
-                          height: 35,
-                          width: 35,
-                          child: CustomImage(
-                              url: entry.value.categoryImage ?? '')),
-                    ],
-                  ),
-                ),
-              )
+                      value: entry.key,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          AutoSizeText(
+                            entry.value.categoryName ?? 'غير معروف',
+                            style: getSemiBoldStyle(color: ColorManager.black),
+                          ),
+                          SizedBox(
+                              height: 35,
+                              width: 35,
+                              child: CustomImage(
+                                  url: entry.value.categoryImage ?? '')),
+                        ],
+                      ),
+                    ),
+                  )
                   .toList(),
               onChanged: (value) {
                 widget.addImagesCubit
@@ -107,7 +108,6 @@ class _ChooseImageCategoriesState extends State<ChooseImageCategories> {
             ),
             items: const [
               DropdownMenuItem(value: 0, child: Text('غير معروف')),
-
             ],
             onChanged: (value) {
               // هنا يمكنك إضافة معالج التغيير

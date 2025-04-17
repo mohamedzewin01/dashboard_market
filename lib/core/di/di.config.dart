@@ -109,10 +109,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i647.ProductsDataSourceRepoImpl(gh<_i680.ApiService>()));
     gh.factory<_i556.StoreInfoUseCases>(
         () => _i556.StoreInfoUseCases(gh<_i504.StoreInfoRepo>()));
-    gh.factory<_i296.BannersCubit>(
-        () => _i296.BannersCubit(gh<_i740.BannersUseCases>()));
     gh.factory<_i1043.AddBannersCubit>(
         () => _i1043.AddBannersCubit(gh<_i740.BannersUseCases>()));
+    gh.factory<_i296.BannersCubit>(
+        () => _i296.BannersCubit(gh<_i740.BannersUseCases>()));
     gh.factory<_i759.ImagesDataSources>(
         () => _i759.ImagesDataSources(apiService: gh<_i680.ApiService>()));
     gh.factory<_i979.AddProductDataSources>(

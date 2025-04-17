@@ -1,6 +1,8 @@
 import 'package:dashboard_market/core/di/di.dart';
 import 'package:dashboard_market/core/resources/color_manager.dart';
+import 'package:dashboard_market/features/add_images/presentation/pages/images_view.dart';
 import 'package:dashboard_market/features/add_product/presentation/manager/add_product_cubit.dart';
+import 'package:dashboard_market/features/categories/presentation/widgets/Add_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/style_manager.dart';
@@ -39,7 +41,7 @@ class _AddProductViewState extends State<AddProductView> {
         create: (context) => viewModel,
         child: LayoutBuilder(
           builder: (context, constraints) {
-            if (constraints.maxWidth < 600) {
+            if (constraints.maxWidth < 950) {
               return AddProductBody(
                 viewModel: viewModel,
               );
@@ -47,20 +49,18 @@ class _AddProductViewState extends State<AddProductView> {
               return Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      color: ColorManager.placeHolderColor,
-                    ),
-                  ),
-                  Expanded(
-                      flex: 3,
+                      flex: 1,
                       child: AddProductBody(
                         viewModel: viewModel,
                       )),
-                  Expanded(
-                    child: Container(
-                      color: ColorManager.placeHolderColor,
-                    ),
-                  )
+                  // Expanded(
+                  //   child:AddCategories()
+                  // ),
+                  Expanded(flex: 1,
+                    child:ImagesView()
+                  ),
+
+
                 ],
               );
             }

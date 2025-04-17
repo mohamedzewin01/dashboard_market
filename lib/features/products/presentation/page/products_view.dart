@@ -48,15 +48,6 @@ class _ProductsViewState extends State<ProductsView> {
               indicatorPadding: const EdgeInsets.all(10),
               labelPadding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-              // overlayColor:WidgetStateProperty.all(ColorManager.offwhite.withAlpha(100), ),
-              // indicator: BoxDecoration(
-              //   gradient: LinearGradient(colors: [ColorManager.offwhite,ColorManager.orange]),
-              //   color: ColorManager.orange.withAlpha(100),
-              //
-              //   borderRadius: BorderRadius.circular(20),
-              //
-              // ),
-
               indicatorWeight: 4,
               unselectedLabelColor: Colors.black,
               labelColor: ColorManager.primaryColor,

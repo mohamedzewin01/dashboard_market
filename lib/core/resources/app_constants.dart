@@ -68,6 +68,7 @@ class AppConstants {
 
   // مولد عشوائي
 
+static String version= 'v 1.0.2';
 
 }
 

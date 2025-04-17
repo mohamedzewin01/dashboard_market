@@ -19,10 +19,8 @@ class SectionUploadImages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: UpLoadImage(
-            viewModel: viewModel,
-          ),
+        UpLoadImage(
+          viewModel: viewModel,
         ),
         const SizedBox(height: AppSize.s24),
         Expanded(
