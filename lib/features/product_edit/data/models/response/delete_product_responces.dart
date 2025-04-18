@@ -1,4 +1,5 @@
-import '../../../domain/entities/products_entities.dart';
+import 'package:dashboard_market/features/product_edit/domain/entities/edit_product_entity.dart';
+
 
 class DeleteProductResponses {
   String? status;

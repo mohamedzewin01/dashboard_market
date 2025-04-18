@@ -1,13 +1,13 @@
 import 'dart:developer';
 
+import 'package:dashboard_market/features/product_edit/presentation/pages/edit_product.dart';
+import 'package:dashboard_market/features/products/presentation/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../data/models/response/AllProductsRespose.dart';
-import '../cubit/home_cubit.dart';
-import 'edit_product.dart';
 import 'products_all_items.dart';
-import 'search_bar.dart';
+
 
 class ProductItemsHome extends StatefulWidget {
   const ProductItemsHome({
@@ -97,12 +97,25 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EditProduct(
-                                  viewModel: widget.viewModel,
-                                  product: filteredProducts![index],
-                                ),
+                                builder: (_) => EditProduct(product: filteredProducts![index]),
                               ),
-                            );
+                            ).then((value) {
+                              if (value == true) {
+                               widget. viewModel.getHomeData();
+                              }
+                            });
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => EditProduct(
+                            //       product: filteredProducts![index],
+                            //     ),
+                            //   ),
+                            // ).then((onValue){
+                            //   if(onValue == true){
+                            //     widget.viewModel.getHomeData();
+                            //   }
+                            // });
                           },
                           product: filteredProducts![index],
                         ),

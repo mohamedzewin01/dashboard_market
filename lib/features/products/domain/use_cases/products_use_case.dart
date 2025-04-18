@@ -19,7 +19,5 @@ class HomeUseCase {
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest) {
     return productsRepo.editProductsData(editProductRequest);
   }
-  Future<Result<DeleteProductEntity?>> deleteProductsData(String productId){
-    return productsRepo.deleteProductsData(productId);
-  }
+
 }

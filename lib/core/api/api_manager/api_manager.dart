@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dashboard_market/core/secrets.dart';
 import 'package:dashboard_market/features/add_images/data/models/images_model.dart';
 import 'package:dashboard_market/features/add_product/data/models/add_product_responces.dart';
@@ -8,6 +7,10 @@ import 'package:dashboard_market/features/banners/data/models/response/ChangeSta
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 import 'package:dashboard_market/features/banners/data/models/response/delete_banner_model.dart';
 import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
+import 'package:dashboard_market/features/product_edit/data/models/request/edit_product_request.dart';
+import 'package:dashboard_market/features/product_edit/data/models/response/delete_product_responces.dart';
+import 'package:dashboard_market/features/product_edit/data/models/response/edit_product_response.dart';
+import 'package:dashboard_market/features/product_edit/data/models/response/fetch_categories.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
@@ -17,7 +20,6 @@ import '../../../features/add_images/data/models/upload_image_model.dart';
 import '../../../features/categories/data/models/add_category_responces.dart';
 import '../../../features/products/data/models/request/edit_product_request.dart';
 import '../../../features/products/data/models/response/AllProductsRespose.dart';
-import '../../../features/products/data/models/response/delete_product_responces.dart';
 import '../../../features/products/data/models/response/edit_product_response.dart';
 import '../../../features/setting/data/models/store_info_edit_response.dart';
 import '../../../features/setting/data/models/store_info_request.dart';
@@ -40,6 +42,10 @@ abstract class ApiService {
   @POST(ApiConstants.editProducts)
   Future<EditProductResponse?> editProduct(
       @Body() EditProductRequest? editProductRequest);
+
+  @POST(ApiConstants.editProducts)
+  Future<EditProductResponseDto?> editProduct2(
+      @Body() EditProductRequestDto? editProductRequest);
 
   @POST(ApiConstants.fetchImages)
   Future<ImagesModel?> getImagesData();
@@ -72,6 +78,16 @@ abstract class ApiService {
   @POST(ApiConstants.fetchCategories)
   Future<FetchCategoriesResponse?> getCategories();
 
+
+  @POST(ApiConstants.fetchCategories)
+  Future<FetchCategoriesEdit?> getCategoriesToEdit();
+
+  @POST(ApiConstants.deleteProduct)
+  Future<DeleteProductResponses?> deleteProduct(
+      @Part(name: 'productid') String? productId,);
+
+
+
   @POST(ApiConstants.addCategories)
   @MultiPart()
   Future<AddCategoryResponse?> addCategory(
@@ -92,10 +108,6 @@ abstract class ApiService {
     @Part(name: 'image') File? imageFile,
     @Part(name: 'imagePath') String? categoryName,
   );
-
-  @POST(ApiConstants.deleteProduct)
-  Future<DeleteProductResponses?> deleteProduct(
-      @Part(name: 'productid') String? productId,);
 
 
   @POST(ApiConstants.fetchBanners)

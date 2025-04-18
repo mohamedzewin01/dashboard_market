@@ -10,12 +10,4 @@ class ProductsEntity {
   List<Products>? products;
 }
 
-class DeleteProductEntity {
 
-  String? message;
-
-
-  DeleteProductEntity({ this.message,});
-
-
-}

@@ -52,6 +52,19 @@ import '../../features/categories/domain/use_cases/categories_use_case.dart'
     as _i548;
 import '../../features/categories/presentation/manager/categories_cubit.dart'
     as _i572;
+import '../../features/product_edit/data/data_sources/products_edit_data_source_repo.dart'
+    as _i95;
+import '../../features/product_edit/data/data_sources/products_edit_data_source_repo_impl.dart'
+    as _i162;
+import '../../features/product_edit/data/repo_impl/products_repo_impl.dart'
+    as _i167;
+import '../../features/product_edit/domain/repo/products_repo.dart' as _i1007;
+import '../../features/product_edit/domain/use_cases/products_use_case.dart'
+    as _i534;
+import '../../features/product_edit/presentation/manager/category_cubit/product_categories_edit_cubit.dart'
+    as _i358;
+import '../../features/product_edit/presentation/manager/edit_product_cubit.dart'
+    as _i682;
 import '../../features/products/data/data_sources/products_data_source_repo.dart'
     as _i1;
 import '../../features/products/data/data_sources/products_data_source_repo_impl.dart'
@@ -61,7 +74,8 @@ import '../../features/products/data/repo_impl/products_repo_impl.dart'
 import '../../features/products/domain/repo/products_repo.dart' as _i482;
 import '../../features/products/domain/use_cases/products_use_case.dart'
     as _i258;
-import '../../features/products/presentation/cubit/home_cubit.dart' as _i537;
+import '../../features/products/presentation/cubit/products_cubit.dart'
+    as _i911;
 import '../../features/setting/data/data_sources/store_data_sources.dart'
     as _i630;
 import '../../features/setting/data/repositories/store_info_repo_impl.dart'
@@ -109,6 +123,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i647.ProductsDataSourceRepoImpl(gh<_i680.ApiService>()));
     gh.factory<_i556.StoreInfoUseCases>(
         () => _i556.StoreInfoUseCases(gh<_i504.StoreInfoRepo>()));
+    gh.factory<_i95.ProductsEditDataSourceRepo>(
+        () => _i162.ProductsEditDataSourceRepoImpl(gh<_i680.ApiService>()));
     gh.factory<_i1043.AddBannersCubit>(
         () => _i1043.AddBannersCubit(gh<_i740.BannersUseCases>()));
     gh.factory<_i296.BannersCubit>(
@@ -133,12 +149,20 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i212.StoreInfoCubit(gh<_i556.StoreInfoUseCases>()));
     gh.factory<_i728.ImagesUseCase>(
         () => _i728.ImagesUseCase(gh<_i378.ImagesRepo>()));
+    gh.factory<_i1007.ProductsEditRepo>(
+        () => _i167.ProductsRepoImpl(gh<_i95.ProductsEditDataSourceRepo>()));
     gh.factory<_i572.CategoriesCubit>(
         () => _i572.CategoriesCubit(gh<_i548.CategoriesUseCase>()));
     gh.factory<_i258.HomeUseCase>(
         () => _i258.HomeUseCase(gh<_i482.ProductsRepo>()));
-    gh.factory<_i537.ProductsCubit>(
-        () => _i537.ProductsCubit(gh<_i258.HomeUseCase>()));
+    gh.factory<_i534.ProductsEditUseCase>(
+        () => _i534.ProductsEditUseCase(gh<_i1007.ProductsEditRepo>()));
+    gh.factory<_i911.ProductsCubit>(
+        () => _i911.ProductsCubit(gh<_i258.HomeUseCase>()));
+    gh.factory<_i682.EditProductCubit>(
+        () => _i682.EditProductCubit(gh<_i534.ProductsEditUseCase>()));
+    gh.factory<_i358.ProductCategoriesEditCubit>(() =>
+        _i358.ProductCategoriesEditCubit(gh<_i534.ProductsEditUseCase>()));
     return this;
   }
 }

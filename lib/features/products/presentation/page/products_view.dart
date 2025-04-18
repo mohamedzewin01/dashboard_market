@@ -1,11 +1,9 @@
 import 'package:dashboard_market/core/resources/color_manager.dart';
-import 'package:flutter/gestures.dart';
+import 'package:dashboard_market/features/products/presentation/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/di/di.dart';
 import '../../../../core/resources/style_manager.dart';
-import '../../../products/presentation/cubit/home_cubit.dart';
 import '../../../products/presentation/widgets/home_body.dart';
 
 class ProductsView extends StatefulWidget {
@@ -26,8 +24,8 @@ class _ProductsViewState extends State<ProductsView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => viewModel..getHomeData(),
+    return BlocProvider.value(
+      value: viewModel..getHomeData(),
       child: DefaultTabController(
         length: 5,
         child: Scaffold(

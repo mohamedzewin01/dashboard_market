@@ -6,6 +6,5 @@ import '../entities/products_entities.dart';
 
 abstract class ProductsRepo {
   Future<Result<ProductsEntity?>> getProductsData();
-  Future<Result<DeleteProductEntity?>> deleteProductsData(String productId);
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest);
 }

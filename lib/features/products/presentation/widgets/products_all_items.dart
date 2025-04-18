@@ -1,16 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dashboard_market/features/products/presentation/cubit/products_cubit.dart';
 import 'package:dashboard_market/features/products/presentation/widgets/switch_status_products.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/custom_riyal_saudi.dart';
 import '../../data/models/response/AllProductsRespose.dart';
-import '../cubit/home_cubit.dart';
+
 
 class CustomProductsAllItem extends StatelessWidget {
   const CustomProductsAllItem({
@@ -217,7 +216,12 @@ class CustomProductsAllItem extends StatelessWidget {
             child: SwitchStatusProducts(
                 viewModel: viewModel,
                 product: product),
-          )
+          ),
+          // Positioned(
+          //   top: 35, // to shift little up
+          //   left: 0,
+          //   child: Text(product.),
+          // )
         ],
       ),
     );
