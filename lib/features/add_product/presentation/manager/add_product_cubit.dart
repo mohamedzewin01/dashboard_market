@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dashboard_market/features/add_product/domain/entities/add_product_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
@@ -15,6 +16,7 @@ class AddProductCubit extends Cubit<AddProductState> {
 
   AddProductCubit(this._addProductUseCase) : super(AddProductInitial());
 
+  static AddProductCubit get(context) => BlocProvider.of(context);
   String imagePath = '';
   int status = 0;
   int categoryId = 1;

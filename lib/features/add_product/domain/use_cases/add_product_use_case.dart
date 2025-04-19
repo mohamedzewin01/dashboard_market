@@ -33,4 +33,8 @@ class AddProductUseCase {
         imagePath: imagePath,
         categoryId: categoryId);
   }
+
+  Future<Result<AllImagesEntity?>> getAllImages() {
+    return addProductRepo.addImages();
+  }
 }

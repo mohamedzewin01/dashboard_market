@@ -122,17 +122,32 @@ class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
                 filteredImages?.isNotEmpty == true ? filteredImages : allImages;
             return Column(
               children: [
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: searchController,
+                    textDirection: TextDirection.rtl, // اتجاه النص من اليمين إلى اليسار
+                    textAlign: TextAlign.right,
                     decoration: InputDecoration(
+
                       hintText: 'ابحث عن صورة...',
                       prefixIcon: Icon(Icons.search, color: ColorManager.grey),
+                      suffixIcon: searchController.text.isNotEmpty
+                          ? IconButton(
+                        icon: Icon(Icons.clear, color: ColorManager.grey),
+                        onPressed: () {
+                          searchController.clear(); // مسح النص
+                          filterImages(''); // تحديث القائمة
+                        },
+                      )
+                          : null, // إذا لم يكن هناك نص، لا تعرض الأيقونة
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
                     ),
-                    onChanged: filterImages,
+                    onChanged: (value) {
+                      filterImages(value); // استدعاء الدالة لتحديث القائمة
+                    },
                   ),
                 ),
                 Expanded(
@@ -161,26 +176,49 @@ class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
                                     )))
                           ],
                         ))
-                      : ListView.builder(
-                          itemCount: filteredImages?.length ?? 0,
-                          itemBuilder: (context, index) => ListTile(
-                            leading: SizedBox(
-                              height: 60,
-                              width: 60,
-                              child: CustomImage(
-                                  url: filteredImages![index].imagePath ?? ''),
-                            ),
-                            title: Text(filteredImages![index].imageName ?? ''),
-                            onTap: () {
-                              widget.addProductCubit.imagePath =
-                                  filteredImages![index].imagePath ?? '';
-                              log(widget.addProductCubit.imagePath);
-                              widget.addProductCubit.changeImagePath(
-                                  filteredImages![index].imagePath ?? '');
-                              Navigator.pop(context);
-                            },
+                      : GridView.builder(
+                          itemCount: filteredImages?.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 6,
+                            crossAxisSpacing: 5.0,
+                            mainAxisSpacing: 5.0,
+                            childAspectRatio: 2.5 / 4,
                           ),
+                          itemBuilder: (ctx, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                widget.addProductCubit.imagePath =
+                                    filteredImages![index].imagePath ?? '';
+
+                                widget.addProductCubit.changeImagePath(
+                                    filteredImages![index].imagePath ?? '');
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    CustomImage(
+                                      url: "${filteredImages?[index].imagePath}",
+                                      height: 110,
+                                    ),
+                                    Text(
+                                      filteredImages?[index].imageName ?? '',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         ),
+
+
                 ),
               ],
             );

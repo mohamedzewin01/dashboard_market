@@ -33,6 +33,8 @@ import '../../features/add_product/domain/use_cases/add_product_use_case.dart'
     as _i790;
 import '../../features/add_product/presentation/manager/add_product_cubit.dart'
     as _i272;
+import '../../features/add_product/presentation/manager/ProductPhoto/product_photo_cubit.dart'
+    as _i803;
 import '../../features/banners/data/data_sources/banners_data_source_repo_impl.dart'
     as _i6;
 import '../../features/banners/data/repo_impl/banners_repo_impl.dart' as _i194;
@@ -141,6 +143,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i249.ProductsRepoImpl(gh<_i1.ProductsDataSourceRepo>()));
     gh.factory<_i272.AddProductCubit>(
         () => _i272.AddProductCubit(gh<_i790.AddProductUseCase>()));
+    gh.factory<_i803.ProductPhotoCubit>(
+        () => _i803.ProductPhotoCubit(gh<_i790.AddProductUseCase>()));
     gh.factory<_i208.ImagesCubit>(
         () => _i208.ImagesCubit(gh<_i759.ImagesDataSources>()));
     gh.factory<_i378.ImagesRepo>(

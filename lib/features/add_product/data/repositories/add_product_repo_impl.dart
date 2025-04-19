@@ -26,4 +26,9 @@ class AddProductRepoImpl implements AddProductRepo {
     return addProductDataSources.addProduct(productName, productPrice,
         priceAfter, description, dateDiscount, status, imagePath, categoryId);
   }
+
+  @override
+  Future<Result<AllImagesEntity?>> addImages() {
+ return addProductDataSources.addImages();
+  }
 }

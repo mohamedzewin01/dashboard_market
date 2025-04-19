@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dashboard_market/core/secrets.dart';
 import 'package:dashboard_market/features/add_images/data/models/images_model.dart';
 import 'package:dashboard_market/features/add_product/data/models/add_product_responces.dart';
+import 'package:dashboard_market/features/add_product/data/models/images_dto.dart';
 import 'package:dashboard_market/features/banners/data/models/response/AddBannerModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/ChangeStatusModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
@@ -49,6 +50,10 @@ abstract class ApiService {
 
   @POST(ApiConstants.fetchImages)
   Future<ImagesModel?> getImagesData();
+
+  @POST(ApiConstants.fetchImages)
+  Future<ImagesDto?> getAllImage();
+
 
   @POST(ApiConstants.uploadImage)
   @MultiPart()

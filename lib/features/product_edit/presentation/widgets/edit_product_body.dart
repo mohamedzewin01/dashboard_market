@@ -136,10 +136,6 @@ class EditProductBody extends StatelessWidget {
                               if (context.mounted) {
                                 Navigator.pop(context, true);
                               }
-                            }).catchError((error) {
-                              if (context.mounted) {
-                                Navigator.pop(context, false);
-                              }
                             });
                           }),
                     ),

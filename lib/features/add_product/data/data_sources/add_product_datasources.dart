@@ -1,5 +1,6 @@
 import 'package:dashboard_market/core/api/api_extentions.dart';
 import 'package:dashboard_market/core/api/api_manager/api_manager.dart';
+import 'package:dashboard_market/features/add_images/domain/entities/images_entity.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/common/api_result.dart';
 import '../../domain/entities/add_product_entity.dart';
@@ -32,6 +33,17 @@ class AddProductDataSources {
             categoryId);
 
         return response?.toAddProductEntity();
+      },
+    );
+  }
+
+
+  Future<Result<AllImagesEntity?>> addImages() async {
+    return executeApi(
+          ()async {
+        var response = await apiService.getAllImage();
+
+        return response?.toAllImagesEntity();
       },
     );
   }

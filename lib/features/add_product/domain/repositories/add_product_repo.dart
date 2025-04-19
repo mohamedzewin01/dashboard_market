@@ -15,5 +15,6 @@ abstract class AddProductRepo {
     required  String imagePath,
     required int categoryId,
   });
+  Future<Result<AllImagesEntity?>> addImages();
 
 }

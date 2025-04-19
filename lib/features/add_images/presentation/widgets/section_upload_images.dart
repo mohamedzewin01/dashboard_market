@@ -35,7 +35,7 @@ class SectionUploadImages extends StatelessWidget {
                   controller: viewModel.nameController,
                   hintText: 'اسم الصورة',
                   validator: (value) {
-                    if (value!.trim().isEmpty || value.length < 6) {
+                    if (value!.trim().isEmpty || value.length < 2) {
                       return 'ادخل اسم الصورة';
                     }
                     return null;
@@ -53,6 +53,7 @@ class SectionUploadImages extends StatelessWidget {
                     onPressed: () async {
                       if (viewModel.formKey.currentState!.validate()) {
                         if (viewModel.imageFile != null) {
+                          viewModel.nameController.clear();
                           await viewModel.upLoadImages();
                           viewModel.imageFile = null;
                           await viewModel.fetchImages();

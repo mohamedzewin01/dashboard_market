@@ -243,7 +243,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.initialValue,
     this.onChanged,
-    this.inputAction, this.minLines, this.maxLines, this.onFieldSubmitted, this.autofocus, this.maxLength,
+    this.inputAction, this.minLines, this.maxLines, this.onFieldSubmitted, this.autofocus, this.maxLength, this.focusNode,
   });
 
   final TextEditingController controller;
@@ -259,6 +259,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Widget? suffix;
   final Widget? prefixIcon;
+  final FocusNode? focusNode;
   final TextInputType? keyboardType;
   final TextInputAction? inputAction;
   final void Function(String)? onChanged;
@@ -277,10 +278,12 @@ class CustomTextFormField extends StatelessWidget {
         cursorColor: ColorManager.placeHolderColor,
         style:getSemiBoldStyle(color: ColorManager.black,fontSize: FontSize.s16),
         initialValue: initialValue,
-        readOnly: enabled ?? false,
+        enabled: enabled ?? true,
+
         minLines: minLines,
         maxLines: maxLines,
         controller: controller,
+        focusNode: FocusNode(),
         keyboardType: keyboardType,
         onFieldSubmitted: onFieldSubmitted,
         decoration: InputDecoration(
@@ -384,7 +387,7 @@ class CustomSearchTextFormField extends StatelessWidget {
       cursorColor: ColorManager.placeHolderColor,
       style:getSemiBoldStyle(color: ColorManager.black,fontSize: FontSize.s16),
       initialValue: initialValue,
-      readOnly: enabled ?? false,
+      enabled: enabled ?? true,
       minLines: minLines,
       maxLines: maxLines,
       controller: controller,
