@@ -21,4 +21,5 @@ class ApiConstants {
   static const String addBanners = "banners/addbanners.php";
   static const String deleteBanners = "banners/delete_banners";
   static const String editBanners = "banners/editbanners.php";
+  static const String dashboardStatistics = "dashboard/dashboardStatistics";
 }

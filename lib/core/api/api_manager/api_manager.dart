@@ -8,6 +8,7 @@ import 'package:dashboard_market/features/banners/data/models/response/ChangeSta
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 import 'package:dashboard_market/features/banners/data/models/response/delete_banner_model.dart';
 import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
+import 'package:dashboard_market/features/home/data/models/dashboard_statistics_dto.dart';
 import 'package:dashboard_market/features/product_edit/data/models/request/edit_product_request.dart';
 import 'package:dashboard_market/features/product_edit/data/models/response/delete_product_responces.dart';
 import 'package:dashboard_market/features/product_edit/data/models/response/edit_product_response.dart';
@@ -142,5 +143,6 @@ abstract class ApiService {
       @Part(name: 'bannersStatus') String? status,
       );
 
-
+  @POST(ApiConstants.dashboardStatistics)
+  Future<DashboardStatisticsDto?> getDashboardStatistics();
 }
