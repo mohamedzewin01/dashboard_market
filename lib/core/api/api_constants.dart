@@ -1,9 +1,9 @@
 
 
-import 'package:dashboard_market/core/secrets.dart';
+
 
 class ApiConstants {
-  static const String baseUrlImage = "${Secrets.baseUrl}upload/";
+  static const String baseUrlImage = "https://artawiya.com/fadaalhalj/api/v2/upload/";
   static const String home = "products/viewHome";
   static const String products = "products/fetchAllProducts.php";
   static const String editProducts = "products/editProduct.php";

@@ -3,6 +3,7 @@ import 'package:dashboard_market/features/home/presentation/cubit/home_cubit.dar
 import 'package:flutter/material.dart';
 import 'package:dashboard_market/core/resources/color_manager.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/resources/style_manager.dart';
 import '../../data/models/dashboard_statistics_dto.dart';
 
@@ -185,29 +186,13 @@ class DashboardStatisticsPage extends StatelessWidget {
                           childAspectRatio: 1.2, // نسبة العرض إلى الارتفاع للعنصر
                         ),
                         itemBuilder: (context, index) {
-                          return StatisticCard( data: dashboardStatistics[index],
+                          return StatisticCard( data: dashboardStatistics[index],index: index,
                               );
                         },
                       ),
                     );
                   }
-                  return
-
-                    Expanded(
-                    child: GridView.builder(
-                      itemCount:statisticsData.length,
-                      gridDelegate:
-                      const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 250.0, // أقصى عرض للعنصر الواحد
-                        crossAxisSpacing: 16.0, // المسافة الأفقية بين العناصر
-                        mainAxisSpacing: 16.0, // المسافة العمودية بين العناصر
-                        childAspectRatio: 1.2, // نسبة العرض إلى الارتفاع للعنصر
-                      ),
-                      itemBuilder: (context, index) {
-                        return StatisticCard( data: statisticsData[index]);
-                      },
-                    ),
-                  );
+                  return Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,));
                 },
               ),
             ],
@@ -222,8 +207,9 @@ class DashboardStatisticsPage extends StatelessWidget {
 
 }
 class StatisticCard extends StatelessWidget {
-  const StatisticCard({super.key, required this.data});
+  const StatisticCard({super.key, required this.data, required this.index});
   final DashboardStatistics data;
+  final int  index;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -257,12 +243,12 @@ class StatisticCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFFEBEE),
+                  color: Color(0xFFF1EFEF),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  Icons.add,
-                  color: Colors.orange,
+                  icons[index ]??Icons.access_time_outlined,
+                  color: colorIcon[index]??Colors.red,
                   size: 20,
                 ),
               ),
@@ -271,7 +257,11 @@ class StatisticCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             data.value.toString(),
-            style:  getBoldStyle(color: ColorManager.indigoLight, fontSize: 30)
+            style:  TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w900,
+              color:Colors.redAccent
+            )
           ),
           if (data
               .subtitle!.isNotEmpty)
@@ -289,3 +279,22 @@ class StatisticCard extends StatelessWidget {
     );
   }
 }
+
+
+final List<IconData?> icons = [
+  Icons.shopping_bag,
+  Icons.category,
+  Icons.local_offer,
+  Icons.image,
+  Icons.people,
+  Icons.visibility,
+];
+
+final List<Color?> colorIcon = [
+  Color(0xFF1E88E5), // أزرق
+  Color(0xFF43A047), // أخضر غامق
+  Color(0xFFF4511E), // برتقالي غامق
+  Color(0xFF8E24AA), // بنفسجي
+  Color(0xFF3949AB), // أزرق بنفسجي
+  Color(0xFF00ACC1), // أزرق فيروزي
+];

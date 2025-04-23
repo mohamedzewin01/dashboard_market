@@ -100,7 +100,9 @@ class _LoginViewState extends State<LoginView> {
           ),
           Expanded(
               child: Container(
+                width: double.infinity,
             color: ColorManager.primaryColor,
+                child: Center(child: Text(  'v1.0.0',style: TextStyle(color: ColorManager.placeHolderColor),)),
           )),
         ],
       ),

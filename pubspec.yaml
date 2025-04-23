@@ -55,7 +55,7 @@ dependencies:
   path_provider:
   getwidget: ^6.0.0
   auto_size_text: ^3.0.0
-  device_info_plus: ^11.3.3
+  device_info_plus:
 #  flutter_inappwebview: ^6.1.5
 
 
