@@ -5,6 +5,7 @@ sealed class CategoriesState {}
 
 final class CategoriesInitial extends CategoriesState {}
 final class CategoriesLoading extends CategoriesState {}
+final class ChangeIdCategory extends CategoriesState {}
 final class CategoriesSuccess extends CategoriesState {
   final FetchCategoriesEntity categoriesEntity;
   CategoriesSuccess(this.categoriesEntity);

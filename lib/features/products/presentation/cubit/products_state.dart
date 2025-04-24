@@ -18,3 +18,9 @@ final class ProductsFail extends ProductsState {
 
   ProductsFail(this.exception);
 }
+
+final class ProductsAll extends ProductsState {
+  final ProductsEntity? homeEntity;
+
+  ProductsAll(this.homeEntity);
+}

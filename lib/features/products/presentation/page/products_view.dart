@@ -1,4 +1,6 @@
 import 'package:dashboard_market/core/resources/color_manager.dart';
+import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
+import 'package:dashboard_market/features/categories/presentation/manager/categories_cubit.dart';
 import 'package:dashboard_market/features/products/presentation/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,17 +17,29 @@ class ProductsView extends StatefulWidget {
 
 class _ProductsViewState extends State<ProductsView> {
   late ProductsCubit viewModel;
+  late CategoriesCubit categoriesViewModel;
+
 
   @override
   void initState() {
     viewModel = getIt.get<ProductsCubit>();
+    categoriesViewModel = getIt.get<CategoriesCubit>();
+
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: viewModel..getHomeData(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: viewModel..getHomeData(),
+        ),
+        BlocProvider.value(
+          value: categoriesViewModel..getCategoriesData(),
+        ),
+      ],
       child: DefaultTabController(
         length: 5,
         child: Scaffold(
@@ -49,8 +63,8 @@ class _ProductsViewState extends State<ProductsView> {
               indicatorWeight: 4,
               unselectedLabelColor: Colors.black,
               labelColor: ColorManager.primaryColor,
-              labelStyle:
-                  getBoldStyle(color: ColorManager.primaryColor, fontSize: 14),
+              labelStyle: getBoldStyle(
+                  color: ColorManager.primaryColor, fontSize: 14),
               unselectedLabelStyle:
                   getMediumStyle(color: Colors.black, fontSize: 12),
               tabs: [
@@ -74,9 +88,12 @@ class _ProductsViewState extends State<ProductsView> {
           ),
           body: HomeBody(
             viewModel: viewModel,
+
           ),
         ),
       ),
     );
   }
 }
+
+

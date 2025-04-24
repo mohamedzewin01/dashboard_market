@@ -74,3 +74,4 @@ static String version= 'v 1.0.4';
 
 
 final GlobalKey<ScaffoldState>  listGenerate = GlobalKey<ScaffoldState>() ;
+ int idCategory = 0;

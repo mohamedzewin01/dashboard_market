@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
@@ -17,11 +18,14 @@ class CategoriesCubit extends Cubit<CategoriesState> {
 
   CategoriesCubit(this._categoriesUseCase) : super(CategoriesInitial());
 
-
+static CategoriesCubit get(context) => BlocProvider.of(context);
 
   TextEditingController categoryNameController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+
+
+
 
   Future<void> getCategoriesData() async {
     emit(CategoriesLoading());

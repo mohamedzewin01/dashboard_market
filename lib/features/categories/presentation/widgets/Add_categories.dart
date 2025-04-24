@@ -99,57 +99,57 @@ class _AddCategoriesState extends State<AddCategories> {
                   ),
                 ],
               ),
-              Expanded(
-                child: BlocConsumer<CategoriesCubit, CategoriesState>(
-                  listener: (context, state) {
-                    // TODO: implement listener
-                  },
-                  builder: (context, state) {
-                    if (state is CategoriesSuccess) {
-                      List<Categories>? allCategories =
-                          state.categoriesEntity.categories ?? [];
-                      List<Categories>? categories=allCategories.reversed.toList();
-                      return GridView.builder(
-                        itemCount: categories.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 1.5,
-                            crossAxisSpacing: 5,
-                            // mainAxisExtent: 150,
-                            crossAxisCount: 3),
-                        itemBuilder: (context, index) => Card(
-                          child: Column(
-                            children: [
-                              AspectRatio(
-                                  aspectRatio: 2,
-                                  child: CustomImage(
-                                      url:
-                                          categories[index].categoryImage ?? '')),
-                              AutoSizeText(
-                                categories[index].categoryName ?? '',
-                                style:
-                                    getSemiBoldStyle(color: ColorManager.orange),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                    return Skeletonizer(
-                      child: GridView.builder(
-                        itemCount: 5,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3),
-                        itemBuilder: (context, index) => Column(
-                          children: [
-                            CustomImage(
-                                url: ' categories[index].imagePath??' ''),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              )
+              // Expanded(
+              //   child: BlocConsumer<CategoriesCubit, CategoriesState>(
+              //     listener: (context, state) {
+              //       // TODO: implement listener
+              //     },
+              //     builder: (context, state) {
+              //       if (state is CategoriesSuccess) {
+              //         List<Categories>? allCategories =
+              //             state.categoriesEntity.categories ?? [];
+              //         List<Categories>? categories=allCategories.reversed.toList();
+              //         return GridView.builder(
+              //           itemCount: categories.length,
+              //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //             childAspectRatio: 1.5,
+              //               crossAxisSpacing: 5,
+              //               // mainAxisExtent: 150,
+              //               crossAxisCount: 3),
+              //           itemBuilder: (context, index) => Card(
+              //             child: Column(
+              //               children: [
+              //                 AspectRatio(
+              //                     aspectRatio: 2,
+              //                     child: CustomImage(
+              //                         url:
+              //                             categories[index].categoryImage ?? '')),
+              //                 AutoSizeText(
+              //                   categories[index].categoryName ?? '',
+              //                   style:
+              //                       getSemiBoldStyle(color: ColorManager.orange),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         );
+              //       }
+              //       return Skeletonizer(
+              //         child: GridView.builder(
+              //           itemCount: 5,
+              //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //               crossAxisCount: 3),
+              //           itemBuilder: (context, index) => Column(
+              //             children: [
+              //               CustomImage(
+              //                   url: ' categories[index].imagePath??' ''),
+              //             ],
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // )
             ],
           ),
         ),

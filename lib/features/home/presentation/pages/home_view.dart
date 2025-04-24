@@ -159,52 +159,140 @@ class DashboardStatisticsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[50], // خلفية فاتحة
       body: SafeArea(
-        // لتجنب مناطق النظام (مثل شريط الحالة)
         child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-               Text(
-                'إحصائيات لوحة المعلومات',
-                style: getBoldStyle(color: ColorManager.primaryColor, fontSize: 20),
-              ),
-              const SizedBox(height: 20),
-              BlocBuilder<HomeCubit, HomeState>(
-                builder: (context, state) {
-                  if (state is HomeSuccess) {
-                    List<DashboardStatistics>? dashboardStatistics = state
-                        .homeEntity.dashboardStatistics ?? [];
-                    return Expanded(
-                      child: GridView.builder(
-                        itemCount: dashboardStatistics.length,
-                        gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 250.0, // أقصى عرض للعنصر الواحد
-                          crossAxisSpacing: 16.0, // المسافة الأفقية بين العناصر
-                          mainAxisSpacing: 16.0, // المسافة العمودية بين العناصر
-                          childAspectRatio: 1.2, // نسبة العرض إلى الارتفاع للعنصر
-                        ),
-                        itemBuilder: (context, index) {
-                          return StatisticCard( data: dashboardStatistics[index],index: index,
-                              );
-                        },
-                      ),
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  'إحصائيات لوحة المعلومات',
+                  style: getBoldStyle(color: ColorManager.primaryColor, fontSize: 20),
+                ),
+                const SizedBox(height: 20),
+                BlocBuilder<HomeCubit, HomeState>(
+                  builder: (context, state) {
+                    if (state is HomeSuccess) {
+                      List<DashboardStatistics>? dashboardStatistics = state.homeEntity.dashboardStatistics ?? [];
+                      List<CategoriesProductsCount>? secondDashboardStatistics = state.homeEntity.categoriesProductsCount ?? [];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+
+                          GridView.builder(
+                            itemCount: dashboardStatistics.length,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 250.0, // أقصى عرض للعنصر الواحد
+                              crossAxisSpacing: 16.0, // المسافة الأفقية بين العناصر
+                              mainAxisSpacing: 16.0, // المسافة العمودية بين العناصر
+                              childAspectRatio: 1.2, // نسبة العرض إلى الارتفاع للعنصر
+                            ),
+                            itemBuilder: (context, index) {
+                              return StatisticCard(data: dashboardStatistics[index], index: index);
+                            },
+                          ),
+                          const SizedBox(height: 20), // مسافة بين الـ GridViews
+                          // ثاني GridView
+                          GridView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: secondDashboardStatistics.length,
+                            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                              maxCrossAxisExtent: 250.0,
+                              crossAxisSpacing: 16.0,
+                              mainAxisSpacing: 16.0,
+                              childAspectRatio: 1.2,
+                            ),
+                            itemBuilder: (context, index) {
+                              return StatisticCardCategory(data: secondDashboardStatistics[index], index: index);
+                            },
+                          ),
+                        ],
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(color: ColorManager.primaryColor),
                     );
-                  }
-                  return Center(child: CircularProgressIndicator(color: ColorManager.primaryColor,));
-                },
-              ),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
 
+class StatisticCardCategory extends StatelessWidget {
+  const StatisticCardCategory({super.key, required this.data, required this.index});
+  final CategoriesProductsCount data;
+  final int  index;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            // spreadFactor: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  data.name??'',
+                  style:  getBoldStyle(color: ColorManager.primaryColor, fontSize: 16),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Color(0xFFF1EFEF),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  icons[index ]??Icons.access_time_outlined,
+                  color: colorIcon[index]??Colors.red,
+                  size: 20,
+                ),
+              ),
 
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+              data.totalProducts.toString(),
+              style:  TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w900,
+                  color:Colors.redAccent
+              )
+          ),
+          Text(
+              ' منتج في قسم ${data.name}',
+              style:  getBoldStyle(color: ColorManager.grey, fontSize: 14)
+          ),
+          const Spacer(),
 
-
+        ],
+      ),
+    );
+  }
 }
 class StatisticCard extends StatelessWidget {
   const StatisticCard({super.key, required this.data, required this.index});
@@ -288,6 +376,37 @@ final List<IconData?> icons = [
   Icons.image,
   Icons.people,
   Icons.visibility,
+  Icons.shopping_bag,
+  Icons.category,
+  Icons.local_offer,
+  Icons.image,
+  Icons.people,
+  Icons.visibility,
+  Icons.shopping_bag,
+  Icons.category,
+  Icons.local_offer,
+  Icons.image,
+  Icons.people,
+  Icons.visibility,
+  Icons.shopping_bag,
+  Icons.category,
+  Icons.local_offer,
+  Icons.image,
+  Icons.people,
+  Icons.visibility,
+  Icons.shopping_bag,
+  Icons.category,
+  Icons.local_offer,
+  Icons.image,
+  Icons.people,
+  Icons.visibility,
+  Icons.shopping_bag,
+  Icons.category,
+  Icons.local_offer,
+  Icons.image,
+  Icons.people,
+  Icons.visibility,
+
 ];
 
 final List<Color?> colorIcon = [
@@ -296,5 +415,45 @@ final List<Color?> colorIcon = [
   Color(0xFFF4511E), // برتقالي غامق
   Color(0xFF8E24AA), // بنفسجي
   Color(0xFF3949AB), // أزرق بنفسجي
-  Color(0xFF00ACC1), // أزرق فيروزي
+  Color(0xFF00ACC1),
+  Color(0xFF1E88E5), // أزرق
+  Color(0xFF43A047), // أخضر غامق
+  Color(0xFFF4511E), // برتقالي غامق
+  Color(0xFF8E24AA), // بنفسجي
+  Color(0xFF3949AB), // أزرق بنفسجي
+  Color(0xFF00ACC1), //
+  Color(0xFF1E88E5), // أزرق
+  Color(0xFF43A047), // أخضر غامق
+  Color(0xFFF4511E), // برتقالي غامق
+  Color(0xFF8E24AA), // بنفسجي
+  Color(0xFF3949AB), // أزرق بنفسجي
+  Color(0xFF00ACC1), //
+  Color(0xFF1E88E5), // أزرق
+  Color(0xFF43A047), // أخضر غامق
+  Color(0xFFF4511E), // برتقالي غامق
+  Color(0xFF8E24AA), // بنفسجي
+  Color(0xFF3949AB), // أزرق بنفسجي
+  Color(0xFF00ACC1), //
+  Color(0xFF1E88E5), // أزرق
+  Color(0xFF43A047), // أخضر غامق
+  Color(0xFFF4511E), // برتقالي غامق
+  Color(0xFF8E24AA), // بنفسجي
+  Color(0xFF3949AB), // أزرق بنفسجي
+  Color(0xFF00ACC1), //
+  Color(0xFF1E88E5), // أزرق
+  Color(0xFF43A047), // أخضر غامق
+  Color(0xFFF4511E), // برتقالي غامق
+  Color(0xFF8E24AA), // بنفسجي
+  Color(0xFF3949AB), // أزرق بنفسجي
+  Color(0xFF00ACC1), //
+  Color(0xFF1E88E5), // أزرق
+  Color(0xFF43A047), // أخضر غامق
+  Color(0xFFF4511E), // برتقالي غامق
+  Color(0xFF8E24AA), // بنفسجي
+  Color(0xFF3949AB), // أزرق بنفسجي
+  Color(0xFF00ACC1), //// أزرق فيروزي
 ];
+
+
+
+

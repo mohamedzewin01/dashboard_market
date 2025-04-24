@@ -17,6 +17,9 @@ part 'products_state.dart';
 class ProductsCubit extends Cubit<ProductsState> {
   final HomeUseCase _homeUseCase;
 
+
+
+
   ProductsCubit(this._homeUseCase) : super(ProductsInitial());
 static ProductsCubit get(context) => BlocProvider.of(context);
   Future<void> getHomeData() async {

@@ -10,12 +10,12 @@ import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/custom_riyal_saudi.dart';
 import '../../data/models/response/AllProductsRespose.dart';
 
-
 class CustomProductsAllItem extends StatelessWidget {
   const CustomProductsAllItem({
     super.key,
     required this.product,
-    this.onTap, required this.viewModel,
+    this.onTap,
+    required this.viewModel,
   });
 
   final Products product;
@@ -71,9 +71,9 @@ class CustomProductsAllItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       textDirection: TextDirection.rtl,
                       style: getSemiBoldStyle(
-                          color: ColorManager.black,
-                          fontSize: 14,
-                          ),
+                        color: ColorManager.black,
+                        fontSize: 14,
+                      ),
                       maxLines: 1,
                     ),
                     Row(
@@ -104,8 +104,10 @@ class CustomProductsAllItem extends StatelessWidget {
                     ),
                     IntrinsicHeight(
                       child: Row(
-                        mainAxisAlignment:product.productPriceAfterDiscount != 0 ? MainAxisAlignment.spaceEvenly:MainAxisAlignment.center,
-
+                        mainAxisAlignment:
+                            product.productPriceAfterDiscount != 0
+                                ? MainAxisAlignment.spaceEvenly
+                                : MainAxisAlignment.center,
                         children: [
                           product.productPriceAfterDiscount != 0
                               ? Row(
@@ -132,50 +134,52 @@ class CustomProductsAllItem extends StatelessWidget {
                                   ],
                                 )
                               : Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const CustomRiyalSaudi(
-                                color: ColorManager.error,
-                                size: 12,
-                              ),
-                              const SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                product.productPrice.toString(),
-                                style: const TextStyle(
-                                  color: ColorManager.error,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-
-                                  decorationColor: ColorManager.primary,
-                                  decorationThickness: 2,
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const CustomRiyalSaudi(
+                                      color: ColorManager.error,
+                                      size: 12,
+                                    ),
+                                    const SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text(
+                                      product.productPrice.toString(),
+                                      style: const TextStyle(
+                                        color: ColorManager.error,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                        decorationColor: ColorManager.primary,
+                                        decorationThickness: 2,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
                           product.productPriceAfterDiscount != 0
                               ? VerticalDivider(
                                   color: ColorManager.placeHolderColor,
                                 )
                               : SizedBox(),
-                          product.productPriceAfterDiscount == 0?SizedBox(): Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CustomRiyalSaudi(),
-                              const SizedBox(
-                                width: 3,
-                              ),
-                              Text(
-                                product.productPriceAfterDiscount.toString(),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: 16,
-                                    color: ColorManager.error),
-                              ),
-                            ],
-                          ),
+                          product.productPriceAfterDiscount == 0
+                              ? SizedBox()
+                              : Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    CustomRiyalSaudi(),
+                                    const SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text(
+                                      product.productPriceAfterDiscount
+                                          .toString(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 16,
+                                          color: ColorManager.error),
+                                    ),
+                                  ],
+                                ),
                         ],
                       ),
                     ),
@@ -213,9 +217,12 @@ class CustomProductsAllItem extends StatelessWidget {
           Positioned(
             top: 0, // to shift little up
             right: 0,
-            child: SwitchStatusProducts(
-                viewModel: viewModel,
-                product: product),
+            child: SwitchStatusProducts(viewModel: viewModel, product: product),
+          ),
+          Positioned(
+            top: 45, // to shift little up
+            right: 10,
+            child: SelectProduct(),
           ),
           // Positioned(
           //   top: 35, // to shift little up
@@ -225,5 +232,38 @@ class CustomProductsAllItem extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class SelectProduct extends StatefulWidget {
+  const SelectProduct({
+    super.key,
+  });
+
+  @override
+  State<SelectProduct> createState() => _SelectProductState();
+}
+
+class _SelectProductState extends State<SelectProduct> {
+  final List<Map<String, dynamic>> _products = [
+    {'name': 'Product 1', 'selected': false},
+    {'name': 'Product 2', 'selected': false},
+    {'name': 'Product 3', 'selected': false},
+    {'name': 'Product 4', 'selected': false},
+    {'name': 'Product 5', 'selected': false},
+  ];
+  bool isChecked = false;
+  @override
+  Widget build(BuildContext context) {
+    return   Checkbox(
+      mouseCursor:MouseCursor.uncontrolled ,
+        activeColor: ColorManager.orange,
+        checkColor:ColorManager.primaryColor ,
+        value: isChecked,
+        onChanged: (value) {
+      setState(() {
+        isChecked = value ?? false;
+      });
+    });
   }
 }
