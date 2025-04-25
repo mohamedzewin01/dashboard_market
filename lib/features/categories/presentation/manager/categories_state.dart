@@ -19,3 +19,5 @@ final class AddCategoriesSuccess extends CategoriesState {
   final AddCategoryEntity addCategoryEntity;
   AddCategoriesSuccess(this.addCategoryEntity);
 }
+
+

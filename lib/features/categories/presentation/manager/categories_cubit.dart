@@ -14,17 +14,18 @@ part 'categories_state.dart';
 
 @injectable
 class CategoriesCubit extends Cubit<CategoriesState> {
-  final CategoriesUseCase _categoriesUseCase;
+
 
   CategoriesCubit(this._categoriesUseCase) : super(CategoriesInitial());
-
+  final CategoriesUseCase _categoriesUseCase;
 static CategoriesCubit get(context) => BlocProvider.of(context);
+
+
+
 
   TextEditingController categoryNameController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-
-
 
 
   Future<void> getCategoriesData() async {
@@ -48,13 +49,18 @@ static CategoriesCubit get(context) => BlocProvider.of(context);
 
 
 
+
+
   String imagePath = '';
   int status = 1;
   File? imageFile;
   Future<void> addCategory() async {
-    emit(CategoriesLoading());
      await _categoriesUseCase.addCategory(
         imageFile!, categoryNameController.text, status);
 
   }
+
+
+
+
 }

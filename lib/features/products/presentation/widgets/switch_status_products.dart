@@ -8,11 +8,11 @@ class SwitchStatusProducts extends StatefulWidget {
   const SwitchStatusProducts({
     super.key,
     required this.product,
-    required this.viewModel,
+    // required this.viewModel,
   });
 
   final Products product;
-  final ProductsCubit viewModel;
+  // final ProductsCubit viewModel;
 
   @override
   State<SwitchStatusProducts> createState() => _SwitchStatusProductsState();
@@ -33,7 +33,7 @@ class _SwitchStatusProductsState extends State<SwitchStatusProducts> {
         onChanged: (value) {
           setState(() {
             // تحديث حالة المنتج عبر ViewModel
-            widget.viewModel.editProduct(
+            ProductsCubit.get(context).editProduct(
               EditProductRequest(
                 idProduct: widget.product.idProduct,
                 status: value ? 1 : 0,

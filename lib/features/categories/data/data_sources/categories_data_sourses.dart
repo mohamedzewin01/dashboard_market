@@ -32,4 +32,25 @@ class CategoriesDataSources {
       },
     );
   }
+
+  Future<Result<ProductsByCategoriesEntity?>> getProductByCategories(
+      int? idCategory) async {
+    return executeApi(
+      () async {
+        var response = await apiService.getProductsByCategories(idCategory);
+        return response?.toProductsByCategoriesEntity();
+      },
+    );
+  }
+
+  Future<Result<EditCategoryEntity?>> editProductByCategories(int categoryId,
+      String? categoryName, String? oldImagePath, File? newImage) {
+    return executeApi(
+      () async {
+        var response = await apiService.updateCategory(
+            categoryId, categoryName, oldImagePath, newImage);
+        return response?.toEditCategoryEntity();
+      },
+    );
+  }
 }

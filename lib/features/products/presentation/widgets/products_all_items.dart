@@ -15,11 +15,11 @@ class CustomProductsAllItem extends StatelessWidget {
     super.key,
     required this.product,
     this.onTap,
-    required this.viewModel,
+    // required this.viewModel,
   });
 
   final Products product;
-  final ProductsCubit viewModel;
+  // final ProductsCubit viewModel;
   final void Function()? onTap;
 
   @override
@@ -217,7 +217,9 @@ class CustomProductsAllItem extends StatelessWidget {
           Positioned(
             top: 0, // to shift little up
             right: 0,
-            child: SwitchStatusProducts(viewModel: viewModel, product: product),
+            child: SwitchStatusProducts(
+                // viewModel: viewModel,
+                product: product),
           ),
           Positioned(
             top: 45, // to shift little up

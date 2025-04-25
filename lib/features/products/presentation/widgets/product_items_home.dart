@@ -92,7 +92,7 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
                       ),
                       delegate: SliverChildBuilderDelegate(
                         (context, index) => CustomProductsAllItem(
-                          viewModel: widget.viewModel,
+                          // viewModel: widget.viewModel,
                           onTap: () {
                             Navigator.push(
                               context,

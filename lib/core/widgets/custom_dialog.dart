@@ -191,7 +191,7 @@ class CustomDialog {
       },
     );
   }
-  static void showSuccessDialog(BuildContext context, {Widget? goto}) {
+  static void showSuccessDialog(BuildContext context, {Widget? goto ,String? message}) {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -220,7 +220,7 @@ class CustomDialog {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  "تم اضافة المنتج بنجاح",
+                  message?? "تم اضافة المنتج بنجاح",
                   style: getBoldStyle(color: ColorManager.white, fontSize: 20),
                 ),
                 const SizedBox(height: 10),

@@ -21,4 +21,16 @@ class CategoriesUseCase {
   Future<Result<AddCategoryEntity?>> addCategory(
           File imageFile, String categoryName, int status) =>
       categoriesRepo.addCategory(imageFile, categoryName, status);
+
+  Future<Result<ProductsByCategoriesEntity?>> getProductByCategories(
+          int? idCategory) =>
+      categoriesRepo.getProductByCategories(idCategory);
+
+  Future<Result<EditCategoryEntity?>> editProductByCategories(
+          {
+            required int categoryId,
+          String? categoryName,
+          String? oldImagePath,
+          File? newImage}) =>
+      categoriesRepo.editProductByCategories(categoryId, categoryName, oldImagePath, newImage);
 }

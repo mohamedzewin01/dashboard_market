@@ -54,6 +54,10 @@ import '../../features/categories/domain/use_cases/categories_use_case.dart'
     as _i548;
 import '../../features/categories/presentation/manager/categories_cubit.dart'
     as _i572;
+import '../../features/categories/presentation/manager/edit_category_cubit.dart'
+    as _i881;
+import '../../features/categories/presentation/manager/products_by_category_cubit.dart'
+    as _i1019;
 import '../../features/home/data/data_sources/data_sources.dart' as _i470;
 import '../../features/home/data/repo_impl/home_repo_impl.dart' as _i886;
 import '../../features/home/domain/repo/home_repo.dart' as _i280;
@@ -168,6 +172,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i167.ProductsRepoImpl(gh<_i95.ProductsEditDataSourceRepo>()));
     gh.factory<_i572.CategoriesCubit>(
         () => _i572.CategoriesCubit(gh<_i548.CategoriesUseCase>()));
+    gh.factory<_i1019.ProductsByCategoryCubit>(
+        () => _i1019.ProductsByCategoryCubit(gh<_i548.CategoriesUseCase>()));
+    gh.factory<_i881.EditCategoryCubit>(
+        () => _i881.EditCategoryCubit(gh<_i548.CategoriesUseCase>()));
     gh.factory<_i9.HomeCubit>(() => _i9.HomeCubit(gh<_i395.HomeUseCase>()));
     gh.factory<_i258.HomeUseCase>(
         () => _i258.HomeUseCase(gh<_i482.ProductsRepo>()));
