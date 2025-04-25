@@ -31,6 +31,10 @@ class _EditCategoryState extends State<EditCategory> {
           CustomDialog.showSuccessDialog(context,message: "تم التعديل بنجاح");
           widget.viewModelCategories.getCategoriesData();
         }
+        if(state is DeleteCategorySuccess){
+          CustomDialog.showSuccessDialog(context,message: "تم حذف القسم بنجاح");
+          widget.viewModelCategories.getCategoriesData();
+        }
       },
       builder: (context, state) {
         EditCategoryCubit viewModel = context.read<EditCategoryCubit>();
@@ -136,8 +140,10 @@ class _EditCategoryState extends State<EditCategory> {
                     hintText: "اسم المنتج",
                   ),
                   Row(
+                    spacing: 16,
                     children: [
                       Expanded(
+                        flex: 2,
                         child: CustomElevatedButton(
                           buttonColor: ColorManager.orange,
                           title: 'تعديل',
@@ -146,10 +152,30 @@ class _EditCategoryState extends State<EditCategory> {
                             if (viewModel.formKeyEdit.currentState!
                                 .validate()) {
 
-                              viewModel.editCategory(idCategory:45  );
+                              viewModel.editCategory(idCategory:46  );
 
                             }
                           },
+                        ),
+                      ),
+
+                      Tooltip(
+                        message: "في حالة وجود منتجات داخل القسم لا يمكن حذفه ",
+                        child: Expanded(
+                          child: CustomElevatedButton(
+                            buttonColor: ColorManager.error,
+                            title: 'حذف',
+                            onPressed: () {
+
+                              if (viewModel.formKeyEdit.currentState!
+                                  .validate()) {
+
+                                viewModel.deleteCategory(idCategory:46  );
+
+                              }
+
+                            },
+                          ),
                         ),
                       ),
                     ],

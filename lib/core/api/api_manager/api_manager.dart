@@ -6,6 +6,7 @@ import 'package:dashboard_market/features/banners/data/models/response/AddBanner
 import 'package:dashboard_market/features/banners/data/models/response/ChangeStatusModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 import 'package:dashboard_market/features/banners/data/models/response/delete_banner_model.dart';
+import 'package:dashboard_market/features/categories/data/models/delete_category.dart';
 import 'package:dashboard_market/features/categories/data/models/edit_category_dto.dart';
 import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
 import 'package:dashboard_market/features/categories/data/models/products_by_categories_dto.dart';
@@ -56,7 +57,6 @@ abstract class ApiService {
   @POST(ApiConstants.fetchImages)
   Future<ImagesDto?> getAllImage();
 
-
   @POST(ApiConstants.uploadImage)
   @MultiPart()
   Future<UpLoadImageModel?> uploadImage(
@@ -85,15 +85,13 @@ abstract class ApiService {
   @POST(ApiConstants.fetchCategories)
   Future<FetchCategoriesResponse?> getCategories();
 
-
   @POST(ApiConstants.fetchCategories)
   Future<FetchCategoriesEdit?> getCategoriesToEdit();
 
   @POST(ApiConstants.deleteProduct)
   Future<DeleteProductResponses?> deleteProduct(
-      @Part(name: 'productid') String? productId,);
-
-
+    @Part(name: 'productid') String? productId,
+  );
 
   @POST(ApiConstants.addCategories)
   @MultiPart()
@@ -116,43 +114,39 @@ abstract class ApiService {
     @Part(name: 'imagePath') String? categoryName,
   );
 
-
   @POST(ApiConstants.fetchBanners)
   Future<BannersModelsResponse?> fetchBanners();
 
   @POST(ApiConstants.addBanners)
   @MultiPart()
   Future<AddBannerModel?> addBanner(
-      @Part(name: 'title') String? title,
-      @Part(name: 'description') String? description,
-      @Part(name: 'productId') String? productId,
-      @Part(name: 'imagePath') File? imagePath,
-      @Part(name: 'status') String? status,
-      );
+    @Part(name: 'title') String? title,
+    @Part(name: 'description') String? description,
+    @Part(name: 'productId') String? productId,
+    @Part(name: 'imagePath') File? imagePath,
+    @Part(name: 'status') String? status,
+  );
 
   @POST(ApiConstants.deleteBanners)
   @MultiPart()
   Future<DeleteBannerModel?> deleteBanner(
-      @Part(name: 'bannersID') String? bannersId,
-      @Part(name: 'image_name') String? imagePath,
-      );
+    @Part(name: 'bannersID') String? bannersId,
+    @Part(name: 'image_name') String? imagePath,
+  );
 
   @POST(ApiConstants.editBanners)
   @MultiPart()
   Future<ChangeStatusModel?> changeStatus(
-      @Part(name: 'bannersId') String? bannersId,
-      @Part(name: 'bannersStatus') String? status,
-      );
+    @Part(name: 'bannersId') String? bannersId,
+    @Part(name: 'bannersStatus') String? status,
+  );
 
   @POST(ApiConstants.dashboardStatistics)
   Future<DashboardStatisticsDto?> getDashboardStatistics();
 
-
   @POST(ApiConstants.getProductsByCategories)
   Future<ProductsByCategoriesDto?> getProductsByCategories(
       @Part(name: 'idCategory') int? idCategory);
-
-
 
   @POST(ApiConstants.updateCategory)
   @MultiPart()
@@ -160,6 +154,12 @@ abstract class ApiService {
       @Part(name: 'category_id') int categoryId,
       @Part(name: 'category_name') String? categoryName,
       @Part(name: 'oldImagePath') String? oldImagePath,
-      @Part(name: 'newImage') File? newImage
-      );
+      @Part(name: 'newImage') File? newImage);
+
+  @POST(ApiConstants.deleteCategory)
+  @MultiPart()
+  Future<DeleteCategoryDto?> deleteCategory(
+    @Part(name: 'categoryId') int categoryId,
+    @Part(name: 'image_name') String? imageName,
+  );
 }

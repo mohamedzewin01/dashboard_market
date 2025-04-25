@@ -112,7 +112,7 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                                 color: _selectedIndex == index
                                     ? Colors.white
                                     : Colors.black,
-                                fontSize: 16,
+                                fontSize: 12,
                               ),
                             ),
                           ),
@@ -123,87 +123,90 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                   // _categoriesList.isNotEmpty
                   _selectedIndex != null
                       ? Expanded(
-                          child: TabBarView(
-                            controller: _tabController,
-                            children: _categoriesList.map((category) {
-                              return BlocBuilder<ProductsByCategoryCubit,
-                                  ProductsByCategoryState>(
-                                builder: (context, state) {
-                                  if (state is ProductsByCategorySuccess) {
-                                    List<ProductsRelations>? filteredProducts =
-                                        state
-                                                .productsByCategoriesEntity
-                                                .productsData
-                                                ?.productsRelations ??
-                                            [];
-                                    return CustomScrollView(
-                                      physics: const BouncingScrollPhysics(),
-                                      slivers: [
-                                        SliverToBoxAdapter(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Text(
-                                              'عدد المنتجات بالقسم  ${filteredProducts.length}',
-                                              style: getBoldStyle(
-                                                  color: Colors.teal,
-                                                  fontSize: 20),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TabBarView(
+                              controller: _tabController,
+                              children: _categoriesList.map((category) {
+                                return BlocBuilder<ProductsByCategoryCubit,
+                                    ProductsByCategoryState>(
+                                  builder: (context, state) {
+                                    if (state is ProductsByCategorySuccess) {
+                                      List<ProductsRelations>? filteredProducts =
+                                          state
+                                                  .productsByCategoriesEntity
+                                                  .productsData
+                                                  ?.productsRelations ??
+                                              [];
+                                      return CustomScrollView(
+                                        physics: const BouncingScrollPhysics(),
+                                        slivers: [
+                                          SliverToBoxAdapter(
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16.0),
+                                              child: Text(
+                                                'عدد المنتجات بالقسم  ${filteredProducts.length}',
+                                                style: getBoldStyle(
+                                                    color: Colors.teal,
+                                                    fontSize: 20),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SliverGrid(
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: crossAxisCount,
-                                            crossAxisSpacing: 16.0,
-                                            mainAxisSpacing: 16.0,
-                                            childAspectRatio: 1.0,
-                                          ),
-                                          delegate: SliverChildBuilderDelegate(
-                                            (context, index) =>
-                                                CustomProductsAllItem(
-                                              // viewModel: widget.viewModel,
-                                              onTap: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (_) => EditProduct(
-                                                        product:
-                                                            filteredProducts[
-                                                                    index]
-                                                                .toProducts()),
-                                                  ),
-                                                ).then((value) {
-                                                  if (value == true) {
-                                                    widget
-                                                        .viewModelProductsByCategory
-                                                        .getProductsByCategory(
-                                                            idCategory:
-                                                                _categoriesList[
-                                                                            index]
-                                                                        .categoryId ??
-                                                                    0);
-                                                  }
-                                                });
-                                              },
-                                              product: filteredProducts[index]
-                                                  .toProducts(),
+                                          SliverGrid(
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: crossAxisCount,
+                                              crossAxisSpacing: 16.0,
+                                              mainAxisSpacing: 16.0,
+                                              childAspectRatio: 1.0,
                                             ),
-                                            childCount: filteredProducts.length,
+                                            delegate: SliverChildBuilderDelegate(
+                                              (context, index) =>
+                                                  CustomProductsAllItem(
+                                                // viewModel: widget.viewModel,
+                                                onTap: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (_) => EditProduct(
+                                                          product:
+                                                              filteredProducts[
+                                                                      index]
+                                                                  .toProducts()),
+                                                    ),
+                                                  ).then((value) {
+                                                    if (value == true) {
+                                                      widget
+                                                          .viewModelProductsByCategory
+                                                          .getProductsByCategory(
+                                                              idCategory:
+                                                                  _categoriesList[
+                                                                              index]
+                                                                          .categoryId ??
+                                                                      0);
+                                                    }
+                                                  });
+                                                },
+                                                product: filteredProducts[index]
+                                                    .toProducts(),
+                                              ),
+                                              childCount: filteredProducts.length,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    );
-                                    // state.productsByCategoriesEntity.productsData
-                                    //     ?.productsRelations?.where((element) =>
-                                    // element.categoryId == category.id)
-                                  }
-                                  return Center(
-                                      child: CircularProgressIndicator(
-                                    color: ColorManager.primaryColor,
-                                  ));
-                                },
-                              );
-                            }).toList(),
+                                        ],
+                                      );
+                                      // state.productsByCategoriesEntity.productsData
+                                      //     ?.productsRelations?.where((element) =>
+                                      // element.categoryId == category.id)
+                                    }
+                                    return Center(
+                                        child: CircularProgressIndicator(
+                                      color: ColorManager.primaryColor,
+                                    ));
+                                  },
+                                );
+                              }).toList(),
+                            ),
                           ),
                         )
                       : Center(

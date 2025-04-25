@@ -57,12 +57,12 @@ class _EditProductState extends State<EditProduct> {
             } else {
               return Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      height: double.infinity,
-                      color: ColorManager.placeHolderColor,
-                    ),
-                  ),
+                  // Expanded(
+                  //   child: Container(
+                  //     height: double.infinity,
+                  //     color: ColorManager.placeHolderColor,
+                  //   ),
+                  // ),
                   Expanded(
                     flex: 2,
                     child: EditProductBody(

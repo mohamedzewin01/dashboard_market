@@ -37,4 +37,9 @@ class CategoriesRepoImpl implements CategoriesRepo {
     return categoriesDataSources.editProductByCategories(
         categoryId, categoryName, oldImagePath, newImage);
   }
+
+  @override
+  Future<Result<DeleteCategoryEntity?>> deleteProductByCategories(int categoryId, String imageName) {
+   return categoriesDataSources.deleteProductByCategories(categoryId, imageName);
+  }
 }

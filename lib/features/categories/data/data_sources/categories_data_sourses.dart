@@ -53,4 +53,12 @@ class CategoriesDataSources {
       },
     );
   }
+  Future<Result<DeleteCategoryEntity?>> deleteProductByCategories(int categoryId,String imageName) {
+    return executeApi(
+      () async {
+        var response = await apiService.deleteCategory(categoryId, imageName);
+        return response?.toDeleteCategoryEntity();
+      },
+    );
+  }
 }

@@ -33,4 +33,8 @@ class CategoriesUseCase {
           String? oldImagePath,
           File? newImage}) =>
       categoriesRepo.editProductByCategories(categoryId, categoryName, oldImagePath, newImage);
+
+
+  Future<Result<DeleteCategoryEntity?>> deleteProductByCategories(int categoryId,String imageName) =>
+      categoriesRepo.deleteProductByCategories(categoryId, imageName);
 }

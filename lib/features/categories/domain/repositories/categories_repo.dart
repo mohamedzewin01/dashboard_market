@@ -13,4 +13,5 @@ abstract class CategoriesRepo {
   Future<Result<ProductsByCategoriesEntity?>> getProductByCategories(int? idCategory);
   Future<Result<EditCategoryEntity?>> editProductByCategories(int categoryId,
       String? categoryName, String? oldImagePath, File? newImage);
+  Future<Result<DeleteCategoryEntity?>> deleteProductByCategories(int categoryId,String imageName);
 }

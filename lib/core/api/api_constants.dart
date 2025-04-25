@@ -24,4 +24,5 @@ class ApiConstants {
   static const String dashboardStatistics = "dashboard/dashboardStatistics";
   static const String getProductsByCategories = "categories/getProductsByCategories";
   static const String updateCategory = "categories/updateCategory.php";
+  static const String deleteCategory = "categories/deleteCategory.php";
 }

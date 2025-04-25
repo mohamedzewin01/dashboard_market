@@ -58,4 +58,21 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
         break;
     }
   }
+
+  Future<void>deleteCategory({required int idCategory})async{
+    emit(EditCategoryLoading());
+    var result = await _categoriesUseCase.deleteProductByCategories(46, imagePathEdit);
+    switch (result) {
+      case Success<DeleteCategoryEntity?>():
+        {
+          emit(DeleteCategorySuccess(result.data!));
+        }
+        break;
+      case Fail<DeleteCategoryEntity?>():
+        {
+          emit(DeleteCategoryFailure(result.exception));
+        }
+        break;
+    }
+  }
 }
