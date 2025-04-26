@@ -57,7 +57,7 @@ static CategoriesCubit get(context) => BlocProvider.of(context);
   Future<void> addCategory() async {
      await _categoriesUseCase.addCategory(
         imageFile!, categoryNameController.text, status);
-
+    await getCategoriesData();
   }
 
 

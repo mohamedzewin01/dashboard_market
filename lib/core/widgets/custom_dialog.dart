@@ -191,12 +191,12 @@ class CustomDialog {
       },
     );
   }
-  static void showSuccessDialog(BuildContext context, {Widget? goto ,String? message}) {
+  static void showSuccessDialog(BuildContext context, {Widget? goto ,String? message,int? duration}) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        Future.delayed(const Duration(seconds: 1), () {
+        Future.delayed( Duration(seconds:duration?? 1), () {
           if (context.mounted) {
             Navigator.of(context).pop();
           }
@@ -250,12 +250,12 @@ class CustomDialog {
               children: [
                 const Icon(
                   Icons.error_outline,
-                  color: ColorManager.orange,
+                  color: ColorManager.error,
                   size: 60,
                 ),
                 const SizedBox(height: 10),
                 const Text(
-                  "An Error Occurred!",
+                  "لقد حدث خطأ!",
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -266,7 +266,7 @@ class CustomDialog {
                 Text(
                   message ?? "Something went wrong. Please try again.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Colors.white70),
+                  style: getSemiBoldStyle(color: Colors.white70, fontSize: 18),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
@@ -281,7 +281,7 @@ class CustomDialog {
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Text("Back",
+                    child: Text("رجوع",
                         style: getBoldStyle(
                             color: ColorManager.white, fontSize: 18)),
                   ),

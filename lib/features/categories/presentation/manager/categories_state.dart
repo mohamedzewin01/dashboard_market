@@ -14,10 +14,13 @@ final class CategoriesFailure extends CategoriesState {
   final Exception exception;
   CategoriesFailure(this.exception);
 }
-
 final class AddCategoriesSuccess extends CategoriesState {
   final AddCategoryEntity addCategoryEntity;
   AddCategoriesSuccess(this.addCategoryEntity);
+}
+final class AddCategoriesFailure extends CategoriesState {
+  final Exception exception;
+  AddCategoriesFailure(this.exception);
 }
 
 

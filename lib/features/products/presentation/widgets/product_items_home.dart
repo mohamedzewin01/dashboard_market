@@ -1,13 +1,14 @@
 import 'dart:developer';
 
+import 'package:dashboard_market/core/resources/products_selected.dart';
 import 'package:dashboard_market/features/product_edit/presentation/pages/edit_product.dart';
 import 'package:dashboard_market/features/products/presentation/cubit/products_cubit.dart';
+import 'package:dashboard_market/features/products/presentation/widgets/select_product.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../data/models/response/AllProductsRespose.dart';
 import 'products_all_items.dart';
-
 
 class ProductItemsHome extends StatefulWidget {
   const ProductItemsHome({
@@ -45,6 +46,7 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
   }
 
   TextEditingController searchController = TextEditingController();
+  bool selectAll = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,44 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
             children: [
               Row(
                 children: [
-                  crossAxisCount > 2 ? Spacer():SizedBox(width: 16,),
+                  crossAxisCount > 2
+                      ? Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+
+                              IconButton(
+                                icon: Icon(Icons.check_circle_outline),
+                                onPressed: () {
+                                  setState(() {
+                                    selectAll = !selectAll;
+                                    selectAll
+                                        ? ProductsSelected.selectAllProduct(
+                                            products: filteredProducts!)
+                                        : ProductsSelected.cancelSelect();
+                                  });
+                                },
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.local_offer),
+                                // أيقونة للمنتجات التي تحتوي على خصم
+                                onPressed: () {
+                                  setState(() {
+                                    selectAll = !selectAll;
+                                    selectAll
+                                        ? ProductsSelected
+                                            .setProductsWithDiscount(
+                                                products: filteredProducts!)
+                                        : ProductsSelected.cancelSelect();
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        )
+                      : SizedBox(
+                          width: 16,
+                        ),
                   Expanded(
                     flex: 2,
                     child: CustomSearchTextFormField(
@@ -74,7 +113,11 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
                       },
                     ),
                   ),
-                  crossAxisCount > 2 ? Spacer():SizedBox(width: 16,),
+                  crossAxisCount > 2
+                      ? Spacer()
+                      : SizedBox(
+                          width: 16,
+                        ),
                 ],
               ),
               SizedBox(
@@ -91,36 +134,49 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
                         childAspectRatio: 1.0,
                       ),
                       delegate: SliverChildBuilderDelegate(
-                        (context, index) => CustomProductsAllItem(
-                          // viewModel: widget.viewModel,
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => EditProduct(product: filteredProducts![index]),
+                          childCount: filteredProducts?.length,
+                          (context, index) {
+                        // ProductsSelected.setProductsProduct(filteredProducts?[index].idProduct??0, false);
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SelectProduct(
+                              products: filteredProducts?[index],
+                            ),
+                            Expanded(
+                              child: CustomProductsAllItem(
+                                // viewModel: widget.viewModel,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => EditProduct(
+                                          product: filteredProducts![index]),
+                                    ),
+                                  ).then((value) {
+                                    if (value == true) {
+                                      widget.viewModel.getHomeData();
+                                    }
+                                  });
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => EditProduct(
+                                  //       product: filteredProducts![index],
+                                  //     ),
+                                  //   ),
+                                  // ).then((onValue){
+                                  //   if(onValue == true){
+                                  //     widget.viewModel.getHomeData();
+                                  //   }
+                                  // });
+                                },
+                                product: filteredProducts![index],
                               ),
-                            ).then((value) {
-                              if (value == true) {
-                               widget. viewModel.getHomeData();
-                              }
-                            });
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => EditProduct(
-                            //       product: filteredProducts![index],
-                            //     ),
-                            //   ),
-                            // ).then((onValue){
-                            //   if(onValue == true){
-                            //     widget.viewModel.getHomeData();
-                            //   }
-                            // });
-                          },
-                          product: filteredProducts![index],
-                        ),
-                        childCount: filteredProducts?.length,
-                      ),
+                            ),
+                          ],
+                        );
+                      }),
                     ),
                   ],
                 ),

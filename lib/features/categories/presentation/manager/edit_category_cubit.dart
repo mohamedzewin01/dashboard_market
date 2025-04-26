@@ -22,9 +22,11 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
   String imagePathEdit = '';
   File? imageFileEdit;
   final formKeyEdit = GlobalKey<FormState>();
+  int? idCategory;
 
-  changeNameCategory(String name) {
+  changeNameCategory(String name,int idCategory) {
     editCategoryNameController.text = name;
+    this.idCategory = idCategory;
     emit(EditCategoryChangeImage());
   }
 
@@ -34,20 +36,21 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
     emit(EditCategoryChangeImage());
   }
 
-  Future<void> editCategory({
-    required int idCategory,
-
-
-  }) async {
+  Future<void> editCategory() async {
     emit(EditCategoryLoading());
     var result = await _categoriesUseCase
-        .editProductByCategories(categoryId: idCategory,
+        .editProductByCategories(
+        categoryId: idCategory??0,
         categoryName: editCategoryNameController.text,
         oldImagePath: imagePathEdit,
         newImage: imageFileEdit);
     switch (result) {
       case Success<EditCategoryEntity?>():
         {
+          imagePathEdit = '';
+          imageFileEdit = null;
+          idCategory = null;
+          editCategoryNameController.clear();
           emit(EditCategorySuccess(result.data!));
         }
         break;
@@ -59,9 +62,9 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
     }
   }
 
-  Future<void>deleteCategory({required int idCategory})async{
+  Future<void>deleteCategory()async{
     emit(EditCategoryLoading());
-    var result = await _categoriesUseCase.deleteProductByCategories(46, imagePathEdit);
+    var result = await _categoriesUseCase.deleteProductByCategories(idCategory??0, imagePathEdit);
     switch (result) {
       case Success<DeleteCategoryEntity?>():
         {
@@ -75,4 +78,17 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
         break;
     }
   }
+
+  // TextEditingController categoryNameController = TextEditingController();
+  //
+  // final formKey = GlobalKey<FormState>();
+  // String imagePath = '';
+  // int status = 1;
+  // File? imageFile;
+  // Future<void> addCategory() async {
+  //   await _categoriesUseCase.addCategory(
+  //       imageFile!, categoryNameController.text, status);
+  //
+  // }
+
 }

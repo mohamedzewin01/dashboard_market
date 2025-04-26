@@ -19,9 +19,12 @@ import 'edit_category.dart';
 
 class AddCategories extends StatefulWidget {
   const AddCategories({
-    super.key, required this.viewModel,
+    super.key,
+    required this.viewModel,
   });
+
   final CategoriesCubit viewModel;
+
   @override
   State<AddCategories> createState() => _AddCategoriesState();
 }
@@ -111,13 +114,16 @@ class _AddCategoriesState extends State<AddCategories> {
                         buttonColor: ColorManager.orange,
                         title: 'اضافة',
                         onPressed: () {
-                          if (widget.viewModel.formKey.currentState!.validate()) {
+                          if (widget.viewModel.formKey.currentState!
+                              .validate()) {
                             if (widget.viewModel.imageFile != null) {
                               widget.viewModel.addCategory();
-                              widget.viewModel.getCategoriesData();
-                              widget.viewModel.categoryNameController.clear();
-                              widget.viewModel.imagePath = '';
-                              widget.viewModel.imageFile = null;
+                              setState(() {
+                                widget.viewModel.categoryNameController.clear();
+                                widget.viewModel.imagePath = '';
+                                widget.viewModel.imageFile = null;
+                              });
+
                             }
                           }
                         },
@@ -125,7 +131,9 @@ class _AddCategoriesState extends State<AddCategories> {
                     ),
                   ],
                 ),
-                EditCategory(viewModelCategories: widget.viewModel,)
+                EditCategory(
+                  viewModelCategories: widget.viewModel,
+                )
               ],
             ),
           ),
@@ -134,5 +142,3 @@ class _AddCategoriesState extends State<AddCategories> {
     ));
   }
 }
-
-

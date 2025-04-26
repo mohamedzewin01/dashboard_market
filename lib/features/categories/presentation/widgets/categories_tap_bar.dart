@@ -14,7 +14,8 @@ import '../manager/edit_category_cubit.dart';
 class CategoriesTapBar extends StatefulWidget {
   const CategoriesTapBar({
     super.key,
-    required this.viewModelProductsByCategory, required this.viewModel,
+    required this.viewModelProductsByCategory,
+    required this.viewModel,
   });
 
   final ProductsByCategoryCubit viewModelProductsByCategory;
@@ -25,22 +26,21 @@ class CategoriesTapBar extends StatefulWidget {
 }
 
 class _CategoriesTapBarState extends State<CategoriesTapBar>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin  {
   TabController? _tabController;
   List<Categories> _categoriesList = [];
-  int? _selectedIndex; // 🔸 مؤشر التب المحدد يدويًا
+  int? _selectedIndex;
 
   @override
   void dispose() {
-    _tabController?.dispose();
+    _tabController?.dispose(); // التخلص من TabController عند الخروج
     super.dispose();
   }
 
   void _updateTabController(int length) {
-    if (_tabController?.length != length) {
-      _tabController?.dispose();
+    if (_tabController == null || _tabController!.length != length) {
+      _tabController?.dispose(); // التخلص من TabController القديم
       _tabController = TabController(length: length, vsync: this);
-      _selectedIndex = null; // 🔸 لا يتم تحديد تب افتراضيًا
     }
   }
 
@@ -57,16 +57,19 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
       body: BlocBuilder<CategoriesCubit, CategoriesState>(
         builder: (context, state) {
           if (state is CategoriesSuccess) {
-            _categoriesList =
+            final categoriesList =
                 state.categoriesEntity.categories?.reversed.toList() ?? [];
-            _updateTabController(_categoriesList.length);
+            if (_categoriesList != categoriesList) {
+              _categoriesList = categoriesList;
+              _updateTabController(_categoriesList.length);
+            }
 
             return LayoutBuilder(builder: (context, constraints) {
               int crossAxisCount = constraints.maxWidth > 900
                   ? 6
                   : constraints.maxWidth > 700
-                      ? 4
-                      : 3;
+                  ? 4
+                  : 3;
 
               return Column(
                 children: [
@@ -77,16 +80,13 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                         int index = entry.key;
                         String tabText = entry.value.categoryName ?? "Unknown";
                         String imageUrl = entry.value.categoryImage ?? "";
+                        int id = entry.value.categoryId ?? 0;
 
                         return GestureDetector(
                           onTap: () {
-                            cubit.changeNameCategory(tabText);
+                            cubit.changeNameCategory(tabText, id);
                             cubit.changeImageCategory(imageUrl);
-                           cubit.changeImageCategory(imageUrl);
-                            print(
-                                '*****************************************************************   ${cubit.editCategoryNameController.text}');
-                            print(
-                                '***************************** $imageUrl ************************************   ${cubit.imagePathEdit}');
+
                             setState(() {
                               _selectedIndex = index;
                               _tabController?.animateTo(index);
@@ -119,104 +119,98 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                         );
                       }).toList(),
                     ),
-                  // TabBarView
-                  // _categoriesList.isNotEmpty
                   _selectedIndex != null
                       ? Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TabBarView(
-                              controller: _tabController,
-                              children: _categoriesList.map((category) {
-                                return BlocBuilder<ProductsByCategoryCubit,
-                                    ProductsByCategoryState>(
-                                  builder: (context, state) {
-                                    if (state is ProductsByCategorySuccess) {
-                                      List<ProductsRelations>? filteredProducts =
-                                          state
-                                                  .productsByCategoriesEntity
-                                                  .productsData
-                                                  ?.productsRelations ??
-                                              [];
-                                      return CustomScrollView(
-                                        physics: const BouncingScrollPhysics(),
-                                        slivers: [
-                                          SliverToBoxAdapter(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(16.0),
-                                              child: Text(
-                                                'عدد المنتجات بالقسم  ${filteredProducts.length}',
-                                                style: getBoldStyle(
-                                                    color: Colors.teal,
-                                                    fontSize: 20),
-                                              ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: _categoriesList.map((category) {
+                          return BlocBuilder<ProductsByCategoryCubit,
+                              ProductsByCategoryState>(
+                            builder: (context, state) {
+                              if (state is ProductsByCategorySuccess) {
+                                List<ProductsRelations>? filteredProducts =
+                                    state
+                                        .productsByCategoriesEntity
+                                        .productsData
+                                        ?.productsRelations ??
+                                        [];
+                                return CustomScrollView(
+                                  physics: const BouncingScrollPhysics(),
+                                  slivers: [
+                                    SliverToBoxAdapter(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Text(
+                                          'عدد المنتجات بالقسم  ${filteredProducts.length}',
+                                          style: getBoldStyle(
+                                              color: Colors.teal,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                    SliverGrid(
+                                      gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: crossAxisCount,
+                                        crossAxisSpacing: 16.0,
+                                        mainAxisSpacing: 16.0,
+                                        childAspectRatio: 1.0,
+                                      ),
+                                      delegate: SliverChildBuilderDelegate(
+                                            (context, index) =>
+                                            CustomProductsAllItem(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (_) => EditProduct(
+                                                        product:
+                                                        filteredProducts[
+                                                        index]
+                                                            .toProducts()),
+                                                  ),
+                                                ).then((value) {
+                                                  if (value == true) {
+                                                    widget
+                                                        .viewModelProductsByCategory
+                                                        .getProductsByCategory(
+                                                        idCategory:
+                                                        _categoriesList[
+                                                        index]
+                                                            .categoryId ??
+                                                            0);
+                                                  }
+                                                });
+                                              },
+                                              product: filteredProducts[index]
+                                                  .toProducts(),
                                             ),
-                                          ),
-                                          SliverGrid(
-                                            gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: crossAxisCount,
-                                              crossAxisSpacing: 16.0,
-                                              mainAxisSpacing: 16.0,
-                                              childAspectRatio: 1.0,
-                                            ),
-                                            delegate: SliverChildBuilderDelegate(
-                                              (context, index) =>
-                                                  CustomProductsAllItem(
-                                                // viewModel: widget.viewModel,
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (_) => EditProduct(
-                                                          product:
-                                                              filteredProducts[
-                                                                      index]
-                                                                  .toProducts()),
-                                                    ),
-                                                  ).then((value) {
-                                                    if (value == true) {
-                                                      widget
-                                                          .viewModelProductsByCategory
-                                                          .getProductsByCategory(
-                                                              idCategory:
-                                                                  _categoriesList[
-                                                                              index]
-                                                                          .categoryId ??
-                                                                      0);
-                                                    }
-                                                  });
-                                                },
-                                                product: filteredProducts[index]
-                                                    .toProducts(),
-                                              ),
-                                              childCount: filteredProducts.length,
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                      // state.productsByCategoriesEntity.productsData
-                                      //     ?.productsRelations?.where((element) =>
-                                      // element.categoryId == category.id)
-                                    }
-                                    return Center(
-                                        child: CircularProgressIndicator(
-                                      color: ColorManager.primaryColor,
-                                    ));
-                                  },
+                                        childCount: filteredProducts.length,
+                                      ),
+                                    ),
+                                  ],
                                 );
-                              }).toList(),
-                            ),
-                          ),
-                        )
+                              }
+                              return Center(
+                                  child: CircularProgressIndicator(
+                                    color: ColorManager.primaryColor,
+                                  ));
+                            },
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  )
                       : Center(
-                          heightFactor: 4,
-                          child: Text(
-                            "قم يتحديد القسم الذي تريده",
-                            style:
-                                getBoldStyle(color: Colors.teal, fontSize: 20),
-                          ),
-                        ),
+                    heightFactor: 4,
+                    child: Text(
+                      "قم يتحديد القسم الذي تريده",
+                      style:
+                      getBoldStyle(color: Colors.teal, fontSize: 20),
+                    ),
+                  ),
                 ],
               );
             });

@@ -65,14 +65,14 @@ class Products {
     createdAt = json['createdAt'];
   }
 
-  num? idProduct;
+  int? idProduct;
   String? productName;
   num? productPrice;
   String? description;
   String? imageCover;
   num? productPriceAfterDiscount;
   int? category;
-  num? descount;
+  int? descount;
   num? status;
   String? dateDescount;
   String? createdAt;
