@@ -6,8 +6,12 @@ import '../../domain/entities/products_entities.dart';
 import '../models/request/edit_product_request.dart';
 
 abstract class ProductsDataSourceRepo {
-  Future<Result<ProductsEntity?>> getProductsData();
-  // Future<Result<DeleteProductEntity?>> deleteProductsData(String productId);
+  Future<Result<ProductsEntity?>> getLimitAllProducts(int? page);
+  Future<Result<ProductsEntity?>> getLimitProductsDiscount(int? page);
+  Future<Result<ProductsEntity?>> getLimitProductsNotDiscount(int? page);
+  Future<Result<ProductsEntity?>> getLimitProductsActive(int? page);
+  Future<Result<ProductsEntity?>> getLimitProductsNotActive(int? page);
+
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest);
-  // Future<Result<FetchCategoriesEditEntity?>> getCategoriesToEdit();
+
 }

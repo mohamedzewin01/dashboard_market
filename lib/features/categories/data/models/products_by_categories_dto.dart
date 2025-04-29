@@ -1,5 +1,5 @@
 import 'package:dashboard_market/features/categories/domain/entities/fetch_categories.dart';
-import 'package:dashboard_market/features/products/data/models/response/AllProductsRespose.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'products_by_categories_dto.g.dart';

@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dashboard_market/features/products/presentation/cubit/products_cubit.dart';
 import 'package:dashboard_market/features/products/presentation/widgets/switch_status_products.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -8,7 +7,8 @@ import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/style_manager.dart';
 import '../../../../core/widgets/custom_riyal_saudi.dart';
-import '../../data/models/response/AllProductsRespose.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
+
 
 class CustomProductsAllItem extends StatelessWidget {
   const CustomProductsAllItem({

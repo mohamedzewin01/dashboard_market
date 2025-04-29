@@ -15,6 +15,7 @@ import 'package:dashboard_market/features/product_edit/data/models/request/edit_
 import 'package:dashboard_market/features/product_edit/data/models/response/delete_product_responces.dart';
 import 'package:dashboard_market/features/product_edit/data/models/response/edit_product_response.dart';
 import 'package:dashboard_market/features/product_edit/data/models/response/fetch_categories.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
@@ -23,7 +24,6 @@ import '../../../features/add_images/data/models/delete_image.dart';
 import '../../../features/add_images/data/models/upload_image_model.dart';
 import '../../../features/categories/data/models/add_category_responces.dart';
 import '../../../features/products/data/models/request/edit_product_request.dart';
-import '../../../features/products/data/models/response/AllProductsRespose.dart';
 import '../../../features/products/data/models/response/edit_product_response.dart';
 import '../../../features/setting/data/models/store_info_edit_response.dart';
 import '../../../features/setting/data/models/store_info_request.dart';
@@ -40,8 +40,30 @@ abstract class ApiService {
   @FactoryMethod()
   factory ApiService(Dio dio) = _ApiService;
 
-  @POST(ApiConstants.products)
-  Future<AllProductsResponse?> getProductsData();
+  @POST(ApiConstants.getLimitAllProducts)
+  Future<AllProductsResponse?> getLimitAllProducts(
+    @Part(name: 'page') int? page
+  );
+
+  @POST(ApiConstants.getLimitProductsDiscount)
+  Future<AllProductsResponse?> getLimitProductsDiscount(
+      @Part(name: 'page') int? page
+      );
+
+  @POST(ApiConstants.getLimitProductsNotDiscount)
+  Future<AllProductsResponse?> getLimitProductsNotDiscount(
+      @Part(name: 'page') int? page
+      );
+
+  @POST(ApiConstants.getLimitProductsActive)
+  Future<AllProductsResponse?> getLimitProductsActive(
+      @Part(name: 'page') int? page
+      );
+
+  @POST(ApiConstants.getLimitProductsNotActive)
+  Future<AllProductsResponse?> getLimitProductsNotActive(
+      @Part(name: 'page') int? page
+      );
 
   @POST(ApiConstants.editProducts)
   Future<EditProductResponse?> editProduct(

@@ -8,16 +8,27 @@ import '../entities/products_entities.dart';
 import '../repo/products_repo.dart';
 
 @injectable
-class HomeUseCase {
+class ProductsUseCase {
   ProductsRepo productsRepo;
 
-  HomeUseCase(this.productsRepo);
+  ProductsUseCase(this.productsRepo);
 
-  Future<Result<ProductsEntity?>> getProductsData() {
-    return productsRepo.getProductsData();
+  Future<Result<ProductsEntity?>> getLimitAllProducts(int? page) {
+    return productsRepo.getLimitAllProducts(page);
+  }
+  Future<Result<ProductsEntity?>> getLimitProductsDiscount(int? page) {
+    return productsRepo.getLimitProductsDiscount(page);
+  }
+  Future<Result<ProductsEntity?>> getLimitProductsNotDiscount(int? page) {
+    return productsRepo.getLimitProductsNotDiscount(page);
+  }
+  Future<Result<ProductsEntity?>> getLimitProductsActive(int? page) {
+    return productsRepo.getLimitProductsActive(page);
+  }
+  Future<Result<ProductsEntity?>> getLimitProductsNotActive(int? page) {
+    return productsRepo.getLimitProductsNotActive(page);
   }
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest) {
     return productsRepo.editProductsData(editProductRequest);
   }
-
 }

@@ -15,13 +15,33 @@ class ProductsRepoImpl implements ProductsRepo {
   ProductsRepoImpl(this.productsDataSourceRepo);
 
   @override
-  Future<Result<ProductsEntity?>> getProductsData() {
-    return productsDataSourceRepo.getProductsData();
+  Future<Result<ProductsEntity?>> getLimitAllProducts(int? page) {
+    return productsDataSourceRepo.getLimitAllProducts(page);
   }
 
   @override
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest) {
     return productsDataSourceRepo.editProductsData( editProductRequest);
+  }
+
+  @override
+  Future<Result<ProductsEntity?>> getLimitProductsDiscount(int? page) {
+ return productsDataSourceRepo.getLimitProductsDiscount(page);
+  }
+
+  @override
+  Future<Result<ProductsEntity?>> getLimitProductsActive(int? page) {
+  return productsDataSourceRepo.getLimitProductsActive(page);
+  }
+
+  @override
+  Future<Result<ProductsEntity?>> getLimitProductsNotActive(int? page) {
+    return productsDataSourceRepo.getLimitProductsNotActive(page);
+  }
+
+  @override
+  Future<Result<ProductsEntity?>> getLimitProductsNotDiscount(int? page) {
+    return productsDataSourceRepo.getLimitProductsNotDiscount(page);
   }
 
 

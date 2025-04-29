@@ -1,21 +1,20 @@
-import 'dart:developer';
-
 import 'package:dashboard_market/core/resources/products_selected.dart';
 import 'package:dashboard_market/features/product_edit/presentation/pages/edit_product.dart';
 import 'package:dashboard_market/features/products/presentation/cubit/products_cubit.dart';
 import 'package:dashboard_market/features/products/presentation/widgets/select_product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../data/models/response/AllProductsRespose.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
 import 'products_all_items.dart';
 
 class ProductItemsHome extends StatefulWidget {
   const ProductItemsHome({
-    super.key,
+    Key? key,
     required this.viewModel,
-    required this.products,
-  });
+    this.products,
+  }) : super(key: key);
 
   final ProductsCubit viewModel;
   final List<Products>? products;
@@ -25,28 +24,76 @@ class ProductItemsHome extends StatefulWidget {
 }
 
 class _ProductItemsHomeState extends State<ProductItemsHome> {
-  List<Products>? filteredProducts = [];
+  late ScrollController _scrollController;
+  late TextEditingController _searchController;
   String query = "";
-
+  bool isLoadingMore = false;
+  bool selectAll = false;
+  List<Products>? filteredProducts = [];
   @override
   void initState() {
-    super.initState();
     filteredProducts = widget.products;
+    super.initState();
+    _scrollController = ScrollController()..addListener(_onScroll);
+    _searchController = TextEditingController();
+    widget.viewModel.getLimitAllProducts(isFirstFetch: true);
   }
 
-  void updateSearch(String searchQuery) {
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 300 &&
+        !isLoadingMore) {
+      setState(() => isLoadingMore = true);
+      _fetchProductsByTab().then((_) {
+        setState(() => isLoadingMore = false);
+      });
+    }
+  }
+
+  Future<void> _fetchProductsByTab() async {
+    final cubit = context.read<ProductsCubit>();
+    switch (widget.viewModel.tabController.index) {
+      case 0:
+        await cubit.getLimitAllProducts();
+        break;
+      case 1:
+        await widget.viewModel.getLimitProductsActive();
+        break;
+      case 2:
+        await widget.viewModel.getLimitProductsNotActive();
+        break;
+      case 3:
+        await widget.viewModel.getLimitProductsDiscount();
+        break;
+      case 4:
+        await widget.viewModel.getLimitProductsNotDiscount();
+        break;
+      default:
+        break;
+    }
+  }
+
+  void _updateSearch(String searchQuery) {
     setState(() {
       query = searchQuery;
       filteredProducts = widget.products
           ?.where((product) => product.productName!
-              .toLowerCase()
-              .contains(searchQuery.toLowerCase()))
+          .toLowerCase()
+          .contains(searchQuery.toLowerCase()))
           .toList();
+
     });
+
+
   }
 
-  TextEditingController searchController = TextEditingController();
-  bool selectAll = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,128 +104,167 @@ class _ProductItemsHomeState extends State<ProductItemsHome> {
           int crossAxisCount = constraints.maxWidth > 900
               ? 5
               : constraints.maxWidth > 700
-                  ? 3
-                  : 2;
-          log(constraints.maxWidth.toString());
+              ? 3
+              : 2;
           return Column(
             children: [
-              Row(
-                children: [
-                  crossAxisCount > 2
-                      ? Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-
-                              IconButton(
-                                icon: Icon(Icons.check_circle_outline),
-                                onPressed: () {
-                                  setState(() {
-                                    selectAll = !selectAll;
-                                    selectAll
-                                        ? ProductsSelected.selectAllProduct(
-                                            products: filteredProducts!)
-                                        : ProductsSelected.cancelSelect();
-                                  });
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.local_offer),
-                                // أيقونة للمنتجات التي تحتوي على خصم
-                                onPressed: () {
-                                  setState(() {
-                                    selectAll = !selectAll;
-                                    selectAll
-                                        ? ProductsSelected
-                                            .setProductsWithDiscount(
-                                                products: filteredProducts!)
-                                        : ProductsSelected.cancelSelect();
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        )
-                      : SizedBox(
-                          width: 16,
-                        ),
-                  Expanded(
-                    flex: 2,
-                    child: CustomSearchTextFormField(
-                      hintText: 'ابحث عن المنتجات ...',
-                      prefixIcon: Icon(Icons.search),
-                      controller: searchController,
-                      onChanged: (value) {
-                        updateSearch(value);
-                      },
-                    ),
-                  ),
-                  crossAxisCount > 2
-                      ? Spacer()
-                      : SizedBox(
-                          width: 16,
-                        ),
-                ],
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [
-                    SliverGrid(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: 16.0,
-                        mainAxisSpacing: 16.0,
-                        childAspectRatio: 1.0,
-                      ),
-                      delegate: SliverChildBuilderDelegate(
-                          childCount: filteredProducts?.length,
-                          (context, index) {
-                        // ProductsSelected.setProductsProduct(filteredProducts?[index].idProduct??0, false);
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+              RepaintBoundary(
+                child: Row(
+                  children: [
+                    if (crossAxisCount > 2)
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SelectProduct(
-                              products: filteredProducts?[index],
+                            IconButton(
+                              icon: Icon(Icons.check_circle_outline),
+                              onPressed: () {
+                                setState(() {
+                                  selectAll = !selectAll;
+                                  selectAll
+                                      ? ProductsSelected.selectAllProduct(products: filteredProducts!)
+                                      : ProductsSelected.cancelSelect();
+                                });
+                              },
                             ),
-                            Expanded(
-                              child: CustomProductsAllItem(
-                                // viewModel: widget.viewModel,
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => EditProduct(
-                                          product: filteredProducts![index]),
-                                    ),
-                                  ).then((value) {
-                                    if (value == true) {
-                                      widget.viewModel.getHomeData();
-                                    }
-                                  });
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => EditProduct(
-                                  //       product: filteredProducts![index],
-                                  //     ),
-                                  //   ),
-                                  // ).then((onValue){
-                                  //   if(onValue == true){
-                                  //     widget.viewModel.getHomeData();
-                                  //   }
-                                  // });
-                                },
-                                product: filteredProducts![index],
-                              ),
+                            IconButton(
+                              icon: Icon(Icons.local_offer),
+                              onPressed: () {
+                                setState(() {
+                                  selectAll = !selectAll;
+                                  selectAll
+                                      ? ProductsSelected.setProductsWithDiscount(products: filteredProducts!)
+                                      : ProductsSelected.cancelSelect();
+                                });
+                              },
                             ),
                           ],
-                        );
-                      }),
+                        ),
+                      )
+                    else
+                      const SizedBox(width: 16),
+                    Expanded(
+                      flex: 2,
+                      child: CustomSearchTextFormField(
+                        hintText: 'ابحث عن المنتجات ...',
+                        prefixIcon: const Icon(Icons.search),
+                        controller: _searchController,
+                        onChanged: (value) {
+                          _updateSearch(value);
+                        },
+                      ),
                     ),
+                    if (crossAxisCount > 2)
+                      const Spacer()
+                    else
+                      const SizedBox(width: 16),
                   ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: BlocBuilder<ProductsCubit, ProductsState>(
+                  builder: (context, state) {
+                    List<Products> products = [];
+
+                    if (state is ProductsSuccess) {
+                      products = state.productsEntity?.products ?? [];
+                    }
+
+                    if (state is ProductsDiscountSuccess) {
+                      products = state.productsEntity?.products ?? [];
+                    }
+
+                    if (state is ProductsNotDiscountSuccess) {
+                      products = state.productsEntity?.products ?? [];
+                    }
+
+                    if (state is ProductsActiveSuccess) {
+                      products = state.productsEntity?.products ?? [];
+                    }
+
+                    if (state is ProductsNotActiveSuccess) {
+                      products = state.productsEntity?.products ?? [];
+                    }
+
+                    final filteredProducts = query.isEmpty
+                        ? products
+                        : products
+                        .where((product) => product.productName
+                        ?.toLowerCase()
+                        .contains(query.toLowerCase()) ??
+                        false)
+                        .toList();
+
+                    if (state is ProductsLoading && products.isEmpty) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (state is ProductsDiscountFail) {
+                      return const Center(child: Text('حدث خطأ أثناء تحميل المنتجات'));
+                    }
+
+                    if (filteredProducts.isEmpty) {
+                      return const Center(child: Text('لا توجد منتجات'));
+                    }
+
+                    return CustomScrollView(
+                      controller: _scrollController,
+                      slivers: [
+                        SliverGrid(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: 16.0,
+                            mainAxisSpacing: 16.0,
+                            childAspectRatio: 1.0,
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                              return Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SelectProduct(
+                                    products: filteredProducts[index],
+                                  ),
+                                  Expanded(
+                                    child: CustomProductsAllItem(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => EditProduct(
+                                              product: filteredProducts[index],
+                                            ),
+                                          ),
+                                        ).then((value) {
+                                          if (value == true) {
+                                            widget.viewModel.getLimitAllProducts(
+                                              isFirstFetch: true,
+                                            );
+                                          }
+                                        });
+                                      },
+                                      product: filteredProducts[index],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                            childCount: filteredProducts.length,
+                          ),
+                        ),
+                        if (isLoadingMore)
+                          const SliverToBoxAdapter(
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(16),
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],

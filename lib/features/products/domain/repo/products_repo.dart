@@ -5,6 +5,11 @@ import '../../data/models/request/edit_product_request.dart';
 import '../entities/products_entities.dart';
 
 abstract class ProductsRepo {
-  Future<Result<ProductsEntity?>> getProductsData();
+  Future<Result<ProductsEntity?>> getLimitAllProducts(int? page);
+  Future<Result<ProductsEntity?>> getLimitProductsDiscount(int? page);
+  Future<Result<ProductsEntity?>> getLimitProductsNotDiscount(int? page);
+  Future<Result<ProductsEntity?>> getLimitProductsActive(int? page);
+  Future<Result<ProductsEntity?>> getLimitProductsNotActive(int? page);
+
   Future<Result<EditProductEntity?>> editProductsData(EditProductRequest editProductRequest);
 }

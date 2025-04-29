@@ -172,17 +172,17 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i167.ProductsRepoImpl(gh<_i95.ProductsEditDataSourceRepo>()));
     gh.factory<_i572.CategoriesCubit>(
         () => _i572.CategoriesCubit(gh<_i548.CategoriesUseCase>()));
-    gh.factory<_i1019.ProductsByCategoryCubit>(
-        () => _i1019.ProductsByCategoryCubit(gh<_i548.CategoriesUseCase>()));
     gh.factory<_i881.EditCategoryCubit>(
         () => _i881.EditCategoryCubit(gh<_i548.CategoriesUseCase>()));
+    gh.factory<_i1019.ProductsByCategoryCubit>(
+        () => _i1019.ProductsByCategoryCubit(gh<_i548.CategoriesUseCase>()));
     gh.factory<_i9.HomeCubit>(() => _i9.HomeCubit(gh<_i395.HomeUseCase>()));
-    gh.factory<_i258.HomeUseCase>(
-        () => _i258.HomeUseCase(gh<_i482.ProductsRepo>()));
+    gh.factory<_i258.ProductsUseCase>(
+        () => _i258.ProductsUseCase(gh<_i482.ProductsRepo>()));
     gh.factory<_i534.ProductsEditUseCase>(
         () => _i534.ProductsEditUseCase(gh<_i1007.ProductsEditRepo>()));
     gh.factory<_i911.ProductsCubit>(
-        () => _i911.ProductsCubit(gh<_i258.HomeUseCase>()));
+        () => _i911.ProductsCubit(gh<_i258.ProductsUseCase>()));
     gh.factory<_i358.ProductCategoriesEditCubit>(() =>
         _i358.ProductCategoriesEditCubit(gh<_i534.ProductsEditUseCase>()));
     gh.factory<_i682.EditProductCubit>(

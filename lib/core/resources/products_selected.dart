@@ -1,6 +1,7 @@
 
 
-import '../../features/products/data/models/response/AllProductsRespose.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
+
 
 class ProductsSelected {
   static Map<int, bool> isProductProduct = {};

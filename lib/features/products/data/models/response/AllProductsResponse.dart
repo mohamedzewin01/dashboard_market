@@ -1,10 +1,14 @@
-import '../../../domain/entities/products_entities.dart';
+import 'package:dashboard_market/features/products/domain/entities/products_entities.dart';
 
 class AllProductsResponse {
   AllProductsResponse({
-    this.status,
-    this.products,
-  });
+      this.status, 
+      this.products, 
+      this.page, 
+      this.limit, 
+      this.total, 
+      this.pages,}
+      );
 
   AllProductsResponse.fromJson(dynamic json) {
     status = json['status'];
@@ -14,10 +18,17 @@ class AllProductsResponse {
         products?.add(Products.fromJson(v));
       });
     }
+    page = json['page'];
+    limit = json['limit'];
+    total = json['total'];
+    pages = json['pages'];
   }
-
   String? status;
   List<Products>? products;
+  num? page;
+  num? limit;
+  num? total;
+  num? pages;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -25,31 +36,34 @@ class AllProductsResponse {
     if (products != null) {
       map['products'] = products?.map((v) => v.toJson()).toList();
     }
+    map['page'] = page;
+    map['limit'] = limit;
+    map['total'] = total;
+    map['pages'] = pages;
     return map;
   }
-
   ProductsEntity toHomeEntity() {
     return ProductsEntity(
       status: status,
       products: products,
     );
   }
+
 }
 
 class Products {
   Products({
-    this.idProduct,
-    this.productName,
-    this.productPrice,
-    this.description,
-    this.imageCover,
-    this.productPriceAfterDiscount,
-    this.category,
-    this.descount,
-    this.status,
-    this.dateDescount,
-    this.createdAt,
-  });
+      this.idProduct, 
+      this.productName, 
+      this.productPrice, 
+      this.description, 
+      this.imageCover, 
+      this.productPriceAfterDiscount, 
+      this.category, 
+      this.descount, 
+      this.status, 
+      this.dateDescount, 
+      this.createdAt,});
 
   Products.fromJson(dynamic json) {
     idProduct = json['id_product'];
@@ -64,7 +78,6 @@ class Products {
     dateDescount = json['date_descount'];
     createdAt = json['createdAt'];
   }
-
   int? idProduct;
   String? productName;
   num? productPrice;
@@ -72,7 +85,7 @@ class Products {
   String? imageCover;
   num? productPriceAfterDiscount;
   int? category;
-  int? descount;
+  num? descount;
   num? status;
   String? dateDescount;
   String? createdAt;
@@ -92,4 +105,5 @@ class Products {
     map['createdAt'] = createdAt;
     return map;
   }
+
 }

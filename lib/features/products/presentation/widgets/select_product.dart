@@ -1,6 +1,6 @@
-import 'package:dashboard_market/features/products/data/models/response/AllProductsRespose.dart';
 import 'package:dashboard_market/core/resources/products_selected.dart';
 import 'package:flutter/material.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
 
 class SelectProduct extends StatefulWidget {
   const SelectProduct({

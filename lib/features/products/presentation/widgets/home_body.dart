@@ -3,7 +3,7 @@ import 'package:dashboard_market/features/products/presentation/widgets/product_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../data/models/response/AllProductsRespose.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
 
 
 class HomeBody extends StatelessWidget {
@@ -29,10 +29,10 @@ class HomeBody extends StatelessWidget {
             }
             if (state is ProductsSuccess) {
               List<Products>? products =
-                  state.homeEntity?.products?.reversed.toList() ?? [];
+                  state.productsEntity?.products ?? [];
               return RefreshIndicator(
                 color: ColorManager.primaryColor,
-                onRefresh: () => viewModel.getHomeData(),
+                onRefresh: () => viewModel.getLimitAllProducts(),
                 child:
                     ProductItemsHome(viewModel: viewModel, products: products),
               );
@@ -51,13 +51,13 @@ class HomeBody extends StatelessWidget {
             }
             if (state is ProductsSuccess) {
               List<Products>? products =
-                  state.homeEntity?.products?.reversed.toList() ?? [];
+                  state.productsEntity?.products ?? [];
               List<Products>? products2 = [];
               products2 =
                   products.where((element) => element.status == 1).toList();
               return RefreshIndicator(
                 color: ColorManager.primaryColor,
-                onRefresh: () => viewModel.getHomeData(),
+                onRefresh: () => viewModel.getLimitAllProducts(),
                 child:
                     ProductItemsHome(viewModel: viewModel, products: products2),
               );
@@ -80,13 +80,13 @@ class HomeBody extends StatelessWidget {
             }
             if (state is ProductsSuccess) {
               List<Products>? products =
-                  state.homeEntity?.products?.reversed.toList() ?? [];
+                  state.productsEntity?.products?? [];
               List<Products>? products3 = [];
               products3 =
                   products.where((element) => element.status == 0).toList();
               return RefreshIndicator(
                 color: ColorManager.primaryColor,
-                onRefresh: () => viewModel.getHomeData(),
+                onRefresh: () => viewModel.getLimitAllProducts(),
                 child:
                     ProductItemsHome(viewModel: viewModel, products: products3),
               );
@@ -106,15 +106,15 @@ class HomeBody extends StatelessWidget {
                 ),
               );
             }
-            if (state is ProductsSuccess) {
+            if (state is ProductsDiscountSuccess) {
               List<Products>? products =
-                  state.homeEntity?.products?.reversed.toList() ?? [];
+                  state.productsEntity?.products?? [];
               List<Products>? products3 = [];
               products3 =
                   products.where((element) => element.descount != 0).toList();
               return RefreshIndicator(
                 color: ColorManager.primaryColor,
-                onRefresh: () => viewModel.getHomeData(),
+                onRefresh: () => viewModel.getLimitAllProducts(),
                 child:
                 ProductItemsHome(viewModel: viewModel, products: products3),
               );
@@ -136,13 +136,13 @@ class HomeBody extends StatelessWidget {
             }
             if (state is ProductsSuccess) {
               List<Products>? products =
-                  state.homeEntity?.products?.reversed.toList() ?? [];
+                  state.productsEntity?.products ?? [];
               List<Products>? products3 = [];
               products3 =
                   products.where((element) => element.descount == 0).toList();
               return RefreshIndicator(
                 color: ColorManager.primaryColor,
-                onRefresh: () => viewModel.getHomeData(),
+                onRefresh: () => viewModel.getLimitAllProducts(),
                 child:
                 ProductItemsHome(viewModel: viewModel, products: products3),
               );

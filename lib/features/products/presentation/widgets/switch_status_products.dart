@@ -1,7 +1,7 @@
 import 'package:dashboard_market/features/products/presentation/cubit/products_cubit.dart';
 import 'package:flutter/material.dart';
 import '../../data/models/request/edit_product_request.dart';
-import '../../data/models/response/AllProductsRespose.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
 
 
 class SwitchStatusProducts extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:dashboard_market/features/product_edit/presentation/widgets/edit
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../../products/data/models/response/AllProductsRespose.dart';
+import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
 
 class EditProduct extends StatefulWidget {
   const EditProduct({super.key, required this.product});
