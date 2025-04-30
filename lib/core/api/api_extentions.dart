@@ -6,7 +6,7 @@ import '../common/custom_exception.dart';
 
 Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
   try {
-    var result = await apiCall.call();
+    final result = await apiCall.call();
     return Success(result);
   } on TimeoutException catch (_) {
     return Fail(NoInternetError());

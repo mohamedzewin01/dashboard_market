@@ -81,29 +81,28 @@ class _FitnessTextFormFieldState extends State<FitnessTextFormField> {
         hintText: widget.hintText,
         hintStyle: getRegularStyle(
           color: ColorManager.fieldTextBorder,
-          fontSize: FontSize.s12,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: const EdgeInsets.all(AppPadding.p8),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: ColorManager.fieldTextBorder, width: 1),
+          borderSide: const BorderSide(color: ColorManager.fieldTextBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: ColorManager.fieldTextBorder, width: 1),
+          borderSide: const BorderSide(color: ColorManager.fieldTextBorder),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: ColorManager.fieldTextBorder, width: 1),
+          borderSide: const BorderSide(color: ColorManager.fieldTextBorder),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: ColorManager.fieldTextBorder, width: 1),
+          borderSide: const BorderSide(color: ColorManager.fieldTextBorder),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: ColorManager.fieldTextBorder, width: 1),
+          borderSide: const BorderSide(color: ColorManager.fieldTextBorder),
         ),
       ),
       obscureText: _isObscure,

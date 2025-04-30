@@ -7,10 +7,10 @@ import 'package:flutter_svg/svg.dart';
 import '../api/api_constants.dart';
 
 String getFileExtensionFromUrl(String url) {
-  List<String> parts = url.split('.');
-  String lastPart = parts.last;
-  List<String> extensionParts = lastPart.split('?');
-  String extension = extensionParts.first;
+  final List<String> parts = url.split('.');
+  final String lastPart = parts.last;
+  final List<String> extensionParts = lastPart.split('?');
+  final String extension = extensionParts.first;
   return extension;
 }
 

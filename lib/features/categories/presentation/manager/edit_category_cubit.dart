@@ -1,13 +1,11 @@
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:dashboard_market/core/common/api_result.dart';
 import 'package:dashboard_market/features/categories/domain/entities/fetch_categories.dart';
 import 'package:dashboard_market/features/categories/domain/use_cases/categories_use_case.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 part 'edit_category_state.dart';
 
@@ -24,13 +22,13 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
   final formKeyEdit = GlobalKey<FormState>();
   int? idCategory;
 
-  changeNameCategory(String name,int idCategory) {
+  void changeNameCategory(String name,int idCategory) {
     editCategoryNameController.text = name;
     this.idCategory = idCategory;
     emit(EditCategoryChangeImage());
   }
 
-  changeImageCategory(String image) {
+  void changeImageCategory(String image) {
     imageFileEdit = null;
     imagePathEdit = image;
     emit(EditCategoryChangeImage());
@@ -38,7 +36,7 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
 
   Future<void> editCategory() async {
     emit(EditCategoryLoading());
-    var result = await _categoriesUseCase
+    final result = await _categoriesUseCase
         .editProductByCategories(
         categoryId: idCategory??0,
         categoryName: editCategoryNameController.text,
@@ -64,7 +62,7 @@ class EditCategoryCubit extends Cubit<EditCategoryState> {
 
   Future<void>deleteCategory()async{
     emit(EditCategoryLoading());
-    var result = await _categoriesUseCase.deleteProductByCategories(idCategory??0, imagePathEdit);
+    final result = await _categoriesUseCase.deleteProductByCategories(idCategory??0, imagePathEdit);
     switch (result) {
       case Success<DeleteCategoryEntity?>():
         {

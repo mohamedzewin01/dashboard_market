@@ -1,19 +1,12 @@
 import 'dart:io';
 
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dashboard_market/core/resources/cashed_image.dart';
-import 'package:dashboard_market/core/resources/style_manager.dart';
-import 'package:dashboard_market/features/categories/presentation/manager/edit_category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../core/di/di.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/widgets/custom_elevated_button.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../data/models/fetch_categories.dart';
 import '../manager/categories_cubit.dart';
 import 'edit_category.dart';
 
@@ -49,7 +42,6 @@ class _AddCategoriesState extends State<AddCategories> {
           key: widget.viewModel.formKey,
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               spacing: 16,
               children: [
                 SizedBox(

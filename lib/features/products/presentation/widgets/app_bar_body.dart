@@ -9,10 +9,9 @@ class AppBarBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
+    return const SliverAppBar(
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             width: 5,

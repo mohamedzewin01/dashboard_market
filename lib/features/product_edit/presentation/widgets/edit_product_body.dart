@@ -37,7 +37,7 @@ class EditProductBody extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             CachedNetworkImage(
@@ -56,7 +56,7 @@ class EditProductBody extends StatelessWidget {
                 fit: BoxFit.fill,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Column(
@@ -83,7 +83,7 @@ class EditProductBody extends StatelessWidget {
 
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,),
                     Expanded(
                       child: CustomTextFormField(
@@ -95,12 +95,12 @@ class EditProductBody extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,),
                 ChangeCategories(
                   categoryId: widget.product.category,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,),
                 Text(
                   "في حالة عدم وجود خصم يتم وضع صفر (0) في خانة السعر بعد الخصم",
@@ -113,7 +113,6 @@ class EditProductBody extends StatelessWidget {
                   spacing: 16,
                   children: [
                     Expanded(
-                      flex: 1,
                       child: CustomElevatedButton(
                           buttonColor: ColorManager.primaryColor,
                           title: 'رجوع ',
@@ -138,7 +137,6 @@ class EditProductBody extends StatelessWidget {
                           }),
                     ),
                     Expanded(
-                      flex: 1,
                       child: CustomElevatedButton(
                           buttonColor: ColorManager.error,
                           title: 'حذف ',
@@ -157,7 +155,7 @@ class EditProductBody extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             )
           ],

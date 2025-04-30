@@ -61,7 +61,6 @@
 //   }
 // }
 
-import 'dart:developer';
 import 'package:dashboard_market/core/resources/style_manager.dart';
 import 'package:dashboard_market/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
@@ -132,10 +131,10 @@ class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
                     decoration: InputDecoration(
 
                       hintText: 'ابحث عن صورة...',
-                      prefixIcon: Icon(Icons.search, color: ColorManager.grey),
+                      prefixIcon: const Icon(Icons.search, color: ColorManager.grey),
                       suffixIcon: searchController.text.isNotEmpty
                           ? IconButton(
-                        icon: Icon(Icons.clear, color: ColorManager.grey),
+                        icon: const Icon(Icons.clear, color: ColorManager.grey),
                         onPressed: () {
                           searchController.clear(); // مسح النص
                           filterImages(''); // تحديث القائمة
@@ -161,14 +160,14 @@ class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
                               style: getSemiBoldStyle(
                                   color: ColorManager.orange, fontSize: 24),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 25,
                             ),
                             IconButton(
                                 onPressed: () {
                                   LayoutCubit.get(context).changeIndex(3);
                                 },
-                                icon: CircleAvatar(
+                                icon: const CircleAvatar(
                                     backgroundColor: ColorManager.orange,
                                     child: Icon(
                                       Icons.add_a_photo,
@@ -223,7 +222,7 @@ class _ShowAllImagesToAddProductState extends State<ShowAllImagesToAddProduct> {
               ],
             );
           }
-          return Center(
+          return const Center(
               child: CircularProgressIndicator(color: ColorManager.orange));
         },
       ),

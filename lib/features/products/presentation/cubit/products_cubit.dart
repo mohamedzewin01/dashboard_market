@@ -1,12 +1,9 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../core/common/api_result.dart';
 import '../../data/models/request/edit_product_request.dart';
@@ -19,23 +16,20 @@ part 'products_state.dart';
 class ProductsCubit extends Cubit<ProductsState> {
   final ProductsUseCase _productsUseCase;
 
-
-
-
   ProductsCubit(this._productsUseCase) : super(ProductsInitial());
-static ProductsCubit get(context) => BlocProvider.of(context);
 
+  static ProductsCubit get(context) => BlocProvider.of(context);
 
   int currentPage = 1;
   bool _isLoadingMore = false;
   bool _hasMore = true;
+  num totalProducts = 0;
+  late TabController tabController;
 
- late TabController tabController;
-void changeCurrentPage(int page){
-  currentPage=page;
-  emit(ChangeCurrentPage());
-}
-
+  void changeCurrentPage(int page) {
+    currentPage = page;
+    emit(ChangeCurrentPage());
+  }
 
   Future<void> getLimitAllProducts({bool isFirstFetch = false}) async {
     if (isFirstFetch) {
@@ -49,14 +43,15 @@ void changeCurrentPage(int page){
       case Success<ProductsEntity?>():
         {
           if (!isClosed) {
+
             final oldProducts = (state is ProductsSuccess)
                 ? (state as ProductsSuccess).productsEntity?.products ?? []
                 : [];
 
             final newProducts = result.data?.products ?? [];
 
-            List<Products>? allProducts = [...oldProducts, ...newProducts];
-
+            final List<Products> allProducts = [...oldProducts, ...newProducts];
+             totalProducts = result.data?.total ?? 0;
             emit(ProductsSuccess(
               ProductsEntity(
                 products: allProducts,
@@ -80,8 +75,6 @@ void changeCurrentPage(int page){
     _isLoadingMore = false;
   }
 
-
-
   Future<void> getLimitProductsDiscount({bool isFirstFetch = false}) async {
     if (isFirstFetch) {
       currentPage = 2;
@@ -94,13 +87,14 @@ void changeCurrentPage(int page){
         {
           if (!isClosed) {
             final oldProducts = (state is ProductsDiscountSuccess)
-                ? (state as ProductsDiscountSuccess).productsEntity?.products ?? []
+                ? (state as ProductsDiscountSuccess).productsEntity?.products ??
+                    []
                 : [];
 
             final newProducts = result.data?.products ?? [];
 
             // دمج المنتجات القديمة والجديدة
-            List<Products> allProducts = [...oldProducts, ...newProducts];
+            final List<Products> allProducts = [...oldProducts, ...newProducts];
 
             emit(ProductsDiscountSuccess(
               ProductsEntity(
@@ -134,19 +128,23 @@ void changeCurrentPage(int page){
     }
     _isLoadingMore = true;
 
-    final result = await _productsUseCase.getLimitProductsNotDiscount(currentPage);
+    final result =
+        await _productsUseCase.getLimitProductsNotDiscount(currentPage);
     switch (result) {
       case Success<ProductsEntity?>():
         {
           if (!isClosed) {
             final oldProducts = (state is ProductsNotDiscountSuccess)
-                ? (state as ProductsNotDiscountSuccess).productsEntity?.products ?? []
+                ? (state as ProductsNotDiscountSuccess)
+                        .productsEntity
+                        ?.products ??
+                    []
                 : [];
 
             final newProducts = result.data?.products ?? [];
 
             // دمج المنتجات القديمة والجديدة
-            List<Products> allProducts = [...oldProducts, ...newProducts];
+            final List<Products> allProducts = [...oldProducts, ...newProducts];
 
             emit(ProductsNotDiscountSuccess(
               ProductsEntity(
@@ -186,13 +184,14 @@ void changeCurrentPage(int page){
         {
           if (!isClosed) {
             final oldProducts = (state is ProductsActiveSuccess)
-                ? (state as ProductsActiveSuccess).productsEntity?.products ?? []
+                ? (state as ProductsActiveSuccess).productsEntity?.products ??
+                    []
                 : [];
 
             final newProducts = result.data?.products ?? [];
 
             // دمج المنتجات القديمة والجديدة
-            List<Products> allProducts = [...oldProducts, ...newProducts];
+            final List<Products> allProducts = [...oldProducts, ...newProducts];
 
             emit(ProductsActiveSuccess(
               ProductsEntity(
@@ -226,19 +225,23 @@ void changeCurrentPage(int page){
     }
     _isLoadingMore = true;
 
-    final result = await _productsUseCase.getLimitProductsNotActive(currentPage);
+    final result =
+        await _productsUseCase.getLimitProductsNotActive(currentPage);
     switch (result) {
       case Success<ProductsEntity?>():
         {
           if (!isClosed) {
             final oldProducts = (state is ProductsNotActiveSuccess)
-                ? (state as ProductsNotActiveSuccess).productsEntity?.products ?? []
+                ? (state as ProductsNotActiveSuccess)
+                        .productsEntity
+                        ?.products ??
+                    []
                 : [];
 
             final newProducts = result.data?.products ?? [];
 
             // دمج المنتجات القديمة والجديدة
-            List<Products> allProducts = [...oldProducts, ...newProducts];
+            final List<Products> allProducts = [...oldProducts, ...newProducts];
 
             emit(ProductsNotActiveSuccess(
               ProductsEntity(
@@ -266,18 +269,12 @@ void changeCurrentPage(int page){
     _isLoadingMore = false;
   }
 
-
-
-
-TextEditingController searchController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
   String searchQuery = "";
-  int? selectedCategoryId ;
+  int? selectedCategoryId;
 
   Future<void> editProduct(EditProductRequest editProductRequest) async {
-
     await _productsUseCase.editProductsData(editProductRequest);
     log('Success');
   }
-
-
 }

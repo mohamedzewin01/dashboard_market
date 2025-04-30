@@ -1,15 +1,11 @@
 import 'package:dashboard_market/core/di/di.dart';
 import 'package:dashboard_market/core/resources/color_manager.dart';
-import 'package:dashboard_market/features/add_images/presentation/pages/images_view.dart';
 import 'package:dashboard_market/features/add_product/presentation/manager/add_product_cubit.dart';
 import 'package:dashboard_market/features/add_product/presentation/widgets/image_screen_view.dart';
-import 'package:dashboard_market/features/categories/presentation/widgets/Add_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/resources/style_manager.dart';
 import '../widgets/add_product_body.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class AddProductView extends StatefulWidget {
   const AddProductView({super.key});
@@ -58,7 +54,7 @@ class _AddProductViewState extends State<AddProductView> {
                   // Expanded(
                   //   child:AddCategories()
                   // ),
-                  Expanded(flex: 10, child: ImageScreenView()),
+                  const Expanded(flex: 10, child: ImageScreenView()),
                 ],
               );
             }

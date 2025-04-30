@@ -33,13 +33,13 @@ class MyApp extends StatelessWidget {
         builder: (context, locale) {
           return MaterialApp(
             locale: locale,
-            localizationsDelegates: [
+            localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: [
+            supportedLocales: const [
               // Locale('en'),
               Locale('ar'),
             ],

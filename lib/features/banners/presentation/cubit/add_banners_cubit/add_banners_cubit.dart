@@ -9,7 +9,6 @@ import 'package:dashboard_market/features/banners/domain/use_cases/banners_use_c
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 part 'add_banners_state.dart';
 
@@ -29,7 +28,7 @@ class AddBannersCubit extends Cubit<AddBannersState> {
   }
 
 
-  changeImage(File file) {
+  void changeImage(File file) {
     imageFile = file;
     emit(AddBannersChangeImage());
   }
@@ -58,11 +57,11 @@ class AddBannersCubit extends Cubit<AddBannersState> {
   TextEditingController bannerSubTitleController = TextEditingController();
 
 
-  changeTitle(String title) {
+  void changeTitle(String title) {
     bannerTitleController.text = title;
     emit(AddBannersChangeTitle());
   }
-  changeSubTitle(String title) {
+  void changeSubTitle(String title) {
     bannerSubTitleController.text = title;
     emit(AddBannersChangeSubTitle());
   }

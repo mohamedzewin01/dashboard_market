@@ -22,7 +22,7 @@ class StoreDataSources{
   Future<Result<StoreInfoEntity?>> getStoreInfo()async {
     return executeApi(
       ()async{
-        var response = await apiService.getStoreInfo();
+        final response = await apiService.getStoreInfo();
         return response?.toStoreInfoEntity();
       }
     );
@@ -30,7 +30,7 @@ class StoreDataSources{
   Future<Result<StoreInfoEditEntity?>> editStoreInfo(StoreInfoRequest? storeInfoRequest)async {
     return executeApi(
       ()async{
-        var response = await apiService.editStoreInfo(storeInfoRequest);
+        final response = await apiService.editStoreInfo(storeInfoRequest);
         return response?.toStoreInfoEditEntity();
       }
     );
@@ -38,7 +38,7 @@ class StoreDataSources{
   Future<Result<UploadImageStoreEntity?>> uploadImageStore(File imageFile,String imagePath)async {
     return executeApi(
             ()async{
-          var response = await apiService.uploadImageStore(imageFile, imagePath);
+          final response = await apiService.uploadImageStore(imageFile, imagePath);
           return response?.toUploadImageStoreEntity();
         }
     );

@@ -46,7 +46,7 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
 
   @override
   Widget build(BuildContext context) {
-    EditCategoryCubit cubit = context.read<EditCategoryCubit>();
+    final EditCategoryCubit cubit = context.read<EditCategoryCubit>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -65,7 +65,7 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
             }
 
             return LayoutBuilder(builder: (context, constraints) {
-              int crossAxisCount = constraints.maxWidth > 900
+              final int crossAxisCount = constraints.maxWidth > 900
                   ? 6
                   : constraints.maxWidth > 700
                   ? 4
@@ -75,12 +75,11 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                 children: [
                   if (_categoriesList.isNotEmpty)
                     Wrap(
-                      alignment: WrapAlignment.start,
                       children: _categoriesList.asMap().entries.map((entry) {
-                        int index = entry.key;
-                        String tabText = entry.value.categoryName ?? "Unknown";
-                        String imageUrl = entry.value.categoryImage ?? "";
-                        int id = entry.value.categoryId ?? 0;
+                        final int index = entry.key;
+                        final String tabText = entry.value.categoryName ?? "Unknown";
+                        final String imageUrl = entry.value.categoryImage ?? "";
+                        final int id = entry.value.categoryId ?? 0;
 
                         return GestureDetector(
                           onTap: () {
@@ -112,7 +111,6 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                                 color: _selectedIndex == index
                                     ? Colors.white
                                     : Colors.black,
-                                fontSize: 12,
                               ),
                             ),
                           ),
@@ -130,7 +128,7 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                               ProductsByCategoryState>(
                             builder: (context, state) {
                               if (state is ProductsByCategorySuccess) {
-                                List<ProductsRelations>? filteredProducts =
+                                final List<ProductsRelations> filteredProducts =
                                     state
                                         .productsByCategoriesEntity
                                         .productsData
@@ -156,7 +154,6 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                                         crossAxisCount: crossAxisCount,
                                         crossAxisSpacing: 16.0,
                                         mainAxisSpacing: 16.0,
-                                        childAspectRatio: 1.0,
                                       ),
                                       delegate: SliverChildBuilderDelegate(
                                             (context, index) =>
@@ -193,7 +190,7 @@ class _CategoriesTapBarState extends State<CategoriesTapBar>
                                   ],
                                 );
                               }
-                              return Center(
+                              return const Center(
                                   child: CircularProgressIndicator(
                                     color: ColorManager.primaryColor,
                                   ));

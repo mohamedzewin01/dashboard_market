@@ -17,14 +17,14 @@ class ProductsDataSourceRepoImpl implements ProductsDataSourceRepo {
   @override
   Future<Result<ProductsEntity?>> getLimitAllProducts(int? page) {
     return executeApi(() async {
-      var response = await apiService.getLimitAllProducts(page);
+      final response = await apiService.getLimitAllProducts(page);
       return response?.toHomeEntity();
     });
   }
   @override
   Future<Result<ProductsEntity?>> getLimitProductsDiscount(int? page) {
     return executeApi(() async {
-      var response = await apiService.getLimitProductsDiscount(page);
+      final response = await apiService.getLimitProductsDiscount(page);
       return response?.toHomeEntity();
     });
   }
@@ -33,7 +33,7 @@ class ProductsDataSourceRepoImpl implements ProductsDataSourceRepo {
   @override
   Future<Result<ProductsEntity?>> getLimitProductsActive(int? page) {
     return executeApi(() async {
-      var response = await apiService.getLimitProductsActive(page);
+      final response = await apiService.getLimitProductsActive(page);
       return response?.toHomeEntity();
     });
   }
@@ -41,7 +41,7 @@ class ProductsDataSourceRepoImpl implements ProductsDataSourceRepo {
   @override
   Future<Result<ProductsEntity?>> getLimitProductsNotActive(int? page) {
     return executeApi(() async {
-      var response = await apiService.getLimitProductsNotActive( page);
+      final response = await apiService.getLimitProductsNotActive( page);
       return response?.toHomeEntity();
     });
   }
@@ -49,7 +49,7 @@ class ProductsDataSourceRepoImpl implements ProductsDataSourceRepo {
   @override
   Future<Result<ProductsEntity?>> getLimitProductsNotDiscount(int? page) {
     return executeApi(() async {
-      var response = await apiService.getLimitProductsNotDiscount(page);
+      final response = await apiService.getLimitProductsNotDiscount(page);
       return response?.toHomeEntity();
     });
   }
@@ -57,7 +57,7 @@ class ProductsDataSourceRepoImpl implements ProductsDataSourceRepo {
   Future<Result<EditProductEntity?>> editProductsData(
       EditProductRequest editProductRequest) {
     return executeApi(() async {
-      var response = await apiService.editProduct(editProductRequest);
+      final response = await apiService.editProduct(editProductRequest);
       return response?.toEditProductEntity();
     });
   }

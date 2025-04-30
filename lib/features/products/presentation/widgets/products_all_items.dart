@@ -80,7 +80,7 @@ class CustomProductsAllItem extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text(
                               product.description ?? '',
                               textDirection: TextDirection.rtl,
@@ -89,7 +89,6 @@ class CustomProductsAllItem extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: getSemiBoldStyle(
                                 color: ColorManager.primary,
-                                fontSize: 12,
                               ),
                             ),
                           ),
@@ -99,7 +98,7 @@ class CustomProductsAllItem extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Divider(
+                    const Divider(
                       color: ColorManager.placeHolderColor,
                     ),
                     IntrinsicHeight(
@@ -157,16 +156,16 @@ class CustomProductsAllItem extends StatelessWidget {
                             ],
                           ),
                           product.productPriceAfterDiscount != 0
-                              ? VerticalDivider(
+                              ? const VerticalDivider(
                             color: ColorManager.placeHolderColor,
                           )
-                              : SizedBox(),
+                              : const SizedBox(),
                           product.productPriceAfterDiscount == 0
-                              ? SizedBox()
+                              ? const SizedBox()
                               : Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              CustomRiyalSaudi(),
+                              const CustomRiyalSaudi(),
                               const SizedBox(
                                 width: 3,
                               ),
@@ -189,24 +188,24 @@ class CustomProductsAllItem extends StatelessWidget {
             ),
           ),
           product.productPriceAfterDiscount == 0
-              ? SizedBox()
+              ? const SizedBox()
               : Positioned(
             top: 0,
             left: 0,
             child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: ColorManager.error,
                     borderRadius:
                     BorderRadius.only(topLeft: Radius.circular(8))),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: Column(
                   children: [
                     Text("${product.descount}%",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: ColorManager.white)),
-                    Text("خصم",
+                    const Text("خصم",
                         style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,

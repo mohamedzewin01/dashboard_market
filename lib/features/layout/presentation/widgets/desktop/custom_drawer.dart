@@ -2,8 +2,6 @@ import 'package:dashboard_market/core/resources/app_constants.dart';
 import 'package:dashboard_market/core/resources/style_manager.dart';
 import 'package:dashboard_market/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
@@ -17,7 +15,7 @@ class CustomDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<ItemsDrawer> drawerItems = [
+    final List<ItemsDrawer> drawerItems = [
       ItemsDrawer(
         title: 'الرئيسية',
         imagePath: Assets.home,
@@ -66,9 +64,9 @@ class CustomDrawer extends StatelessWidget {
       slivers: [
         SliverToBoxAdapter(
           child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+              margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(colors: [
                   ColorManager.white,
@@ -96,7 +94,7 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
         ),
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: SizedBox(
             height: 24,
           ),
@@ -108,14 +106,14 @@ class CustomDrawer extends StatelessWidget {
           hasScrollBody: false,
           child: Column(
             children: [
-              Spacer(),
+              const Spacer(),
               ItemsDrawer(
                 page: 6,
                 title: 'خروج',
                 imagePath: Assets.exit,
                 onTap: () => CustomDialog.showExitDialog(context),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Text(
@@ -126,7 +124,7 @@ class CustomDrawer extends StatelessWidget {
                 AppConstants.version,
                 style: getSemiBoldStyle(color: ColorManager.primaryColor),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               )
             ],

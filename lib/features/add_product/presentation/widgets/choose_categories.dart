@@ -37,7 +37,7 @@ class _ChooseCategoriesState extends State<ChooseCategories> {
       child: BlocBuilder<CategoriesCubit, CategoriesState>(
         builder: (context, state) {
           if (state is CategoriesSuccess) {
-            List<Categories> categories =
+            final List<Categories> categories =
                 state.categoriesEntity.categories ?? [];
             if (categories.isEmpty) {
               return const Text('لا توجد بيانات متاحة');

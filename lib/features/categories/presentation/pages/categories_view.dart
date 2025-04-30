@@ -1,20 +1,11 @@
-import 'dart:io';
 
 import 'package:dashboard_market/core/di/di.dart';
-import 'package:dashboard_market/core/resources/style_manager.dart';
-import 'package:dashboard_market/features/categories/data/models/fetch_categories.dart';
 import 'package:dashboard_market/features/categories/presentation/manager/edit_category_cubit.dart';
 import 'package:dashboard_market/features/categories/presentation/manager/products_by_category_cubit.dart';
 import 'package:dashboard_market/features/categories/presentation/widgets/categories_tap_bar.dart';
-import 'package:dashboard_market/features/home/presentation/pages/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/resources/cashed_image.dart';
-import '../../../../core/resources/color_manager.dart';
-import '../../../../core/widgets/custom_elevated_button.dart';
-import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../layout/presentation/cubit/layout_cubit.dart';
 import '../manager/categories_cubit.dart';
 import '../widgets/Add_categories.dart';
@@ -60,7 +51,7 @@ class _CategoriesViewState extends State<CategoriesView> {
           } else {
             return Row(
               children: [
-                Expanded(flex: 1, child: AddCategories(viewModel: viewModel,)),
+                Expanded(child: AddCategories(viewModel: viewModel,)),
                 Expanded(
                   flex: 2,
                   child: CategoriesTapBar(
@@ -71,7 +62,7 @@ class _CategoriesViewState extends State<CategoriesView> {
               ],
             );
           }
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

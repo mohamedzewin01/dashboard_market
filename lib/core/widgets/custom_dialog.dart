@@ -2,7 +2,6 @@
 import 'dart:io';
 
 import 'package:dashboard_market/core/widgets/permission_service.dart';
-import 'package:dashboard_market/features/layout/presentation/cubit/layout_cubit.dart';
 import 'package:flutter/material.dart';
 
 
@@ -26,7 +25,7 @@ class CustomDialog {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CircularProgressIndicator(
+                const CircularProgressIndicator(
                   color: ColorManager.orange,
                 ),
                 const SizedBox(height: 20),
@@ -280,7 +279,7 @@ class CustomDialog {
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Text("رجوع",
                         style: getBoldStyle(
                             color: ColorManager.white, fontSize: 18)),
@@ -311,7 +310,7 @@ class CustomDialog {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
+                const Icon(
                   Icons.warning_amber_rounded,
                   color: ColorManager.orange,
                   size: 60,
@@ -341,7 +340,7 @@ class CustomDialog {
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Text("Complete Data",
                         style: getBoldStyle(
                             color: ColorManager.white, fontSize: 18)),
@@ -361,7 +360,6 @@ class CustomDialog {
       }) async {
     return showDialog(
       context: context,
-      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
           contentPadding: const EdgeInsets.all(20),
@@ -381,7 +379,7 @@ class CustomDialog {
                 icon: Icons.photo_library,
                 label: "Gallery",
                 onTap: () async {
-                  var permission = await isPermissionStorageGranted();
+                  final permission = await isPermissionStorageGranted();
                   if (permission == false) return;
                   gallery();
                   if (context.mounted) Navigator.pop(context);
@@ -391,7 +389,7 @@ class CustomDialog {
                 icon: Icons.camera_alt,
                 label: "Camera",
                 onTap: () async {
-                  var permission = await isPermissionCameraGranted();
+                  final permission = await isPermissionCameraGranted();
                   if (permission == false) return;
                   camera();
                   if (context.mounted) Navigator.pop(context);
@@ -411,7 +409,7 @@ class CustomDialog {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, size: 40, color: ColorManager.orange),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(label, style:getBoldStyle(color: ColorManager.white, fontSize: 16)),
         ],
       ),

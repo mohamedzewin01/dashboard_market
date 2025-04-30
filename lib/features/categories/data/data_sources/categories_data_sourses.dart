@@ -16,7 +16,7 @@ class CategoriesDataSources {
   Future<Result<FetchCategoriesEntity?>> getCategories() async {
     return executeApi(
       () async {
-        var response = await apiService.getCategories();
+        final response = await apiService.getCategories();
         return response?.toFetchCategoriesEntity();
       },
     );
@@ -26,7 +26,7 @@ class CategoriesDataSources {
       File imageFile, String categoryName, int status) async {
     return executeApi(
       () async {
-        var response =
+        final response =
             await apiService.addCategory(imageFile, categoryName, status);
         return response?.toAddCategoryEntity();
       },
@@ -37,7 +37,7 @@ class CategoriesDataSources {
       int? idCategory) async {
     return executeApi(
       () async {
-        var response = await apiService.getProductsByCategories(idCategory);
+        final response = await apiService.getProductsByCategories(idCategory);
         return response?.toProductsByCategoriesEntity();
       },
     );
@@ -47,7 +47,7 @@ class CategoriesDataSources {
       String? categoryName, String? oldImagePath, File? newImage) {
     return executeApi(
       () async {
-        var response = await apiService.updateCategory(
+        final response = await apiService.updateCategory(
             categoryId, categoryName, oldImagePath, newImage);
         return response?.toEditCategoryEntity();
       },
@@ -56,7 +56,7 @@ class CategoriesDataSources {
   Future<Result<DeleteCategoryEntity?>> deleteProductByCategories(int categoryId,String imageName) {
     return executeApi(
       () async {
-        var response = await apiService.deleteCategory(categoryId, imageName);
+        final response = await apiService.deleteCategory(categoryId, imageName);
         return response?.toDeleteCategoryEntity();
       },
     );

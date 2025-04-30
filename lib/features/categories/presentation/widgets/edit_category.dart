@@ -55,12 +55,12 @@ class _EditCategoryState extends State<EditCategory> {
 
         }
         if (state is EditCategoryFailure) {
-          String message = state.exception.toString();
+          final String message = state.exception.toString();
           CustomDialog.showErrorDialog(context, message: message);
         }
       },
       builder: (context, state) {
-        EditCategoryCubit viewModel = context.read<EditCategoryCubit>();
+        final EditCategoryCubit viewModel = context.read<EditCategoryCubit>();
         return Padding(
           padding: const EdgeInsets.all(16),
           child: Form(
@@ -68,7 +68,6 @@ class _EditCategoryState extends State<EditCategory> {
             child: SingleChildScrollView(
               child: Column(
                 spacing: 5,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -82,7 +81,7 @@ class _EditCategoryState extends State<EditCategory> {
                           ? Tooltip(
                               message: " اضغط على صورة لاختيار صورة اخرى",
                               textStyle: getSemiBoldStyle(
-                                  color: ColorManager.white, fontSize: 12),
+                                  color: ColorManager.white),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: ColorManager.error,
@@ -119,7 +118,7 @@ class _EditCategoryState extends State<EditCategory> {
                                   message:
                                       "اختر القسم الاول من القائمة لتظهر صورته حتي يمكنك التعديل",
                                   textStyle: getSemiBoldStyle(
-                                      color: ColorManager.white, fontSize: 12),
+                                      color: ColorManager.white),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     color: ColorManager.error,
@@ -156,7 +155,7 @@ class _EditCategoryState extends State<EditCategory> {
                                     ),
                                   ),
                                 )
-                              : Container(
+                              : SizedBox(
                                   height: 150,
                                   width: double.infinity,
                                   child: Image.file(viewModel.imageFileEdit!)),

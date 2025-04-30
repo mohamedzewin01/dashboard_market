@@ -18,7 +18,7 @@ class DataSourcesDashboardStatistics {
   Future<Result<HomeEntity?>> getDashboardStatistics()async {
     return executeApi(
       ()async{
-        var response = await apiService.getDashboardStatistics();
+        final response = await apiService.getDashboardStatistics();
         return response?.toDashboardStatisticsDto();
       }
     );

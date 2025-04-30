@@ -1,4 +1,3 @@
-import 'package:dashboard_market/core/functions/helper.dart';
 import 'package:dashboard_market/core/resources/cashed_image.dart';
 import 'package:dashboard_market/core/widgets/custom_dialog.dart';
 import 'package:dashboard_market/features/add_product/presentation/widgets/show_all_images.dart';
@@ -37,7 +36,6 @@ class AddProductBody extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 spacing: 5,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -137,7 +135,7 @@ class AddProductBody extends StatelessWidget {
                             if (value!.trim().isEmpty) {
                               return 'ادخل سعر المنتج ';
                             }
-                            RegExp priceRegExp = RegExp(r'^\d+(\.\d{1,2})?$');
+                            final RegExp priceRegExp = RegExp(r'^\d+(\.\d{1,2})?$');
                             if (!priceRegExp.hasMatch(value)) {
                               return 'الرجاء إدخال سعر صحيح';
                             }
@@ -153,13 +151,13 @@ class AddProductBody extends StatelessWidget {
                             // if (value!.trim().isEmpty) {
                             //   return 'ادخل سعر المنتج بعد الخصم';
                             // }
-                            RegExp priceRegExp = RegExp(r'^\d+(\.\d{1,2})?$');
+                            final RegExp priceRegExp = RegExp(r'^\d+(\.\d{1,2})?$');
                             if (!priceRegExp.hasMatch(value!)) {
                               return 'الرجاء إدخال سعر صحيح';
                             }
-                            double discountedPrice =
+                            final double discountedPrice =
                                 double.tryParse(value.trim()) ?? 0.0;
-                            double originalPrice = double.tryParse(viewModel
+                            final double originalPrice = double.tryParse(viewModel
                                     .productPriceController.text
                                     .trim()) ??
                                 0.0;

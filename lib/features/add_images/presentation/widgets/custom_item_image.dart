@@ -20,12 +20,11 @@ class CustomItemImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      clipBehavior: Clip.antiAlias,
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.placeHolderColor, width: 1),
+          border: Border.all(color: ColorManager.placeHolderColor),
         ),
         child: Stack(
           children: [
@@ -35,7 +34,7 @@ class CustomItemImage extends StatelessWidget {
                   aspectRatio: 10 / 9,
                   child: CustomImage(url: imagePath),
                 ),
-                SizedBox(height: 4,),
+                const SizedBox(height: 4,),
                 Text(
                   imageName,
                   textAlign: TextAlign.center,

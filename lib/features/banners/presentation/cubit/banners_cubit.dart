@@ -1,6 +1,4 @@
-import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:dashboard_market/core/common/api_result.dart';
 import 'package:dashboard_market/features/banners/domain/entities/banners_entity.dart';
 import 'package:dashboard_market/features/banners/domain/use_cases/banners_use_cases.dart';
@@ -21,7 +19,7 @@ class BannersCubit extends Cubit<BannersState> {
   static BannersCubit get(context) => BlocProvider.of(context);
 
   int status = 1;
-  changeSwitchStatus(int value) {
+  void changeSwitchStatus(int value) {
     status = value;
     emit(BannersInitial());
   }

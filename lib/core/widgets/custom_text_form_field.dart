@@ -6,12 +6,6 @@ import '../resources/style_manager.dart';
 import '../resources/theme_manager.dart';
 import '../resources/values_manager.dart';
 
-import 'package:flutter/material.dart';
-import '../resources/color_manager.dart';
-import '../resources/font_manager.dart';
-import '../resources/style_manager.dart';
-import '../resources/theme_manager.dart';
-import '../resources/values_manager.dart';
 
 // class CustomTextFormField extends StatelessWidget {
 //   const CustomTextFormField({
@@ -288,7 +282,7 @@ class CustomTextFormField extends StatelessWidget {
         onFieldSubmitted: onFieldSubmitted,
         decoration: InputDecoration(
           isDense: true,
-          errorStyle: TextStyle(fontSize: 14,),
+          errorStyle: const TextStyle(fontSize: 14,),
           prefixIcon: prefixIcon,
           prefixIconColor: ColorManager.placeHolderColor,
           suffixIcon: suffix != null
@@ -394,7 +388,7 @@ class CustomSearchTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       decoration: InputDecoration(
         isDense: true,
-        errorStyle: TextStyle(fontSize: 14,),
+        errorStyle: const TextStyle(fontSize: 14,),
         prefixIcon: prefixIcon,
         prefixIconColor: ColorManager.placeHolderColor,
         suffixIcon: suffix != null

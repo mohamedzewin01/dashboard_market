@@ -1,6 +1,5 @@
 import '../resources/color_manager.dart';
 import '../resources/style_manager.dart';
-import 'permission_service.dart';
 import 'package:flutter/material.dart';
 
 class AddImage {
@@ -29,9 +28,9 @@ class AddImage {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.photo_library,
+                      const Icon(Icons.photo_library,
                           size: 30, color: ColorManager.primaryColor),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Text('عرض الصور',
                           style: getBoldStyle(color: ColorManager.grey)),
                     ],

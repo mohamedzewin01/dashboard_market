@@ -1,5 +1,4 @@
 import 'package:dashboard_market/features/product_edit/domain/entities/edit_product_entity.dart';
-import 'package:dashboard_market/features/products/domain/entities/edit_product_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 

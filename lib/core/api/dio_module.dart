@@ -3,13 +3,12 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import 'api_constants.dart';
 
 @module
 abstract class DioModule {
   @lazySingleton
   Dio providerDio() {
-    Dio dio = Dio(
+    final Dio dio = Dio(
       BaseOptions(
         baseUrl:'https://artawiya.com/fadaalhalj/api/v1/',
         connectTimeout: const Duration(milliseconds: 5000),
@@ -29,9 +28,6 @@ abstract class DioModule {
         requestHeader: true,
         requestBody: true,
         responseHeader: true,
-        responseBody: true,
-        compact: true,
-        maxWidth: 90,
       ),
     );
 

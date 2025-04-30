@@ -17,7 +17,7 @@ class ProductsEditDataSourceRepoImpl implements ProductsEditDataSourceRepo {
   Future<Result<EditProductModelEntity?>> editProductsData(
       EditProductRequestDto editProductRequest) {
   return executeApi(() async{
-    var response = await apiService.editProduct2(editProductRequest);
+    final response = await apiService.editProduct2(editProductRequest);
     return response?.toEditProductEntity();
   },);
   }
@@ -25,7 +25,7 @@ class ProductsEditDataSourceRepoImpl implements ProductsEditDataSourceRepo {
   @override
   Future<Result<DeleteProductEntity?>> deleteProductsData(String productId) {
     return executeApi(()async {
-      var response =await apiService.deleteProduct(productId);
+      final response =await apiService.deleteProduct(productId);
       return response?.toDeleteProductEntity();
     },);
   }
@@ -33,7 +33,7 @@ class ProductsEditDataSourceRepoImpl implements ProductsEditDataSourceRepo {
   @override
   Future<Result<FetchCategoriesEditEntity?>> getCategoriesData() {
     return executeApi(()async {
-      var response =await apiService.getCategoriesToEdit();
+      final response =await apiService.getCategoriesToEdit();
       return response?.toFetchCategoriesEditEntity();
     },);
   }

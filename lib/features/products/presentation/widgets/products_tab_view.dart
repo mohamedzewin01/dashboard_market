@@ -13,38 +13,46 @@ class ProductsTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsCubit, ProductsState>(
       builder: (context, state) {
-
         if (state is ProductsLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
-        }
-        else if (state is ProductsSuccess) {
+        } else if (state is ProductsSuccess) {
+          print('55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555   ///////////////////${state.productsEntity?.total}');
           return ProductItemsHome(
             products: state.productsEntity?.products,
             viewModel: viewModel,
+            totalProducts: state.productsEntity?.total ?? 0,
           );
-        }
-        else if (state is ProductsDiscountSuccess) {
+        } else if (state is ProductsDiscountSuccess) {
           return ProductItemsHome(
-              products: state.productsEntity?.products, viewModel: viewModel);
-        }
-        else if (state is ProductsNotDiscountSuccess) {
+            products: state.productsEntity?.products,
+            viewModel: viewModel,
+            totalProducts: state.productsEntity?.total ?? 0,
+          );
+        } else if (state is ProductsNotDiscountSuccess) {
           return ProductItemsHome(
-              products: state.productsEntity?.products, viewModel: viewModel);
-        }
-        else if (state is ProductsActiveSuccess) {
+            products: state.productsEntity?.products,
+            viewModel: viewModel,
+            totalProducts: state.productsEntity?.total ?? 0,
+          );
+        } else if (state is ProductsActiveSuccess) {
           return ProductItemsHome(
-              products: state.productsEntity?.products, viewModel: viewModel);
-        }
-        else if (state is ProductsNotActiveSuccess) {
+            products: state.productsEntity?.products,
+            viewModel: viewModel,
+            totalProducts: state.productsEntity?.total ?? 0,
+          );
+        } else if (state is ProductsNotActiveSuccess) {
           return ProductItemsHome(
-              products: state.productsEntity?.products, viewModel: viewModel);
-        }
-        else {
-
-          return Center(
-            child:CircularProgressIndicator(color:ColorManager.basicColor,),
+            products: state.productsEntity?.products,
+            viewModel: viewModel,
+            totalProducts: state.productsEntity?.total ?? 0,
+          );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: ColorManager.basicColor,
+            ),
           );
         }
       },

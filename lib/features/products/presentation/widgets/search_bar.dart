@@ -24,15 +24,15 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             child: SearchBar(
               elevation: WidgetStateProperty.all<double?>(4.0),
               controller: widget.viewModel.searchController,
-              leading: Icon(Icons.search, color: Colors.grey),
+              leading: const Icon(Icons.search, color: Colors.grey),
               textStyle: WidgetStateProperty.all<TextStyle>(
-                TextStyle(
+                const TextStyle(
                     fontSize: 16,
                     color: Colors.black,
                     fontWeight: FontWeight.w500),
               ),
               hintStyle: WidgetStateProperty.all<TextStyle?>(
-                TextStyle(
+                const TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
                   fontWeight: FontWeight.w500,
@@ -47,7 +47,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
               trailing: [
                 if (widget.viewModel.searchQuery.isNotEmpty)
                   IconButton(
-                    icon: Icon(Icons.clear, color: Colors.grey),
+                    icon: const Icon(Icons.clear, color: Colors.grey),
                     onPressed: () {
                       setState(() {
                         widget.viewModel.searchController.clear();

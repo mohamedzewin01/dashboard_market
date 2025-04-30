@@ -38,7 +38,7 @@ class _ChangeCategoriesState extends State<ChangeCategories> {
           BlocBuilder<ProductCategoriesEditCubit, ProductCategoriesEditState>(
         builder: (context, state) {
           if (state is ProductCategoriesEditSuccess) {
-            List<CategoriesEdit>? categories =
+            final List<CategoriesEdit> categories =
                 state.fetchCategoriesEditEntity.categories?.reversed.toList() ??
                     [];
             return  DropdownButtonFormField<int>(
@@ -47,11 +47,11 @@ class _ChangeCategoriesState extends State<ChangeCategories> {
                 labelText: 'القسم',
                 labelStyle: getSemiBoldStyle(color: ColorManager.orange),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorManager.placeHolderColor),
+                  borderSide: const BorderSide(color: ColorManager.placeHolderColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorManager.placeHolderColor),
+                  borderSide: const BorderSide(color: ColorManager.placeHolderColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),

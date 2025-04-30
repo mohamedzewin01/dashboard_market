@@ -17,7 +17,7 @@ class ProductPhotoCubit extends Cubit<ProductPhotoState> {
 
   Future<void> fetchImages() async {
     emit(ProductPhotoLoading());
-    var result = await _addProductUseCase.getAllImages();
+    final result = await _addProductUseCase.getAllImages();
     switch (result) {
       case Success<AllImagesEntity?>():
         {

@@ -28,7 +28,7 @@ class SectionUploadImages extends StatelessWidget {
             key: viewModel.formKey,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 CustomTextFormField(
@@ -41,7 +41,7 @@ class SectionUploadImages extends StatelessWidget {
                     return null;
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 ChooseImageCategories(addImagesCubit: viewModel,),

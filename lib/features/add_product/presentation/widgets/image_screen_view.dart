@@ -1,4 +1,3 @@
-import 'package:dashboard_market/core/api/api_constants.dart';
 import 'package:dashboard_market/core/di/di.dart';
 import 'package:dashboard_market/core/resources/cashed_image.dart';
 import 'package:dashboard_market/core/resources/color_manager.dart';
@@ -9,7 +8,6 @@ import 'package:dashboard_market/features/add_product/presentation/manager/add_p
 import 'package:dashboard_market/features/add_product/presentation/widgets/skele__image_product_grid_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class ImageScreenView extends StatefulWidget {
   const ImageScreenView({super.key});
@@ -31,7 +29,7 @@ class _ImageScreenViewState extends State<ImageScreenView> {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: viewModel..fetchImages(),
-      child: ImageProductGridScreen(),
+      child: const ImageProductGridScreen(),
     );
   }
 }
@@ -84,10 +82,10 @@ class _ImageProductGridScreenState extends State<ImageProductGridScreen> {
                       textAlign: TextAlign.right, // محاذاة النص إلى اليمين
                       decoration: InputDecoration(
                         hintText: 'ابحث عن صورة...',
-                        prefixIcon: Icon(Icons.search, color: ColorManager.grey),
+                        prefixIcon: const Icon(Icons.search, color: ColorManager.grey),
                         suffixIcon: searchController.text.isNotEmpty
                             ? IconButton(
-                          icon: Icon(Icons.clear, color: ColorManager.grey),
+                          icon: const Icon(Icons.clear, color: ColorManager.grey),
                           onPressed: () {
                             searchController.clear(); // مسح النص
                             filterImages(''); // تحديث القائمة
@@ -146,7 +144,7 @@ class _ImageProductGridScreenState extends State<ImageProductGridScreen> {
                                   Text(
                                     filteredImages?[index].imageName ?? '',
                                     style: getSemiBoldStyle(
-                                        color: Colors.black, fontSize: 12),
+                                        color: Colors.black),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -161,7 +159,7 @@ class _ImageProductGridScreenState extends State<ImageProductGridScreen> {
                 ],
               );
             }
-            return SkeImagesView();
+            return const SkeImagesView();
           },
         ),
       ),

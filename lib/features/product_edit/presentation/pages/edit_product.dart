@@ -39,7 +39,7 @@ class _EditProductState extends State<EditProduct> {
           centerTitle: true,
           leading: IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: Icon(
+            icon: const Icon(
               Icons.close_outlined,
               color: ColorManager.error,
             ),

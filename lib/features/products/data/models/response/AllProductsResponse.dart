@@ -46,6 +46,10 @@ class AllProductsResponse {
     return ProductsEntity(
       status: status,
       products: products,
+      page: page,
+      limit: limit,
+      total: total,
+
     );
   }
 

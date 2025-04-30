@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'color_manager.dart';
-import 'font_manager.dart';
-import 'style_manager.dart';
 import 'values_manager.dart';
 
 ThemeData getApplicationTheme() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
     systemNavigationBarColor: ColorManager.primary,
@@ -45,7 +43,7 @@ AppBarTheme appBarTheme() {
   return  AppBarTheme(
     color: ColorManager.cardColor.withAlpha(200),
     elevation: AppSize.s5,
-    systemOverlayStyle: SystemUiOverlayStyle(
+    systemOverlayStyle: const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),

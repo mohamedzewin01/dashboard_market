@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:dashboard_market/core/common/api_result.dart';
 import 'package:dashboard_market/features/categories/domain/entities/fetch_categories.dart';
 import 'package:dashboard_market/features/categories/domain/use_cases/categories_use_case.dart';

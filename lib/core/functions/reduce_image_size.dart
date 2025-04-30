@@ -44,7 +44,7 @@ Future<File> resizeAndCompressImage({
 
   final resizedImage = img.copyResize(image!, width: width, height: height);
 
-  String extension = imageFile.path.split('.').last.toLowerCase();
+  final String extension = imageFile.path.split('.').last.toLowerCase();
   final String dir = Directory.systemTemp.path;
   final String newPath = '$dir/resized_${DateTime.now().millisecondsSinceEpoch}.$extension';
 
@@ -79,8 +79,8 @@ Future<File?> pickImage() async {
 
   final XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
   if (xFile != null) {
-    File originalImageFile = File(xFile.path);
-    File resizedImageFile = await resizeAndCompressImage(
+    final File originalImageFile = File(xFile.path);
+    final File resizedImageFile = await resizeAndCompressImage(
       /// تصغير حجم الصورة
         imageFile: originalImageFile,
         width: 800,

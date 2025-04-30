@@ -5,7 +5,6 @@ import 'package:dashboard_market/features/setting/data/models/store_info_request
 import 'package:dashboard_market/features/setting/domain/use_cases/store_info_use_cases.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../core/common/api_result.dart';
 import '../../domain/entities/store_entity.dart';
@@ -38,7 +37,7 @@ class StoreInfoCubit extends Cubit<StoreInfoState> {
   TextEditingController storeDiscountTitleController = TextEditingController();
   TextEditingController storeNameController = TextEditingController();
   Future<void> editStoreInfo() async {
-    StoreInfoRequest storeInfoRequest = StoreInfoRequest(
+    final StoreInfoRequest storeInfoRequest = StoreInfoRequest(
       storeDescreption: discreptionController.text,
       storeDiscountTitle: storeDiscountTitleController.text,
       storeId: 1,

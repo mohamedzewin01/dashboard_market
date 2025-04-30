@@ -43,9 +43,8 @@ class _LoginViewState extends State<LoginView> {
                   children: [
                     Row(
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         Expanded(
-                            flex: 1,
                             child: CustomTextFormField(
                               autofocus: true,
                               inputAction: TextInputAction.go,
@@ -73,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
                               hintText: 'ادخل الرقم السري',
                               labelText: 'الرقم السري',
                             )),
-                        Spacer(),
+                        const Spacer(),
                       ],
                     ),
                     SizedBox(
@@ -102,7 +101,7 @@ class _LoginViewState extends State<LoginView> {
               child: Container(
                 width: double.infinity,
             color: ColorManager.primaryColor,
-                child: Center(child: Text(  'v1.0.0',style: TextStyle(color: ColorManager.placeHolderColor),)),
+                child: const Center(child: Text(  'v1.0.0',style: TextStyle(color: ColorManager.placeHolderColor),)),
           )),
         ],
       ),

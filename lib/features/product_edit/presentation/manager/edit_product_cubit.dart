@@ -1,10 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:dashboard_market/features/product_edit/data/models/request/edit_product_request.dart';
 import 'package:dashboard_market/features/product_edit/domain/use_cases/products_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 part 'edit_product_state.dart';
 
@@ -28,7 +26,7 @@ class EditProductCubit extends Cubit<EditProductState> {
   }
 
   Future<void> editProduct({required String idProduct}) async {
-    EditProductRequestDto editProductRequest = EditProductRequestDto(
+    final EditProductRequestDto editProductRequest = EditProductRequestDto(
       productName: nameController.text,
       description: descriptionController.text,
       productPriceAfterDiscount: newPriceController.text,

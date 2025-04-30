@@ -21,13 +21,13 @@ class AppConstants {
   ];
 
   static  List<Widget> viewOptionsDesktop = <Widget>[
-    HomeView(),
-    ProductsView(),
-    AddProductView(),
-    ImagesView(),
-    CategoriesView(),
-    BannersView(),
-    SettingView(),
+    const HomeView(),
+    const ProductsView(),
+    const AddProductView(),
+    const ImagesView(),
+    const CategoriesView(),
+    const BannersView(),
+    const SettingView(),
 
   ];
  static final List<Color> colors = [

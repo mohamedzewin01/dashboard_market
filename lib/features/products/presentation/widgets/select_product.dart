@@ -37,22 +37,22 @@ class _SelectProductState extends State<SelectProduct> {
           });
         },
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 200),
           width: 24,
           height: 24,
           decoration: BoxDecoration(
-            color: isChecked ? Color(0xFF008080) : Colors.white, // Teal
+            color: isChecked ? const Color(0xFF008080) : Colors.white, // Teal
             borderRadius: BorderRadius.circular(6),
             border: Border.all(
-              color: isHovered ? Color(0xFF20B2AA) : Color(0xFF008080),
+              color: isHovered ? const Color(0xFF20B2AA) : const Color(0xFF008080),
               width: 2,
             ),
             boxShadow: [
               if (isHovered)
                 BoxShadow(
-                  color: Color(0xFF20B2AA).withOpacity(0.3), // Lighter Teal shadow
+                  color: const Color(0xFF20B2AA).withOpacity(0.3), // Lighter Teal shadow
                   blurRadius: 6,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
             ],
           ),

@@ -22,7 +22,7 @@ class AddBannerBody extends StatelessWidget {
     return BlocBuilder<AddBannersCubit, AddBannersState>(
       builder: (context, state) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           child: Form(
             key: viewModel.formKey,
             child: Column(
@@ -63,8 +63,8 @@ class AddBannerBody extends StatelessWidget {
                                     )
                                   : Expanded(
                                       child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.only(
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(18),
                                             bottomLeft: Radius.circular(18),
                                           ),
@@ -140,14 +140,14 @@ class AddBannerBody extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Container(
-                      padding: EdgeInsets.all(0),
+                      padding: const EdgeInsets.all(0),
                       clipBehavior: Clip.antiAlias,
                       height: 35,
                       width: 35,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.add_a_photo_outlined,
                         color: ColorManager.grey,
                       ),

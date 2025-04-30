@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/theme_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../../categories/data/models/fetch_categories.dart';
 import '../../../categories/presentation/manager/categories_cubit.dart';
@@ -39,7 +38,7 @@ class _ChooseImageCategoriesState extends State<ChooseImageCategories> {
       child: BlocBuilder<CategoriesCubit, CategoriesState>(
         builder: (context, state) {
           if (state is CategoriesSuccess) {
-            List<Categories> categories =
+            final List<Categories> categories =
                 state.categoriesEntity.categories ?? [];
             if (categories.isEmpty) {
               return const Text('لا توجد بيانات متاحة');
@@ -50,11 +49,11 @@ class _ChooseImageCategoriesState extends State<ChooseImageCategories> {
                 labelText: 'القسم',
                 labelStyle: getSemiBoldStyle(color: ColorManager.orange),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorManager.placeHolderColor),
+                  borderSide: const BorderSide(color: ColorManager.placeHolderColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorManager.placeHolderColor),
+                  borderSide: const BorderSide(color: ColorManager.placeHolderColor),
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
@@ -99,11 +98,11 @@ class _ChooseImageCategoriesState extends State<ChooseImageCategories> {
               labelStyle: const TextStyle(fontSize: 16),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: ColorManager.placeHolderColor),
+                borderSide: const BorderSide(color: ColorManager.placeHolderColor),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: ColorManager.placeHolderColor),
+                borderSide: const BorderSide(color: ColorManager.placeHolderColor),
               ),
             ),
             items: const [

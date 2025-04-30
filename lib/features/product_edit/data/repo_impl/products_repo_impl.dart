@@ -1,6 +1,5 @@
 import 'package:dashboard_market/features/product_edit/data/data_sources/products_edit_data_source_repo.dart';
 import 'package:dashboard_market/features/product_edit/domain/entities/edit_product_entity.dart';
-import 'package:dashboard_market/features/products/domain/entities/edit_product_entity.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/common/api_result.dart';

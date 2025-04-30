@@ -1,8 +1,6 @@
 import 'dart:math';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dashboard_market/core/di/di.dart';
-import 'package:dashboard_market/core/resources/cashed_image.dart';
 import 'package:dashboard_market/core/widgets/adaptive%20layout.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
 import 'package:dashboard_market/features/banners/presentation/cubit/banners_cubit.dart';
@@ -42,7 +40,7 @@ class _BannersViewState extends State<BannersView> {
           tabletLayout: (context) => BannersBody(viewModel: viewModel),
           desktopLayout: (context) => Row(
             children: [
-              SizedBox(width: 390, child: AddBannerView()),
+              const SizedBox(width: 390, child: AddBannerView()),
               Expanded(child: BannersBody(viewModel: viewModel)),
             ],
           ),
@@ -62,12 +60,12 @@ class BannersBody extends StatelessWidget {
     return BlocBuilder<BannersCubit, BannersState>(
       builder: (context, state) {
         if (state is BannersLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
         if (state is BannersSuccess) {
-          List<Banners>? banners =
+          final List<Banners> banners =
               state.bannersEntity?.banners?.reversed.toList() ?? [];
           return Scaffold(
             body: Padding(
@@ -80,7 +78,7 @@ class BannersBody extends StatelessWidget {
                       viewModel: viewModel,
                       banner: banners[index],
                     ),
-                    separatorBuilder: (context, index) => SizedBox(
+                    separatorBuilder: (context, index) => const SizedBox(
                       height: 16,
                     ),
                   )
@@ -89,7 +87,7 @@ class BannersBody extends StatelessWidget {
             ),
           );
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },
@@ -257,7 +255,7 @@ class ItemBanners extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        title: Row(
+                        title: const Row(
                           children: [
                             Icon(Icons.warning_rounded,
                                 color: Colors.red, size: 28),
@@ -272,7 +270,7 @@ class ItemBanners extends StatelessWidget {
                             ),
                           ],
                         ),
-                        content: Text(
+                        content: const Text(
                           'هل أنت متأكد من حذف البانر؟',
                           style: TextStyle(fontSize: 16, color: Colors.black54),
                         ),
@@ -301,7 +299,7 @@ class ItemBanners extends StatelessWidget {
                                 Navigator.pop(context);
                               }
                             },
-                            child: Text(
+                            child: const Text(
                               'حذف',
                               style:
                                   TextStyle(fontSize: 16, color: Colors.white),
@@ -311,7 +309,7 @@ class ItemBanners extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: Icon(Icons.delete, color: Colors.redAccent, size: 20),
+                  icon: const Icon(Icons.delete, color: Colors.redAccent, size: 20),
                 ),
               ),
             )

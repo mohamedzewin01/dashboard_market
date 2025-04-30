@@ -1,9 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:dashboard_market/features/add_product/domain/entities/add_product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../../core/common/api_result.dart';
 import '../../domain/use_cases/add_product_use_case.dart';
@@ -45,7 +43,7 @@ class AddProductCubit extends Cubit<AddProductState> {
   Future<void> addProduct() async {
     emit(AddProductLoading());
 
-    var result = await _addProductUseCase.addProduct(
+    final result = await _addProductUseCase.addProduct(
         productName: productNameController.text,
         productPrice: double.parse(productPriceController.text),
         priceAfter: double.parse(priceAfterController.text),

@@ -18,7 +18,7 @@ class ImagesDataSources {
   Future<Result<ImagesEntity?>> getImagesData() async {
     return executeApi(
       () async {
-        var response = await apiService.getImagesData();
+        final response = await apiService.getImagesData();
         return response?.toImagesEntity();
       },
     );
@@ -28,7 +28,7 @@ class ImagesDataSources {
       File file, String name, String imageCategory) async {
     return executeApi(
       () async {
-        var response = await apiService.uploadImage(file, name, imageCategory);
+        final response = await apiService.uploadImage(file, name, imageCategory);
         return response?.toUpLoadImageEntity();
       },
     );
@@ -38,7 +38,7 @@ class ImagesDataSources {
    String imageId,   String imageName) async {
     return executeApi(
           () async {
-        var response = await apiService.deleteImage(imageId, imageName);
+        final response = await apiService.deleteImage(imageId, imageName);
         return response?.toDeleteImageEntity();
       },
     );

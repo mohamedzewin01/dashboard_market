@@ -1,10 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/style_manager.dart';
-import '../cubit/layout_cubit.dart';
 
 class ItemsDrawer extends StatelessWidget {
   const ItemsDrawer(
@@ -38,7 +36,7 @@ class ItemsDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(imagePath, height: 25, width: 25),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       title,

@@ -21,9 +21,9 @@ class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutesManager.splashScreen:
-        return MaterialPageRoute(builder: (_) => LoginView());
+        return MaterialPageRoute(builder: (_) => const LoginView());
       case RoutesManager.layout:
-        return MaterialPageRoute(builder: (_) => LayoutScreen());
+        return MaterialPageRoute(builder: (_) => const LayoutScreen());
 
       default:
         return unDefinedRoute();

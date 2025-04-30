@@ -1,15 +1,8 @@
-import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:dashboard_market/core/functions/reduce_image_size.dart';
 import 'package:dashboard_market/features/add_images/presentation/manager/images_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart'; // للجوالب
-import 'package:share_plus/share_plus.dart';
-import 'package:path_provider/path_provider.dart';
-import '../../../../core/resources/color_manager.dart';
-import 'package:flutter/services.dart';
 
 class UpLoadImage extends StatefulWidget {
   const UpLoadImage({
@@ -59,7 +52,7 @@ class _TabBodySellerState extends State<UpLoadImage> {
     return GestureDetector(
       onTap: _pickImage,
       child: Padding(
-        padding:EdgeInsets.symmetric(
+        padding:const EdgeInsets.symmetric(
             horizontal: 20),
         child: Column(
           children: [

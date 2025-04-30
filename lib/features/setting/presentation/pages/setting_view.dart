@@ -3,11 +3,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dashboard_market/core/di/di.dart';
-import 'package:dashboard_market/core/resources/cashed_image.dart';
 import 'package:dashboard_market/core/resources/color_manager.dart';
-import 'package:dashboard_market/core/widgets/custom_elevated_button.dart';
-import 'package:dashboard_market/core/widgets/custom_text_form_field.dart';
-import 'package:dashboard_market/features/home/presentation/pages/home_view.dart';
 import 'package:dashboard_market/features/setting/presentation/manager/store_info_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,7 +43,7 @@ class _SettingViewState extends State<SettingView> {
             child: BlocBuilder<StoreInfoCubit, StoreInfoState>(
               builder: (context, state) {
                 if (state is StoreInfoSuccess) {
-                  Store? store = state.storeInfoEntity.store;
+                  final Store? store = state.storeInfoEntity.store;
                   viewModel.storeNameController.text = store?.storeName ?? '';
                   viewModel.discreptionController.text =
                       store?.storeDescreption ?? '';
@@ -98,8 +94,8 @@ class _SettingViewState extends State<SettingView> {
                                     });
                                   }
                                 },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: CircleAvatar(
                                     backgroundColor: ColorManager.orange,
                                     child: Icon(Icons.change_circle_outlined),
@@ -120,13 +116,13 @@ class _SettingViewState extends State<SettingView> {
                               padding: const EdgeInsets.all(16.0),
                               child: Row(
                                 children: [
-                                  Spacer(),
+                                  const Spacer(),
                                   Expanded(
                                       flex: 2,
                                       child: StoreInfoBody(
                                         viewModel: viewModel,
                                       )),
-                                  Spacer(),
+                                  const Spacer(),
                                 ],
                               ),
                             );
@@ -136,14 +132,14 @@ class _SettingViewState extends State<SettingView> {
                     ),
                   );
                 }
-                return Center(
+                return const Center(
                     child: CircularProgressIndicator(
                         color: ColorManager.primaryColor));
               },
             ),
           );
         }
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       },
     ));
   }

@@ -18,7 +18,6 @@ class NavigateAnimation extends PageRouteBuilder {
               child: SizeTransition(
                 axis: Axis.horizontal,
                 sizeFactor: animation,
-                axisAlignment: 0,
                 child: page,
               ),
             );
