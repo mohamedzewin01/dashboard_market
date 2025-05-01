@@ -1,3 +1,5 @@
+
+
 import 'package:dashboard_market/core/di/di.dart';
 import 'package:dashboard_market/core/resources/color_manager.dart';
 import 'package:dashboard_market/features/add_images/presentation/manager/images_cubit.dart';
@@ -42,15 +44,17 @@ class _ImagesViewState extends State<ImagesView> {
                   if (state is SuccessImages) {
                     final listImage =
                         state.imagesEntity.images?.reversed.toList();
-                    
-                    return Column(
+                    return Row(
                       children: [
-                        SectionUploadImages(viewModel: viewModel),
+                        Expanded(child: SectionUploadImages(viewModel: viewModel)),
                         const Divider(),
-                        SectionListImages(
-                            crossAxisCount: crossAxisCount,
-                            listImage: listImage ?? [],
-                            viewModel: viewModel)
+                        Expanded(
+                          flex: 2,
+                          child: SectionListImages(
+                              crossAxisCount: crossAxisCount,
+                              listImage: listImage ?? [],
+                              viewModel: viewModel),
+                        )
                       ],
                     );
                   }

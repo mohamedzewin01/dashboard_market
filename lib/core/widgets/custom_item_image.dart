@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/cashed_image.dart';
-import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/style_manager.dart';
+import '../resources/cashed_image.dart';
+import '../resources/color_manager.dart';
+import '../resources/style_manager.dart';
 
 class CustomItemImage extends StatelessWidget {
   const CustomItemImage({
@@ -30,14 +30,20 @@ class CustomItemImage extends StatelessWidget {
           children: [
             Column(
               children: [
-                AspectRatio(
-                  aspectRatio: 10 / 9,
-                  child: CustomImage(url: imagePath),
-                ),
+                // AspectRatio(
+                //   aspectRatio: 10 / 9,
+                //   child: CustomImage(url: imagePath),
+                // ),
+                SizedBox(
+                    height: 80,
+                    child: CustomImage(url: imagePath)),
                 const SizedBox(height: 4,),
                 Text(
                   imageName,
                   textAlign: TextAlign.center,
+                  maxLines: 1,
+                  textDirection: TextDirection.rtl,
+                  overflow: TextOverflow.ellipsis,
                   style: getBoldStyle(color: ColorManager.black),
                 ),
               ],

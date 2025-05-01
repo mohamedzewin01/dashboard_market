@@ -219,28 +219,26 @@ class _ProductsViewState extends State<ProductsView>
                 );
               }
             },
-            child: Expanded(
-              child: TabBarView(
-                // controller: viewModel.tabController,
-                children: [
-                  ProductsTabView(
-                    viewModel: viewModel,
-                  ),
-                  // عرض المنتجات لجميع التبويبات
-                  ProductsTabView(
-                    viewModel: viewModel,
-                  ),
-                  ProductsTabView(
-                    viewModel: viewModel,
-                  ),
-                  ProductsTabView(
-                    viewModel: viewModel,
-                  ),
-                  ProductsTabView(
-                    viewModel: viewModel,
-                  ),
-                ],
-              ),
+            child: TabBarView(
+              // controller: viewModel.tabController,
+              children: [
+                ProductsTabView(
+                  viewModel: viewModel,
+                ),
+                // عرض المنتجات لجميع التبويبات
+                ProductsTabView(
+                  viewModel: viewModel,
+                ),
+                ProductsTabView(
+                  viewModel: viewModel,
+                ),
+                ProductsTabView(
+                  viewModel: viewModel,
+                ),
+                ProductsTabView(
+                  viewModel: viewModel,
+                ),
+              ],
             ),
           ),
 

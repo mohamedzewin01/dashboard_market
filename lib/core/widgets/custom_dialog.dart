@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../resources/color_manager.dart';
 import '../resources/style_manager.dart';
+import 'delete_image_dialog.dart';
 
 class CustomDialog {
   static void showLoadingDialog(BuildContext context) {
@@ -415,4 +416,48 @@ class CustomDialog {
       ),
     );
   }
+
+  static Future<void> showDoubleConfirmationDialog(BuildContext context, {
+    required String imageUrl,
+    required VoidCallback onDeleteConfirmed,
+  }) async {
+
+    final firstConfirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => DeleteImageDialog(
+        imageUrl: imageUrl,
+        onConfirm: () => Navigator.pop(context, true),
+      ),
+    );
+
+    if (firstConfirm == true) {
+      // التحذير الثاني
+      final secondConfirm = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('هل أنت متأكد نهائيًا؟'),
+          content: const Text(
+            'لن تتمكن من استرجاع الصورة بعد الحذف.\nهل تريد المتابعة؟',
+            style: TextStyle(fontSize: 16),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('إلغاء'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: const Text('تأكيد الحذف'),
+            ),
+          ],
+        ),
+      );
+
+      if (secondConfirm == true) {
+        onDeleteConfirmed(); // حذف نهائي
+      }
+    }
+  }
+
 }

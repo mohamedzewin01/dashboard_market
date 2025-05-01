@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dashboard_market/core/common/api_result.dart';
 
 import 'package:dashboard_market/features/add_product/domain/entities/add_product_entity.dart';
@@ -30,5 +32,15 @@ class AddProductRepoImpl implements AddProductRepo {
   @override
   Future<Result<AllImagesEntity?>> addImages() {
  return addProductDataSources.addImages();
+  }
+
+  @override
+  Future<Result<DeleteProductImageEntity?>> deleteProductImage(String imageId, String imageName) {
+  return addProductDataSources.deleteProductImage(imageId, imageName);
+  }
+
+  @override
+  Future<Result<UpLoadImageProductEntity?>> upLoadProductImage(File file, String name, String imageCategory) {
+ return addProductDataSources.upLoadProductImage(file, name, imageCategory);
   }
 }

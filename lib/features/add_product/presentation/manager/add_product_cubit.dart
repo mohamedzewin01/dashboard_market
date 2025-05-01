@@ -27,8 +27,10 @@ class AddProductCubit extends Cubit<AddProductState> {
 
   final formKey = GlobalKey<FormState>();
 
-  void changeImagePath(String path) {
+  void changeImagePath({required String path,required String name}) {
     imagePath = path;
+    productNameController.text=name;
+    descriptionController.text=name;
     emit(ChangeImage());
   }
   void changeProductStatus(int statusProduct) {

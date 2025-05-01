@@ -1,5 +1,7 @@
 
 
+import 'dart:io';
+
 import '../../../../core/common/api_result.dart';
 import '../entities/add_product_entity.dart';
 
@@ -16,5 +18,10 @@ abstract class AddProductRepo {
     required int categoryId,
   });
   Future<Result<AllImagesEntity?>> addImages();
+  Future<Result<DeleteProductImageEntity?>> deleteProductImage(
+      String imageId,   String imageName);
 
+
+  Future<Result<UpLoadImageProductEntity?>> upLoadProductImage(
+      File file, String name, String imageCategory);
 }

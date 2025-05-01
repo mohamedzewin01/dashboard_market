@@ -23,27 +23,27 @@ abstract class DioModule {
     };
 
     // Add PrettyDioLogger
-    dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
-      ),
-    );
+    // dio.interceptors.add(
+    //   PrettyDioLogger(
+    //     requestHeader: true,
+    //     requestBody: true,
+    //     responseHeader: true,
+    //   ),
+    // );
 
     // Add Error Handling
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          print('Request: ${options.method} ${options.path}');
+        //  print('Request: ${options.method} ${options.path}');
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          print('Response: ${response.statusCode}');
+        //  print('Response: ${response.statusCode}');
           return handler.next(response);
         },
         onError: (DioException error, handler) {
-          print('Error: ${error.response?.statusCode} - ${error.message}');
+        //  print('Error: ${error.response?.statusCode} - ${error.message}');
           return handler.next(error);
         },
       ),

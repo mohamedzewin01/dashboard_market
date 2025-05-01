@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dashboard_market/core/api/api_extentions.dart';
 import 'package:dashboard_market/core/api/api_manager/api_manager.dart';
 import 'package:injectable/injectable.dart';
@@ -43,6 +45,27 @@ class AddProductDataSources {
         final response = await apiService.getAllImage();
 
         return response?.toAllImagesEntity();
+      },
+    );
+  }
+
+
+  Future<Result<DeleteProductImageEntity?>> deleteProductImage(
+      String imageId,   String imageName) async {
+    return executeApi(
+          () async {
+        final response = await apiService.deleteProductImage(imageId, imageName);
+        return response?.toDeleteImageEntity();
+      },
+    );
+  }
+
+  Future<Result<UpLoadImageProductEntity?>> upLoadProductImage(
+      File file, String name, String imageCategory) async {
+    return executeApi(
+          () async {
+        final response = await apiService.uploadProductImage(file, name, imageCategory);
+        return response?.toUpLoadImageProductEntity();
       },
     );
   }

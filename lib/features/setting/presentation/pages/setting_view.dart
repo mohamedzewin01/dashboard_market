@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -50,7 +50,7 @@ class _SettingViewState extends State<SettingView> {
                   viewModel.storeDiscountTitleController.text =
                       store?.storeDiscountTitle ?? '';
                   viewModel.imageName = store?.storeImage ?? '';
-                  log(viewModel.imageName);
+
                   return SingleChildScrollView(
                     child: Column(
                       children: [

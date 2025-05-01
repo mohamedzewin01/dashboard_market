@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:dashboard_market/features/add_images/data/models/images_model.dart';
 import 'package:dashboard_market/features/add_product/data/models/add_product_responces.dart';
+import 'package:dashboard_market/features/add_product/data/models/delete_product_image.dart';
 import 'package:dashboard_market/features/add_product/data/models/images_dto.dart';
+import 'package:dashboard_market/features/add_product/data/models/upload_image_product_dto.dart';
 import 'package:dashboard_market/features/banners/data/models/response/AddBannerModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/ChangeStatusModel.dart';
 import 'package:dashboard_market/features/banners/data/models/response/banners_models_response.dart';
@@ -86,9 +88,24 @@ abstract class ApiService {
       @Part(name: 'ImageName') String? imageName,
       @Part(name: 'ImageCategory') String? imageCategory);
 
+  @POST(ApiConstants.uploadImage)
+  @MultiPart()
+  Future<UpLoadImageProductModel?> uploadProductImage(
+      @Part(name: 'image') File? imageFile,
+      @Part(name: 'ImageName') String? imageName,
+      @Part(name: 'ImageCategory') String? imageCategory);
+
+
   @POST(ApiConstants.deleteImage)
   @MultiPart()
   Future<DeleteImage?> deleteImage(@Part(name: 'imageId') String? imageId,
+      @Part(name: 'image') String? imageName);
+
+
+///
+  @POST(ApiConstants.deleteImage)
+  @MultiPart()
+  Future<DeleteProductImage?> deleteProductImage(@Part(name: 'imageId') String? imageId,
       @Part(name: 'image') String? imageName);
 
   @POST(ApiConstants.addProduct)

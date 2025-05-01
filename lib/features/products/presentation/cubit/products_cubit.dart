@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:dashboard_market/features/products/data/models/response/AllProductsResponse.dart';
 import 'package:flutter/material.dart';
@@ -275,6 +275,6 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   Future<void> editProduct(EditProductRequest editProductRequest) async {
     await _productsUseCase.editProductsData(editProductRequest);
-    log('Success');
+
   }
 }

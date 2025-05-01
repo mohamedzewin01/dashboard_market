@@ -17,56 +17,55 @@ class SectionUploadImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        UpLoadImage(
-          viewModel: viewModel,
-        ),
-        const SizedBox(height: AppSize.s24),
-        Expanded(
-          child: Form(
-            key: viewModel.formKey,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 25,
-                ),
-                CustomTextFormField(
-                  controller: viewModel.nameController,
-                  hintText: 'اسم الصورة',
-                  validator: (value) {
-                    if (value!.trim().isEmpty || value.length < 2) {
-                      return 'ادخل اسم الصورة';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                ChooseImageCategories(addImagesCubit: viewModel,),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: CustomElevatedButton(
-                    buttonColor: ColorManager.primaryColor,
-                    title: 'Update',
-                    onPressed: () async {
-                      if (viewModel.formKey.currentState!.validate()) {
-                        if (viewModel.imageFile != null) {
-                          viewModel.nameController.clear();
-                          await viewModel.upLoadImages();
-                          viewModel.imageFile = null;
-                          await viewModel.fetchImages();
-                        }
-                      }
-                    },
-                  ),
-                ),
-              ],
+    return Form(
+      key: viewModel.formKey,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: AppSize.s24),
+            UpLoadImage(
+              viewModel: viewModel,
             ),
-          ),
+
+            const SizedBox(
+              height: 25,
+            ),
+            CustomTextFormField(
+              controller: viewModel.nameController,
+              hintText: 'اسم الصورة',
+              validator: (value) {
+                if (value!.trim().isEmpty || value.length < 2) {
+                  return 'ادخل اسم الصورة';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            ChooseImageCategories(addImagesCubit: viewModel,),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: CustomElevatedButton(
+                buttonColor: ColorManager.primaryColor,
+                title: 'اضافة صورة',
+                onPressed: () async {
+                  if (viewModel.formKey.currentState!.validate()) {
+                    if (viewModel.imageFile != null) {
+                      await viewModel.upLoadImages();
+                      viewModel.nameController.clear();
+                      viewModel.imageFile = null;
+                      await viewModel.fetchImages();
+                    }
+                  }
+                },
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

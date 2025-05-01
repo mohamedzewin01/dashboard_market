@@ -18,7 +18,6 @@ class ProductsTabView extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is ProductsSuccess) {
-          print('55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555   ///////////////////${state.productsEntity?.total}');
           return ProductItemsHome(
             products: state.productsEntity?.products,
             viewModel: viewModel,

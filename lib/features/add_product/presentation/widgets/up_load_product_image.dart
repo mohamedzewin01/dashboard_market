@@ -1,22 +1,23 @@
 import 'dart:io';
+
 import 'package:dashboard_market/core/functions/reduce_image_size.dart';
-import 'package:dashboard_market/features/add_images/presentation/manager/images_cubit.dart';
+import 'package:dashboard_market/features/add_product/presentation/manager/ProductPhoto/product_photo_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class UpLoadImage extends StatefulWidget {
-  const UpLoadImage({
+class UpLoadProductImage extends StatefulWidget {
+  const UpLoadProductImage({
     super.key, required this.viewModel,
 
   });
 
-  final ImagesCubit viewModel;
+  final ProductPhotoCubit viewModel;
 
   @override
-  State<UpLoadImage> createState() => _TabBodySellerState();
+  State<UpLoadProductImage> createState() => _TabBodySellerState();
 }
 
-class _TabBodySellerState extends State<UpLoadImage> {
+class _TabBodySellerState extends State<UpLoadProductImage> {
 
   Future<File?> _pickImage() async {
     final XFile? xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
