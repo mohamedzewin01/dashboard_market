@@ -17,7 +17,6 @@ This admin dashboard application allows complete management of the supermarket s
 ![10](https://github.com/user-attachments/assets/0209f95b-dd0d-4bd0-9f85-73436c461c0c)
 ![1](https://github.com/user-attachments/assets/7a901a3a-75c8-406b-86dc-6d54168ebc45)
 
-
 ## Features
 
 - Full product management: add, edit, delete products with image uploads
