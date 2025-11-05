@@ -36,7 +36,7 @@ class _HomeViewState extends State<HomeView> {
             title: FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(
-                "سوبر ماركت فضاء الخليج",
+                "منارة أمجاد للمواد الغذائية",
                 style:
                     getSemiBoldStyle(color: ColorManager.white, fontSize: 18),
               ),

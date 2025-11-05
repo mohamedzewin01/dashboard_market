@@ -50,7 +50,7 @@ class AddProductCubit extends Cubit<AddProductState> {
         productPrice: double.parse(productPriceController.text),
         priceAfter: double.parse(priceAfterController.text),
         description: descriptionController.text,
-        dateDiscount: 'تموينات فضاء الخليج',
+        dateDiscount: 'تموينات منارة أمجاد',
         status: status,
         imagePath: imagePath,
         categoryId: categoryId);

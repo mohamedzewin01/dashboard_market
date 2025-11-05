@@ -69,14 +69,17 @@ class CustomDrawer extends StatelessWidget {
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(colors: [
-                  ColorManager.white,
-                  ColorManager.offwhite,
+                  ColorManager.indigoDark2,
+                  ColorManager.indigoLight,
 
                 ], begin: Alignment.topLeft, end: Alignment.bottomRight),
               ),
-              child: Image.asset(
-                'assets/images/logo.png',
-                fit: BoxFit.cover,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Image.asset(
+                  'assets/images/logo3.png',
+                  fit: BoxFit.cover,
+                ),
               )),
         ),
         SliverToBoxAdapter(
@@ -86,7 +89,7 @@ class CustomDrawer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
-                  'سوبر ماركت فضاء الخليج',
+                  'منارة أمجاد للمواد الغذائية',
                   style: getSemiBoldStyle(
                       color: ColorManager.orange, fontSize: 24),
                 ),

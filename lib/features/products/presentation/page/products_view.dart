@@ -75,7 +75,7 @@ class _ProductsViewState extends State<ProductsView>
           appBar: AppBar(
             backgroundColor: ColorManager.white.withAlpha(100),
             title: Text(
-              "سوبر ماركت فضاء الخليج",
+              "منارة أمجاد للمواد الغذائية",
               style: getSemiBoldStyle(
                   color: ColorManager.primaryColor, fontSize: 18),
             ),

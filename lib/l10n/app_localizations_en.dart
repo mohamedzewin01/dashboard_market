@@ -90,7 +90,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterValidPhoneNumber => 'Enter a valid phone number';
 
   @override
-  String get phoneNumberLengthError => 'Phone number must be at least 11 digits';
+  String get phoneNumberLengthError =>
+      'Phone number must be at least 11 digits';
 
   @override
   String get phoneNumberStartWithZeroError => 'Phone number must start with 0';
@@ -117,7 +118,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailVerification => 'Email Verification';
 
   @override
-  String get subTitleOfEmailVerification => 'Please enter the code sent to your email address';
+  String get subTitleOfEmailVerification =>
+      'Please enter the code sent to your email address';
 
   @override
   String get dontReciveCode => 'Didn\'t receive the code?';
@@ -168,13 +170,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgetPassword => 'Forgot password?';
 
   @override
-  String get forgetPasswordMessageHeader => 'Please enter the email associated with your account';
+  String get forgetPasswordMessageHeader =>
+      'Please enter the email associated with your account';
 
   @override
   String get resetPassword => 'Reset Password';
 
   @override
-  String get resetPasswordMessage => 'Password must not be empty and must contain at least 6 characters, an uppercase letter, and one number';
+  String get resetPasswordMessage =>
+      'Password must not be empty and must contain at least 6 characters, an uppercase letter, and one number';
 
   @override
   String get home => 'Home';
@@ -216,7 +220,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bestSeller => 'Best Seller';
 
   @override
-  String get bestSellerTitleDescription => 'Bloom with our exquisite best sellers';
+  String get bestSellerTitleDescription =>
+      'Bloom with our exquisite best sellers';
 
   @override
   String get countryCurrency => 'EGP';
@@ -369,7 +374,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get ok => 'Ok';
 
   @override
-  String get deleteConfirmation => 'You are about to permanently delete this item. Are you sure you want to proceed?';
+  String get deleteConfirmation =>
+      'You are about to permanently delete this item. Are you sure you want to proceed?';
 
   @override
   String get about_us_title => 'About Us';
@@ -381,19 +387,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get about_us_mission_title => 'Our Mission';
 
   @override
-  String get about_us_mission_content => '- Bring joy and beauty into your life with our exquisite collection of flowers and gifts.\n- Believe in the power of flowers to brighten up any occasion and make it memorable.';
+  String get about_us_mission_content =>
+      '- Bring joy and beauty into your life with our exquisite collection of flowers and gifts.\n- Believe in the power of flowers to brighten up any occasion and make it memorable.';
 
   @override
   String get about_us_vision_title => 'Our Vision';
 
   @override
-  String get about_us_vision_content => '- Be the leading provider of floral arrangements and gifts.\n- Known for our quality, creativity, and exceptional customer service.\n- Strive to make every purchase a delightful experience for our customers.';
+  String get about_us_vision_content =>
+      '- Be the leading provider of floral arrangements and gifts.\n- Known for our quality, creativity, and exceptional customer service.\n- Strive to make every purchase a delightful experience for our customers.';
 
   @override
   String get about_us_contact_title => 'Contact Us';
 
   @override
-  String get about_us_contact_content => '- Have questions or need assistance? Feel free to reach out to us at:\n- Email: support@flowery.com\n- Phone: +20123456789';
+  String get about_us_contact_content =>
+      '- Have questions or need assistance? Feel free to reach out to us at:\n- Email: support@flowery.com\n- Phone: +20123456789';
 
   @override
   String get terms_title => 'Terms & Conditions';
@@ -405,25 +414,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get terms_agreement_title => '1. Agreement to Terms';
 
   @override
-  String get terms_agreement_content => 'By using this application, you agree to follow all rules and policies outlined in this document.';
+  String get terms_agreement_content =>
+      'By using this application, you agree to follow all rules and policies outlined in this document.';
 
   @override
   String get terms_order_title => '2. Order Availability';
 
   @override
-  String get terms_order_content => 'Orders placed through this application are subject to the availability of the items.';
+  String get terms_order_content =>
+      'Orders placed through this application are subject to the availability of the items.';
 
   @override
   String get terms_payment_title => '3. Payment Policy';
 
   @override
-  String get terms_payment_content => 'Payments made for orders are final and non-refundable once the order is confirmed.';
+  String get terms_payment_content =>
+      'Payments made for orders are final and non-refundable once the order is confirmed.';
 
   @override
   String get terms_updates_title => '4. Updates to Terms';
 
   @override
-  String get terms_updates_content => 'We reserve the right to update or modify these terms and conditions at any time without prior notice.';
+  String get terms_updates_content =>
+      'We reserve the right to update or modify these terms and conditions at any time without prior notice.';
 
   @override
   String get terms_contact => 'For more details, contact support@flowery.com';
@@ -468,8 +481,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get area => 'Area';
 
   @override
-  String get something_went_wrong => 'Something went wrong. Please try again later.';
+  String get something_went_wrong =>
+      'Something went wrong. Please try again later.';
 
   @override
-  String get address_added_successfully => 'The address has been successfully added to your saved addresses.';
+  String get address_added_successfully =>
+      'The address has been successfully added to your saved addresses.';
 }

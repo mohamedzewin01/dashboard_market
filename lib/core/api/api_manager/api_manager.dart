@@ -37,7 +37,7 @@ part 'api_manager.g.dart';
 
 @injectable
 @singleton
-@RestApi(baseUrl: 'https://artawiya.com/fadaalhalj/api/v2/')
+@RestApi(baseUrl: 'https://artawiya.com/manartamjaadDB/api/v2/')
 abstract class ApiService {
   @FactoryMethod()
   factory ApiService(Dio dio) = _ApiService;

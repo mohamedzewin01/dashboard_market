@@ -31,4 +31,9 @@ class MyBlocObserver implements BlocObserver {
   void onTransition(Bloc bloc, Transition transition) {
     log('onTransition(${bloc.runtimeType}, $transition)');
   }
+
+  @override
+  void onDone(Bloc bloc, Object? event, [Object? error, StackTrace? stackTrace]) {
+    // TODO: implement onDone
+  }
 }

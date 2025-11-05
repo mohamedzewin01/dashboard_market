@@ -3,7 +3,7 @@
 
 
 class ApiConstants {
-  static const String baseUrlImage = "https://artawiya.com/fadaalhalj/api/v2/upload/";
+  static const String baseUrlImage = "https://artawiya.com/manartamjaadDB/api/v2/upload/";
   static const String home = "products/viewHome";
   static const String getLimitAllProducts = "products/getLimitAllProducts";
   static const String getLimitProductsDiscount = "products/getLimitProductsDiscount";

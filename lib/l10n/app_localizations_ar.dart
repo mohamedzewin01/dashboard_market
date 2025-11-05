@@ -174,7 +174,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get resetPassword => 'إعادة ضبط كلمة السر';
 
   @override
-  String get resetPasswordMessage => 'كلمة السر لازم تكون على الأقل 6 أحرف وتشمل رقم وحرف كبير';
+  String get resetPasswordMessage =>
+      'كلمة السر لازم تكون على الأقل 6 أحرف وتشمل رقم وحرف كبير';
 
   @override
   String get home => 'الرئيسية';
@@ -369,7 +370,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get ok => 'تمام';
 
   @override
-  String get deleteConfirmation => 'هتمسح العنصر ده بشكل نهائي. متأكد إنك عايز تكمل؟';
+  String get deleteConfirmation =>
+      'هتمسح العنصر ده بشكل نهائي. متأكد إنك عايز تكمل؟';
 
   @override
   String get about_us_title => 'من نحن';
@@ -381,19 +383,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get about_us_mission_title => 'مهمتنا';
 
   @override
-  String get about_us_mission_content => '- إدخال السعادة والجمال إلى حياتكم من خلال مجموعتنا الرائعة من الزهور والهدايا.\n- نؤمن بقوة الزهور في إضاءة أي مناسبة وجعلها لا تُنسى.';
+  String get about_us_mission_content =>
+      '- إدخال السعادة والجمال إلى حياتكم من خلال مجموعتنا الرائعة من الزهور والهدايا.\n- نؤمن بقوة الزهور في إضاءة أي مناسبة وجعلها لا تُنسى.';
 
   @override
   String get about_us_vision_title => 'رؤيتنا';
 
   @override
-  String get about_us_vision_content => '- أن نكون المزود الرائد لترتيبات الزهور والهدايا.\n- معروفون بجودتنا وإبداعنا وخدمة العملاء الاستثنائية.\n- نسعى لجعل كل عملية شراء تجربة ممتعة لعملائنا.';
+  String get about_us_vision_content =>
+      '- أن نكون المزود الرائد لترتيبات الزهور والهدايا.\n- معروفون بجودتنا وإبداعنا وخدمة العملاء الاستثنائية.\n- نسعى لجعل كل عملية شراء تجربة ممتعة لعملائنا.';
 
   @override
   String get about_us_contact_title => 'تواصل معنا';
 
   @override
-  String get about_us_contact_content => '- لديك أسئلة أو تحتاج إلى مساعدة؟ لا تتردد في الاتصال بنا:\n- البريد الإلكتروني: support@flowery.com\n- الهاتف: +20123456789';
+  String get about_us_contact_content =>
+      '- لديك أسئلة أو تحتاج إلى مساعدة؟ لا تتردد في الاتصال بنا:\n- البريد الإلكتروني: support@flowery.com\n- الهاتف: +20123456789';
 
   @override
   String get terms_title => 'الشروط والأحكام';
@@ -405,28 +410,33 @@ class AppLocalizationsAr extends AppLocalizations {
   String get terms_agreement_title => '1. الموافقة على الشروط';
 
   @override
-  String get terms_agreement_content => 'باستخدام هذا التطبيق، فإنك توافق على الالتزام بجميع القواعد والسياسات الموضحة في هذا المستند.';
+  String get terms_agreement_content =>
+      'باستخدام هذا التطبيق، فإنك توافق على الالتزام بجميع القواعد والسياسات الموضحة في هذا المستند.';
 
   @override
   String get terms_order_title => '2. توفر الطلب';
 
   @override
-  String get terms_order_content => 'الطلبات المقدمة عبر هذا التطبيق تخضع لتوافر المنتجات.';
+  String get terms_order_content =>
+      'الطلبات المقدمة عبر هذا التطبيق تخضع لتوافر المنتجات.';
 
   @override
   String get terms_payment_title => '3. سياسة الدفع';
 
   @override
-  String get terms_payment_content => 'المدفوعات التي تتم للطلبات نهائية وغير قابلة للاسترداد بمجرد تأكيد الطلب.';
+  String get terms_payment_content =>
+      'المدفوعات التي تتم للطلبات نهائية وغير قابلة للاسترداد بمجرد تأكيد الطلب.';
 
   @override
   String get terms_updates_title => '4. تحديثات الشروط';
 
   @override
-  String get terms_updates_content => 'نحتفظ بالحق في تحديث أو تعديل هذه الشروط والأحكام في أي وقت دون إشعار مسبق.';
+  String get terms_updates_content =>
+      'نحتفظ بالحق في تحديث أو تعديل هذه الشروط والأحكام في أي وقت دون إشعار مسبق.';
 
   @override
-  String get terms_contact => 'للمزيد من التفاصيل، تواصل مع support@flowery.com';
+  String get terms_contact =>
+      'للمزيد من التفاصيل، تواصل مع support@flowery.com';
 
   @override
   String get add_new_address => 'أضف عنوانًا جديدًا';
@@ -471,5 +481,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get something_went_wrong => 'حدث خطأ ما. الرجاء المحاولة لاحقًا.';
 
   @override
-  String get address_added_successfully => 'تمت إضافة العنوان بنجاح إلى العناوين المحفوظة لديك.';
+  String get address_added_successfully =>
+      'تمت إضافة العنوان بنجاح إلى العناوين المحفوظة لديك.';
 }

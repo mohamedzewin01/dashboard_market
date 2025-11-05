@@ -20,7 +20,7 @@ class AppBarBody extends StatelessWidget {
             width: 2,
           ),
           Text(
-            'تموينات فضاء الخليج',
+            'تموينات منارة أمجاد',
             style: TextStyle(
                 color: ColorManager.error,
                 fontWeight: FontWeight.w700,
